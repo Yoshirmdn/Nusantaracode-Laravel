@@ -20,3 +20,8 @@ Route::middleware('auth')->group(function () {
 Route::resource('courses', CoursesController::class);
 
 require __DIR__ . '/auth.php';
+
+// routes for code playground
+Route::get('/playground', function () {
+    return view('user/codePlayground');
+});
