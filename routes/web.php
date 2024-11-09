@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoriesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\ProfileController;
@@ -18,5 +19,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 Route::resource('courses', CoursesController::class);
+Route::resource('categories', CategoriesController::class);
 
 require __DIR__ . '/auth.php';
