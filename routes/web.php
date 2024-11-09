@@ -22,3 +22,8 @@ Route::resource('courses', CoursesController::class);
 Route::resource('categories', CategoriesController::class);
 
 require __DIR__ . '/auth.php';
+
+// routes for code playground
+Route::get('/playground', function () {
+    return view('user/codePlayground');
+});
