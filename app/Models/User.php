@@ -45,4 +45,15 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    // Define the relationship with the Teacher model
+    public function teacher()
+    {
+        return $this->hasOne(Teacher::class);
+    }
+
+    // Define the relationship with the Courses model if necessary
+    public function courses()
+    {
+        return $this->hasMany(Courses::class);
+    }
 }
