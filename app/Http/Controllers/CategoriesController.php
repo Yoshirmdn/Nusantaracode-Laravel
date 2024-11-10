@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categories;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 
 class CategoriesController extends Controller
@@ -14,7 +16,7 @@ class CategoriesController extends Controller
     public function index()
     {
         // $categories = Categories::with('courses')->paginate(10);
-        $categories = Categories::paginate(10);
+        $categories = Categories::paginate(100);
         return view('admin.categoryIndex', compact('categories'));
     }
 
@@ -23,7 +25,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        //        
+        return view('admin.categoryIndex');
     }
 
     /**
@@ -31,15 +33,26 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'slug' => 'nullable|string|max:255|unique:categories',
+            'icon' => 'nullable|image|max:2048',
+        ]);
+        $validatedData['slug'] = $validatedData['slug'] ?? Str::slug($validatedData['name']);
+        if ($request->hasFile('icon')) {
+            $validatedData['icon'] = $request->file('icon')->store('icons', 'public');
+        }
+        Categories::create($validatedData);
+        return redirect()->route('categories.index')->with('success', 'Category created successfully.');
     }
+
 
     /**
      * Display the specified resource.
      */
     public function show(Categories $categories)
     {
-        //
+        return view('admin.categoryIndex', compact('categories'));
     }
 
     /**
@@ -47,7 +60,7 @@ class CategoriesController extends Controller
      */
     public function edit(Categories $categories)
     {
-        //
+        return view('admin.categoryIndex', compact('categories'));
     }
 
     /**
@@ -55,14 +68,40 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, Categories $categories)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'slug' => 'required|string|max:255|unique:categories,slug,' . $categories->id,
+            'icon' => 'nullable|image|max:2048',
+        ]);
+
+        if (empty($validatedData['slug'])) {
+            $validatedData['slug'] = Str::slug($validatedData['name']);
+        }
+
+        if ($request->hasFile('icon')) {
+            $imagePath = $request->file('icon')->store('public/icons');
+            $imageUrl = Storage::url($imagePath);
+            $validatedData['icon'] = $imageUrl;
+        }
+
+        // Update category with validated data
+        $categories->fill($validatedData);
+        $categories->save();
+
+        return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Categories $categories)
+    public function destroy(Categories $category)
     {
-        //
+        if ($category->icon) {
+            Storage::disk('public')->delete($category->icon);
+        }
+        $category->delete();
+
+        return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
     }
 }
