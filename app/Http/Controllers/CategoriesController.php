@@ -16,7 +16,7 @@ class CategoriesController extends Controller
     public function index()
     {
         // $categories = Categories::with('courses')->paginate(10);
-        $categories = Categories::paginate(100);
+        $categories = Categories::all();
         return view('admin.categoryIndex', compact('categories'));
     }
 
@@ -79,12 +79,8 @@ class CategoriesController extends Controller
         }
 
         if ($request->hasFile('icon')) {
-            $imagePath = $request->file('icon')->store('public/icons');
-            $imageUrl = Storage::url($imagePath);
-            $validatedData['icon'] = $imageUrl;
+            $validatedData['icon'] = $request->file('icon')->store('icons', 'public');
         }
-
-        // Update category with validated data
         $categories->fill($validatedData);
         $categories->save();
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categories;
 use App\Models\Courses;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
@@ -15,8 +16,9 @@ class CoursesController extends Controller
      */
     public function index()
     {
+        $categories = Categories::all();
         $courses = Courses::with(['categoriesconn', 'teacherconn.user'])->paginate(10);
-        return view('admin.courseIndex', compact('courses'));
+        return view('admin.courseIndex', compact('courses', 'categories'));
     }
 
     /**
@@ -41,17 +43,13 @@ class CoursesController extends Controller
             'category_id' => 'required|exists:categories,id',
             'teacher_id' => 'required|exists:teachers,id',
         ]);
-
+        $validatedData['slug'] = $validatedData['slug'] ?? Str::slug($validatedData['name']);
         if (empty($validatedData['slug'])) {
             $validatedData['slug'] = Str::slug($validatedData['name']);
         }
-
         if ($request->hasFile('thumbnail')) {
-            $file = $request->file('thumbnail');
-            $filePath = $file->store('thumbnails', 'public');
-            $validatedData['thumbnail'] = $filePath;
+            $validatedData['thumbnail'] = $request->file('thumbnail')->store('thumbnails', 'public');
         }
-
         Courses::create($validatedData);
     }
 
