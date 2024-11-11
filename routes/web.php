@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoriesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UsersController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,6 +21,7 @@ Route::middleware('auth')->group(function () {
 });
 Route::resource('courses', CoursesController::class);
 Route::resource('categories', CategoriesController::class);
+Route::resource('users', UsersController::class);
 
 require __DIR__ . '/auth.php';
 
