@@ -58,34 +58,38 @@ class CategoriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Categories $categories)
+    public function edit($id)
     {
-        return view('admin.categoryIndex', compact('categories'));
+        // Find category by ID
+        $category = Categories::findOrFail($id);
+
+        // Return the view with the category data
+        return view('admin.categoryEdit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Categories $categories)
+    public function update(Request $request, Categories $category)
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:categories,slug,' . $categories->id,
+            'slug' => 'nullable|string|max:255|unique:categories,slug,' . $category->id,
             'icon' => 'nullable|image|max:2048',
         ]);
-
-        if (empty($validatedData['slug'])) {
-            $validatedData['slug'] = Str::slug($validatedData['name']);
-        }
-
+        $validatedData['slug'] = $validatedData['slug'] ?? Str::slug($validatedData['name']);
         if ($request->hasFile('icon')) {
+            if ($category->icon) {
+                Storage::disk('public')->delete($category->icon);
+            }
             $validatedData['icon'] = $request->file('icon')->store('icons', 'public');
         }
-        $categories->fill($validatedData);
-        $categories->save();
-
+        $category->update($validatedData);
         return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
     }
+
+
+
 
 
     /**
