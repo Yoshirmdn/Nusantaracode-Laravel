@@ -139,7 +139,7 @@
                                         {{ $category->name }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <img src="{{ Storage::url($category->icon) }}" alt="{{ $category->name }}"
+                                        <img src="{{ asset('storage/' . $category->icon) }}" alt="{{ $category->name }}"
                                             class="w-20 h-20 object-cover">
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
