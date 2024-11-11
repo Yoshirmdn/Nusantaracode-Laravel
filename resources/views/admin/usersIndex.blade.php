@@ -152,10 +152,6 @@
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Icon
-                                </th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Action
                                 </th>
                             </tr>
@@ -168,10 +164,6 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         {{ $user->name }}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <img src="{{ Storage::url($user->icon) }}" alt="{{ $user->name }}"
-                                            class="w-20 h-20 object-cover">
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <a href="{{ route('users.edit', $user->id) }}"
