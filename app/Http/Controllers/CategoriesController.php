@@ -2,14 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
 use App\Models\Categories;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
 
-class CategoriesController extends Controller
+class CategoriesController extends Controller implements HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:view-categories|create-categories|update-categories|delete-categories', only: ['index', 'store']),
+            new Middleware('permission:create-categories', only: ['create', 'store']),
+            new Middleware('permission:update-categories', only: ['edit', 'update']),
+            new Middleware('permission:delete-categories', only: ['destroy']),
+        ];
+    }
     /**
      * Display a listing of the resource.
      */
@@ -31,7 +44,7 @@ class CategoriesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
@@ -50,7 +63,7 @@ class CategoriesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Categories $categories)
+    public function show(Categories $categories): View
     {
         return view('admin.categoryIndex', compact('categories'));
     }
@@ -58,7 +71,7 @@ class CategoriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit($id): View
     {
         // Find category by ID
         $category = Categories::findOrFail($id);
@@ -70,7 +83,7 @@ class CategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Categories $category)
+    public function update(Request $request, Categories $category): RedirectResponse
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
@@ -95,7 +108,7 @@ class CategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Categories $category)
+    public function destroy(Categories $category): RedirectResponse
     {
         if ($category->icon) {
             Storage::disk('public')->delete($category->icon);
