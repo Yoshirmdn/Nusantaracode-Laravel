@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('quiz_answers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('quiz_id')->constrained('quizzes')->onDelete('cascade');
+            $table->string('answer');
+            $table->tinyInteger('is_correct');
             $table->timestamps();
         });
     }
