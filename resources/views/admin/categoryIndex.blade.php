@@ -75,7 +75,7 @@
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
                                     <input type="text" name="name" id="name"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                        placeholder="Type category name" required>
+                                        placeholder="Type category name" value="{{ old('name') }}" required>
                                     @error('name')
                                         <p class="text-red-600 text-sm">{{ $message }}</p>
                                     @enderror
@@ -83,7 +83,7 @@
 
                                 <input type="hidden" name="slug" id="slug"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                    placeholder="Type or generate slug">
+                                    placeholder="Type or generate slug" value="{{ old('slug') }}">
                                 @error('slug')
                                     <p class="text-red-600 text-sm">{{ $message }}</p>
                                 @enderror
@@ -95,7 +95,9 @@
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                     @error('icon')
                                         <p class="text-red-600 text-sm">{{ $message }}</p>
+                                        <p class="text-gray-500 text-sm">Silakan unggah ulang file Anda.</p>
                                     @enderror
+
                                 </div>
                             </div>
                             <button type="submit"
@@ -139,14 +141,14 @@
                                         {{ $category->name }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <img src="{{ asset('storage/' . $category->icon) }}" alt="{{ $category->name }}"
-                                            class="w-20 h-20 object-cover">
+                                        <img src="{{ asset('storage/' . $category->icon) }}"
+                                            alt="{{ $category->name }}" class="w-20 h-20 object-cover">
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <a href="{{ route('categories.edit', $category->id) }}"
                                             class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                        <form action="{{ route('categories.destroy', $category->id) }}" method="POST"
-                                            class="inline">
+                                        <form action="{{ route('categories.destroy', $category->id) }}"
+                                            method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
