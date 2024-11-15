@@ -51,6 +51,8 @@ class CoursesController extends Controller
             $validatedData['thumbnail'] = $request->file('thumbnail')->store('thumbnails', 'public');
         }
         Courses::create($validatedData);
+        return redirect()->route('courses.index')
+            ->with('success', 'Course deleted successfully.');
     }
 
     /**
@@ -74,30 +76,26 @@ class CoursesController extends Controller
      */
     public function update(Request $request, Courses $courses)
     {
-        // Validate input data
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|unique:courses,slug,' . $courses->id . '|max:255',
+            'slug' => 'required|string|max:255',
             'path_trailer' => 'nullable|string|max:255',
             'about' => 'nullable|string',
             'thumbnail' => 'nullable|image|max:2048',
             'category_id' => 'required|exists:categories,id',
             'teacher_id' => 'required|exists:teachers,id',
         ]);
-
-        if ($request->hasFile('thumbnail')) {
-            if ($courses->thumbnail) {
-                Storage::disk('public')->delete($courses->thumbnail);
-            }
-            $file = $request->file('thumbnail');
-            $thumbnailPath = $file->store('thumbnails', 'public');
-
-            $validatedData['thumbnail'] = $thumbnailPath;
+        $validatedData['slug'] = $validatedData['slug'] ?? Str::slug($validatedData['name']);
+        if (empty($validatedData['slug'])) {
+            $validatedData['slug'] = Str::slug($validatedData['name']);
         }
-
+        if ($request->hasFile('thumbnail')) {
+            Storage::disk('public')->delete($courses->thumbnail);
+            $validatedData['thumbnail'] = $request->file('thumbnail')->store('thumbnails', 'public');
+        }
         $courses->update($validatedData);
-        return redirect()->route('products.index')
-            ->with('success', 'Product updated successfully');
+        return redirect()->route('courses.index')
+            ->with('success', 'Course deleted successfully.');
     }
 
     /**
@@ -105,11 +103,13 @@ class CoursesController extends Controller
      */
     public function destroy(Courses $courses)
     {
-        if ($courses->thumbnail) {
-            Storage::delete('public/' . $courses->thumbnail);
+        if (!empty($courses->thumbnail)) {
+            Storage::disk('public')->delete($courses->thumbnail);
         }
+
         $courses->delete();
-        return redirect()->route('products.index')
-            ->with('success', 'Product deleted successfully');
+
+        return redirect()->route('courses.index')
+            ->with('success', 'Course deleted successfully.');
     }
 }
