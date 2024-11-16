@@ -159,8 +159,8 @@
                             </div>
                         </div>
                         <div class="flex space-x-2">
-                            {{-- {{ route('admin.courses.manage', $course->id) }} --}}
-                            <a href="" class="bg-blue-600 text-white px-4 py-2 rounded-md">Manage</a>
+                            <a href=" {{ route('courses.show', $course->id) }}"
+                                class="bg-blue-600 text-white px-4 py-2 rounded-md">Manage</a>
                             {{-- delete --}}
                             <form action="{{ route('courses.destroy', $course->id) }}" method="POST">
                                 @csrf
