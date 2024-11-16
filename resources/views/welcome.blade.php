@@ -59,7 +59,7 @@
                 <!-- BANNER SECTION START -->
                 <section class="ed-2-banner bg-edoffwhite pt-[120px] pb-[190px] relative z-[1] overflow-hidden">
                     <div class="container max-w-[71.6%] xxxl:max-w-[86.5%] xxl:max-w-[90.6%] mx-auto">
-                        <div class="flex md:flex-col gap-x-[112px] gap-y-[40px] items-center">
+                        <div class="flex flex-row md:flex-col gap-x-[112px] gap-y-[40px] items-center">
                             <!-- banner text -->
                             <div class="max-w-[49%] xxxl:max-w-[45.5%] md:max-w-full shrink-0">
                                 <h6 class="ed-section-sub-title !text-black before:!content-none">ONLINE <span
@@ -88,7 +88,7 @@
                                     <img src="{{ asset('img/banner-2-img-1.jpg') }}" alt="banner image"
                                         class="border-[10px] border-white rounded-[20px] max-w-[241px] aspect-[261/366]">
                                     <img src="{{ asset('img/banner-2-img-2.jpg') }}" alt="banner image"
-                                        class="rounded-[20px]">
+                                        class="rounded-[20px] h-96">
 
                                     <!-- vectors -->
                                     <div>
@@ -519,55 +519,53 @@
                 <!-- ABOUT SECTION START -->
                 <section
                     class="ed-2-about bg-edoffwhite py-[120px] xl:py-[80px] md:py-[60px] relative z-[1] before:absolute before:inset-0 before:-z-[1] before:bg-[url('{{ asset('img/about-us-bg.png') }}')] before:opacity-[5%] before:bg-no-repeat before:bg-cover before:bg-center before:mix-blend-multiply">
-                    <div class="mx-[19.7%] xxxl:mx-[14.7%] xxl:mx-[9.7%] xl:mx-[3.2%] md:mx-[15px]">
-                        <div class="flex flex-wrap gap-x-[75px] gap-y-[30px]">
-                            <!-- left -->
-                            <div class="max-w-[46%] md:max-w-full grow shrink-0">
-                                <div class="relative flex items-end">
-                                    <img src="{{ asset('img/about-2-image-1.png') }}" alt="About Image"
-                                        class="border-[12px] border-white rounded-full">
-                                    <!-- video btn -->
-                                    <div
-                                        class="relative shrink-0 -ml-[202px] lg:-ml-[262px] md:-ml-[202px] xs:-ml-[242px] -mb-[24px]">
-                                        <img src="{{ asset('img/about-2-image-2.png') }}" alt="About Image"
-                                            class="border-[8px] border-white rounded-full w-[292px] xs:w-[252px] aspect-square">
-                                        <a href="https://youtu.be/5ppDzM8m9lI?si=zml3HbV176DBsZlg"
-                                            data-fslightbox="gallery"
-                                            class="flex items-center justify-center w-[60px] aspect-square bg-white rounded-full text-edyellow absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] before:border before:absolute before:top-[50%] before:-translate-y-[50%] before:left-[50%] before:-translate-x-[50%] before:w-[calc(100%+15px)] before:h-[calc(100%+15px)] before:rounded-full before:transition before:duration-[400ms] hover:bg-edpurple hover:text-white hover:before:border-edpurple">
-                                            <i class="fa-solid fa-play"></i>
-                                        </a>
-                                    </div>
+                    <div class="flex flex-row flex-wrap gap-x-[75px] gap-y-[30px]">
+                        <!-- left -->
+                        <div class="max-w-[46%] md:max-w-full grow shrink-0">
+                            <div class="relative flex items-end">
+                                <img src="{{ asset('img/about-2-image-1.png') }}" alt="About Image"
+                                    class="border-[12px] border-white rounded-full">
+                                <!-- video btn -->
+                                <div
+                                    class="relative shrink-0 -ml-[202px] lg:-ml-[262px] md:-ml-[202px] xs:-ml-[242px] -mb-[24px]">
+                                    <img src="{{ asset('img/about-2-image-2.png') }}" alt="About Image"
+                                        class="border-[8px] border-white rounded-full w-[292px] xs:w-[252px] aspect-square">
+                                    <a href="https://youtu.be/5ppDzM8m9lI?si=zml3HbV176DBsZlg"
+                                        data-fslightbox="gallery"
+                                        class="flex items-center justify-center w-[60px] aspect-square bg-white rounded-full text-edyellow absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] before:border before:absolute before:top-[50%] before:-translate-y-[50%] before:left-[50%] before:-translate-x-[50%] before:w-[calc(100%+15px)] before:h-[calc(100%+15px)] before:rounded-full before:transition before:duration-[400ms] hover:bg-edpurple hover:text-white hover:before:border-edpurple">
+                                        <i class="fa-solid fa-play"></i>
+                                    </a>
+                                </div>
 
-                                    <!-- vectors -->
-                                    <div>
-                                        <img src="{{ asset('img/about-2-img-vector.svg') }}" alt="vector"
-                                            class="absolute pointer-events-none top-[60px] right-[65px] -z-[1]">
-                                        <img src="{{ asset('img/about-2-img-vector-2.svg') }}" alt="vector"
-                                            class="absolute pointer-events-none -bottom-[30px] right-0 -z-[1] md:hidden">
-                                    </div>
+                                <!-- vectors -->
+                                <div>
+                                    <img src="{{ asset('img/about-2-img-vector.svg') }}" alt="vector"
+                                        class="absolute pointer-events-none top-[60px] right-[65px] -z-[1]">
+                                    <img src="{{ asset('img/about-2-img-vector-2.svg') }}" alt="vector"
+                                        class="absolute pointer-events-none -bottom-[30px] right-0 -z-[1] md:hidden">
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- right -->
-                            <div class="max-w-[54%] md:max-w-full">
-                                <h6 class="ed-section-sub-title">About us</h6>
-                                <h2 class="ed-section-title mb-[6px]">Learn New <span
-                                        class="inline-block font-bold relative before:absolute before:left-0 before:top-[calc(100%-6px)] before:w-[137px] before:h-[14px] before:bg-[url('{{ asset('img/banner-2-title-vector.svg') }}')] before:bg-[length:100%_100%]">Skills</span>
-                                    To Go Ahead For Your Career</h2>
-                                <p class="text-edgray mb-[34px]">Aonsectetur adipiscing elit Aenean scelerisque augue
-                                    vitae consequat
-                                    Juisque eget congue velit in cursus leo sodales the turpis euismod quis sapien
-                                    euismod quis sapien
-                                    the.</p>
-                                <ul
-                                    class="ed-about-list font-medium text-[18px] text-edblue grid grid-cols-2 xxs:grid-cols-1 gap-[20px] xxs:gap-[15px] mb-[52px] *:pl-[40px] *:relative *:before:absolute *:before:left-0 *:before:-top-[3px] *:before:w-[30px] *:before:aspect-square *:before:border *:before:border-edpurple *:before:rounded-full *:before:bg-[url('{{ asset('img/checkmark.svg') }}')] *:before:bg-no-repeat *:before:bg-[length:15px_13px] *:before:bg-center">
-                                    <li>Flexible Course Plan</li>
-                                    <li>Educator Support</li>
-                                    <li>Expert mentors</li>
-                                    <li>Lifetime Access</li>
-                                </ul>
-                                <a href="#" class="ed-btn">know more</a>
-                            </div>
+                        <!-- right -->
+                        <div class="max-w-[54%] md:max-w-full">
+                            <h6 class="ed-section-sub-title">About us</h6>
+                            <h2 class="ed-section-title mb-[6px]">Learn New <span
+                                    class="inline-block font-bold relative before:absolute before:left-0 before:top-[calc(100%-6px)] before:w-[137px] before:h-[14px] before:bg-[url('{{ asset('img/banner-2-title-vector.svg') }}')] before:bg-[length:100%_100%]">Skills</span>
+                                To Go Ahead For Your Career</h2>
+                            <p class="text-edgray mb-[34px]">Aonsectetur adipiscing elit Aenean scelerisque augue
+                                vitae consequat
+                                Juisque eget congue velit in cursus leo sodales the turpis euismod quis sapien
+                                euismod quis sapien
+                                the.</p>
+                            <ul
+                                class="ed-about-list font-medium text-[18px] text-edblue grid grid-cols-2 xxs:grid-cols-1 gap-[20px] xxs:gap-[15px] mb-[52px] *:pl-[40px] *:relative *:before:absolute *:before:left-0 *:before:-top-[3px] *:before:w-[30px] *:before:aspect-square *:before:border *:before:border-edpurple *:before:rounded-full *:before:bg-[url('{{ asset('img/checkmark.svg') }}')] *:before:bg-no-repeat *:before:bg-[length:15px_13px] *:before:bg-center">
+                                <li>Flexible Course Plan</li>
+                                <li>Educator Support</li>
+                                <li>Expert mentors</li>
+                                <li>Lifetime Access</li>
+                            </ul>
+                            <a href="#" class="ed-btn">know more</a>
                         </div>
                     </div>
                 </section>
@@ -947,7 +945,7 @@
             </div>
 
             {{-- back to top button --}}
-            <div class="fixed bottom-4 right-4">
+            <div class="fixed bottom-4 right-4 z-50">
                 <button id="back-to-top" class="bg-purple-600 text-white rounded-full p-2 focus:outline-none hidden">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
