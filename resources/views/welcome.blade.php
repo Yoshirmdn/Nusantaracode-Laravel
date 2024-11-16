@@ -17,7 +17,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Styles / Scripts -->
-    @vite(['resources/css/app.css', 'resources/css/style.css', 'resources/css/output.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/css/style.css', 'resources/css/output.css', 'resources/js/app.js', 'resources/js/accordion.js'])
 </head>
 
 <body class="font-sans antialiased">
