@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categories;
 use App\Models\Courses;
 use Illuminate\View\View;
+use App\Models\Categories;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 
 class CoursesController extends Controller
@@ -58,9 +59,13 @@ class CoursesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Courses $courses): View
+    public function show(Courses $courses, $id): View
     {
-        return view('admin.courseShow', compact('courses'));
+        $course = Courses::with(['categoriesconn', 'teacherconn.user'])->find($id);
+        if (!$course) {
+            return redirect()->back()->with('error', 'Course not found.');
+        }
+        return view('admin.courseManage', compact('course'));
     }
 
     /**
@@ -101,14 +106,12 @@ class CoursesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Courses $courses)
+    public function destroy(Courses $courses): RedirectResponse
     {
-        if (!empty($courses->thumbnail)) {
+        if ($courses->thumbnail) {
             Storage::disk('public')->delete($courses->thumbnail);
         }
-
         $courses->delete();
-
         return redirect()->route('courses.index')
             ->with('success', 'Course deleted successfully.');
     }
