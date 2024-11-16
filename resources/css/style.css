@@ -1,0 +1,373 @@
+/*!
+Template Name: Edutics - Education HTML Template
+Author: temptics pro
+Version: 1.0
+
+-----------------------------------------------------------------------------------
+Front End is Developed By Shaikh Abu Amer on bahalf of temptics pro
+-----------------------------------------------------------------------------------
+
+
+CSS INDEX
+=================== 
+01. CUSTOM PROPERTIES
+02. GLOBAL
+03. Components
+04. Header
+05. Courses
+
+*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap");
+:root {
+  --ed-blue: #241442;
+  --ed-purple: #5B3AEE;
+  --ed-yellow: #F8BC24;
+  --ed-gray: #4F536C;
+  --ed-gray2: #445375;
+  --black: #000;
+  --white: #fff;
+  --font-poppins: "Poppins", sans-serif;
+}
+
+body {
+  font-family: var(--font-poppins);
+}
+
+a,
+button,
+img,
+svg path {
+  transition: 0.4s ease;
+}
+
+p {
+  line-height: 1.75;
+}
+
+.ed-btn {
+  background-color: var(--ed-purple);
+  color: var(--white);
+  border-radius: 99px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  padding: 0 20px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.ed-btn:hover {
+  background-color: var(--ed-blue);
+}
+
+.ed-section-sub-title {
+  font-weight: 600;
+  color: var(--ed-purple);
+  text-transform: uppercase;
+  padding-right: 10px;
+  display: inline-block;
+  position: relative;
+  margin-bottom: 10px;
+  letter-spacing: 1.5px;
+}
+.ed-section-sub-title::before {
+  content: "";
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 10px;
+  width: 48px;
+  background: linear-gradient(90deg, rgb(91, 58, 238) 3px, rgba(255, 255, 255, 0) 3px, rgba(255, 255, 255, 0) 8px, rgb(91, 58, 238) 8px, rgb(91, 58, 238) 13px, rgba(255, 255, 255, 0) 13px, rgba(255, 255, 255, 0) 18px, rgba(255, 255, 255, 0) 18px, rgb(91, 58, 238) 0);
+}
+.ed-section-sub-title--white {
+  color: var(--white);
+}
+.ed-section-sub-title--white::before {
+  background: linear-gradient(90deg, rgb(255, 255, 255) 3px, rgba(255, 255, 255, 0) 3px, rgba(255, 255, 255, 0) 8px, rgb(255, 255, 255) 8px, rgb(255, 255, 255) 13px, rgba(255, 255, 255, 0) 13px, rgba(255, 255, 255, 0) 18px, rgba(255, 255, 255, 0) 18px, rgb(255, 255, 255) 0);
+}
+
+.ed-section-title {
+  font-weight: 600;
+  font-size: 45px;
+  color: var(--ed-blue);
+  text-transform: capitalize;
+  line-height: 1.29;
+}
+@media screen and (max-width: 1599px) {
+  .ed-section-title {
+    font-size: 40px;
+  }
+}
+@media screen and (max-width: 1399px) {
+  .ed-section-title {
+    font-size: 35px;
+  }
+}
+@media screen and (max-width: 1199px) {
+  .ed-section-title {
+    font-size: 32px;
+  }
+}
+@media screen and (max-width: 575px) {
+  .ed-section-title {
+    font-size: 28px;
+  }
+}
+@media screen and (max-width: 479px) {
+  .ed-section-title {
+    font-size: 25px;
+  }
+}
+
+.ed-single-accordion-item {
+  transition: 0.4s ease;
+}
+
+.ed-single-accordion-item.open .ed-single-accordion-item__header i {
+  transform: rotate(90deg);
+  color: var(--ed-purple);
+}
+.ed-single-accordion-item.open .ed-single-accordion-item__title {
+  color: var(--ed-purple);
+}
+.ed-single-accordion-item.open .ed-single-accordion-item__body {
+  grid-template-rows: 1fr;
+  padding-top: 9px;
+}
+
+.ed-single-accordion-item__header i {
+  transition: transform 0.4s ease;
+}
+
+.ed-single-accordion-item__body {
+  transition: all 0.4s ease;
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+}
+
+.ed-single-accordion-item__body p {
+  overflow: hidden;
+}
+
+@media screen and (max-width: 1199px) {
+  .ed-header-nav {
+    width: 100%;
+  }
+}
+.ed-header-nav a {
+  display: block;
+  line-height: 3;
+  font-weight: 500;
+  color: var(--ed-blue);
+}
+@media screen and (max-width: 1199px) {
+  .ed-header-nav a {
+    border-bottom: 1px solid rgba(79, 83, 108, 0.2);
+    padding-bottom: 6px;
+    padding: 11px 20px;
+    line-height: 1.8;
+  }
+}
+.ed-header-nav a:hover {
+  color: var(--ed-purple);
+}
+.ed-header-nav .has-sub-menu {
+  display: grid;
+  grid-template-rows: max-content 0fr;
+  transition: 0.4s ease;
+}
+.ed-header-nav .has-sub-menu:hover .ed-header-submenu {
+  transform: translateY(0) translateX(-50%);
+  opacity: 1;
+  pointer-events: all;
+}
+@media screen and (max-width: 1199px) {
+  .ed-header-nav .has-sub-menu:hover .ed-header-submenu {
+    transform: translateY(0) translateX(0);
+  }
+}
+@media screen and (max-width: 1199px) {
+  .ed-header-nav .has-sub-menu.active {
+    grid-template-rows: max-content 1fr;
+  }
+}
+.ed-header-nav .has-sub-menu.active > a {
+  margin-bottom: 0;
+}
+.ed-header-nav .has-sub-menu.active .ed-header-submenu {
+  transform: translateY(0) translateX(-50%);
+  opacity: 1;
+  border-color: #ddd;
+  pointer-events: all;
+}
+@media screen and (max-width: 1199px) {
+  .ed-header-nav .has-sub-menu.active .ed-header-submenu {
+    transform: translateY(0) translateX(0);
+  }
+}
+.ed-header-submenu {
+  position: absolute;
+  min-width: 200px;
+  background-color: var(--white);
+  box-shadow: 0 15px 15px rgba(0, 0, 0, 0.03);
+  top: 100%;
+  left: 50%;
+  opacity: 0;
+  transform: translateY(10px) translateX(-50%);
+  transition: 0.4s ease, pointer-events 0s;
+  pointer-events: none;
+  width: max-content;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+}
+@media screen and (max-width: 1199px) {
+  .ed-header-submenu {
+    position: static;
+    transform: translateY(0) translateX(0);
+    opacity: 1;
+    width: 100%;
+    overflow: hidden;
+    box-shadow: none;
+    background-color: #f3f3f3;
+  }
+}
+.ed-header-submenu.active {
+  transform: translateY(0) translateX(-50%);
+  opacity: 1;
+}
+.ed-header-submenu a {
+  padding: 14px 20px;
+  border-bottom: 1px solid #ddd;
+  line-height: 1;
+}
+.ed-header-submenu li:last-child a {
+  border-bottom: 0;
+}
+.ed-header-search.active .ed-header-search-open-btn {
+  color: var(--ed-Lpink);
+}
+.ed-header-search.active form {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+.ed-header-search form {
+  transform: translateY(20px);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s ease;
+}
+@media screen and (max-width: 1199px) {
+  .ed-header-search form {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+.ed-header--2 .ed-header-nav > li > a {
+  color: var(--white);
+}
+.ed-header--2 .ed-header-nav > li > a:hover {
+  color: var(--ed-yellow);
+}
+.ed-header--2.to-be-fixed.ed-sticky {
+  background-color: var(--ed-blue);
+  inset: auto;
+  border-radius: 0;
+  width: 100%;
+  z-index: 222;
+}
+
+.ss-main {
+  border: none;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0;
+  flex-shrink: 0;
+  width: max-content;
+}
+@media screen and (max-width: 1199px) {
+  .ss-main {
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+}
+.ss-main:focus {
+  box-shadow: none;
+}
+.ss-main .ss-arrow path {
+  stroke: var(--white);
+}
+@media screen and (max-width: 1199px) {
+  .ss-main .ss-arrow path {
+    stroke: var(--ed-blue);
+  }
+}
+.ss-main .ss-values .ss-placeholder {
+  color: var(--white);
+}
+@media screen and (max-width: 1199px) {
+  .ss-main .ss-values .ss-placeholder {
+    color: var(--ed-blue);
+  }
+}
+
+.ss-content .ss-list .ss-option {
+  color: rgba(255, 255, 255, 0.8);
+  padding: 12px 10px;
+}
+
+.ss-content.ss-open-below {
+  padding: 0;
+}
+.ss-content.ss-open-below::before {
+  content: none;
+}
+
+.to-be-fixed.ed-sticky {
+  position: fixed;
+  top: 0;
+  background-color: var(--white);
+  inset: 0 100px auto 100px;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1176470588);
+}
+@media screen and (max-width: 1599px) {
+  .to-be-fixed.ed-sticky {
+    inset: 0 30px auto 30px;
+  }
+}
+@media screen and (max-width: 1399px) {
+  .to-be-fixed.ed-sticky {
+    inset: 0 0 auto 0;
+  }
+}
+
+.ed-sidebar.active > * {
+  transform: translateX(0);
+}
+
+.mixitup-control-active {
+  background-color: var(--ed-purple);
+  color: var(--white);
+}
+
+.ed-countdown .number {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+}
+
+.ed-course-details-tab-navs button.active {
+  background-color: var(--ed-purple);
+  color: var(--white);
+}
+.ed-course-details-tabs .ed-tab {
+  overflow: hidden;
+  opacity: 0;
+  height: 0;
+  pointer-events: none;
+}
+.ed-course-details-tabs .ed-tab.active {
+  opacity: 1;
+  height: auto;
+  pointer-events: all;
+}/*# sourceMappingURL=style.css.map */
