@@ -24,5 +24,25 @@ class CreateAdminUserSeeder extends Seeder
         $permissions = Permission::pluck('id', 'id')->all();
         $role->syncPermissions($permissions);
         $user->assignRole([$role->id]);
+        // create for teacher
+        $user = User::create([
+            'name' => 'Rio Teacher',
+            'email' => 'teacher@gmail.com',
+            'password' => bcrypt('123456')
+        ]);
+        $role = Role::create(['name' => 'Teacher']);
+        $permissions = Permission::where('name', 'LIKE', 'course%')->pluck('id', 'id')->all();
+        $role->syncPermissions($permissions);
+        $user->assignRole([$role->id]);
+        // create for student
+        $user = User::create([
+            'name' => 'Rio Student',
+            'email' => 'student@gmail.com',
+            'password' => bcrypt('123456')
+        ]);
+        $role = Role::create(['name' => 'Student']);
+        $permissions = Permission::where('name', 'LIKE', 'course%')->pluck('id', 'id')->all();
+        $role->syncPermissions($permissions);
+        $user->assignRole([$role->id]);
     }
 }
