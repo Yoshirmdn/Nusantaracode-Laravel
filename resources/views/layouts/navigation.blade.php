@@ -30,12 +30,6 @@
                         <x-nav-link :href="route('playground')" :active="request()->routeIs('playground')">
                             {{ __('Code Playground') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('playground')" :active="request()->routeIs('playground')">
-                            {{ __('Code Playground') }}
-                        </x-nav-link>
-                        <x-nav-link :href="route('playground')" :active="request()->routeIs('playground')">
-                            {{ __('Code Playground') }}
-                        </x-nav-link>
                     @endrole
                 </div>
             </div>

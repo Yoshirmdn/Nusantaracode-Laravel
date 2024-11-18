@@ -36,3 +36,6 @@ require __DIR__ . '/auth.php';
 Route::get('/playground', function () {
     return view('user/codePlayground');
 })->name('playground');
+Route::get('/Coursedetails', function () {
+    return view('user/Coursedetails');
+})->name('coursedetails');
