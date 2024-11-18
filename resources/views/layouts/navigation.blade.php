@@ -26,6 +26,11 @@
                             {{ __('Manage Users') }}
                         </x-nav-link>
                     @endrole
+                    @role('teacher')
+                        <x-nav-link :href="route('courses.index')" :active="request()->routeIs('courses.index')">
+                            {{ __('Manage Course') }}
+                        </x-nav-link>
+                    @endrole
                     @role('student')
                         <x-nav-link :href="route('playground')" :active="request()->routeIs('playground')">
                             {{ __('Code Playground') }}
