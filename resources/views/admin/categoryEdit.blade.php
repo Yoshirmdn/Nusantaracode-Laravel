@@ -41,48 +41,35 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                <div class="p-6 text-gray-900"></div>
+                <form action="{{ route('categories.update', $category->id) }}" method="POST"
+                    enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <div class="mb-4">
+                        @error('name')
+                            <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+                        @enderror
+                        <label for="name" class="block text-sm font-medium text-gray-700">Category Name</label>
+                        <input type="text" name="name" id="name" value="{{ $category->name }}"
+                            class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    </div>
+                    {{-- icon --}}
+                    <div class="mb-4">
+                        @error('icon')
+                            <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+                        @enderror
+                        <label for="icon" class="block text-sm font-medium text-gray-700">Category Icon</label>
+                        <input type="file" name="icon" id="icon"
+                            class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    </div>
 
-                    <form action="{{ route('categories.update', $category->id) }}" method="POST"
-                        enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
-                        <div class="mb-4">
-                            <label for="name" class="block text-sm font-medium text-gray-700">Category Name</label>
-                            <input type="text" name="name" id="name"
-                                value="{{ old('name', $category->name) }}"
-                                class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                        </div>
-                        <input type="hidden" name="slug" id="slug"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Type or generate slug">
-                        <div class="mb-4">
-                            <label for="icon" class="block text-sm font-medium text-gray-700">Category Icon</label>
-                            <input type="file" name="icon" id="icon"
-                                class="form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            @if ($category->icon)
-                                <div class="mt-2">
-                                    <span class="text-sm text-gray-600">Current Icon:</span>
-                                    <img src="{{ asset('storage/' . $category->icon) }}" alt="Category Icon"
-                                        class="h-16 w-16 mt-1 rounded">
-                                </div>
-                            @endif
-                        </div>
-                        <button type="submit"
-                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Update</button>
-                    </form>
-                </div>
+                    <button type="submit"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Update</button>
+                </form>
             </div>
         </div>
+    </div>
     </div>
 </x-app-layout>
 <script>

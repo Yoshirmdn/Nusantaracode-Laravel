@@ -15,19 +15,28 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('courses.index')" :active="request()->routeIs('courses.index')">
-                        {{ __('Manage Courses') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
-                        {{ __('Manage Categories') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
-                        {{ __('Manage Users') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('playground')" :active="request()->routeIs('playground')">
-                        {{ __('Code Playground') }}
-                    </x-nav-link>
-
+                    @role('admin')
+                        <x-nav-link :href="route('courses.index')" :active="request()->routeIs('courses.index')">
+                            {{ __('Manage Courses') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
+                            {{ __('Manage Categories') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                            {{ __('Manage Users') }}
+                        </x-nav-link>
+                    @endrole
+                    @role('student')
+                        <x-nav-link :href="route('playground')" :active="request()->routeIs('playground')">
+                            {{ __('Code Playground') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('playground')" :active="request()->routeIs('playground')">
+                            {{ __('Code Playground') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('playground')" :active="request()->routeIs('playground')">
+                            {{ __('Code Playground') }}
+                        </x-nav-link>
+                    @endrole
                 </div>
             </div>
 

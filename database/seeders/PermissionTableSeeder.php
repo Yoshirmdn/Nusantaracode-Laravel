@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Spatie\Permission\Models\Role;
 
 class PermissionTableSeeder extends Seeder
 {
@@ -47,5 +48,35 @@ class PermissionTableSeeder extends Seeder
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);
         }
+
+        $adminRole = Role::create(['name' => 'admin']);
+        $teacherRole = Role::create(['name' => 'teacher']);
+        $studentRole = Role::create(['name' => 'student']);
+
+        $adminRole->givePermissionTo(Permission::all());
+
+        $teacherPermissions = [
+            'view-course-keypoints',
+            'create-course-keypoints',
+            'update-course-keypoints',
+            'delete-course-keypoints',
+            'view-courses',
+            'update-courses',
+            'view-quizzes',
+            'view-quiz-answers',
+        ];
+
+        $teacherRole->givePermissionTo($teacherPermissions);
+
+        $studentPermissions = [
+            'view-course-keypoints',
+            'view-categories',
+            'view-courses',
+            'create-quiz-answers',
+            'view-quizzes',
+            'view-certificates',
+        ];
+
+        $studentRole->givePermissionTo($studentPermissions);
     }
 }

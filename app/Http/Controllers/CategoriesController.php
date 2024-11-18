@@ -101,10 +101,6 @@ class CategoriesController extends Controller implements HasMiddleware
         return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
     }
 
-
-
-
-
     /**
      * Remove the specified resource from storage.
      */

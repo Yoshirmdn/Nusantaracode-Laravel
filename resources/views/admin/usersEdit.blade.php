@@ -16,6 +16,17 @@
                     class="mt-1 p-2 border border-gray-300 rounded w-full">
             </div>
             <div class="mb-4">
+                <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
+                <select id="role" name="roles[]" class="mt-1 p-2 border border-gray-300 rounded w-full" required>
+                    @foreach ($roles as $role)
+                        <option value="{{ $role }}" {{ in_array($role, $userRole) ? 'selected' : '' }}>
+                            {{ $role }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="mb-4">
                 <label for="icon" class="block text-sm font-medium text-gray-700">Icon</label>
                 <input type="file" id="icon" name="icon"
                     class="mt-1 p-2 border border-gray-300 rounded w-full">
