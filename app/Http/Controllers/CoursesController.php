@@ -138,13 +138,13 @@ class CoursesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Courses $courses)
+    public function destroy(Courses $course)
     {
-        if ($courses->thumbnail) {
-            Storage::disk('public')->delete($courses->thumbnail);
+        if ($course->thumbnail) {
+            Storage::disk('public')->delete($course->thumbnail);
         }
 
-        $courses->delete();
+        $course->delete();
 
         return redirect()->route('courses.index')
             ->with('success', 'Course deleted successfully.');
