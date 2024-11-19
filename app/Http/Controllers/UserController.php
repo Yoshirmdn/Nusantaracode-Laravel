@@ -80,6 +80,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,
             'avatar' => 'nullable|image|max:1024',
+            'occupation' => 'nullable|string|max:255',
             'roles' => 'required|array', // Validasi roles sebagai array
             'roles.*' => 'exists:roles,name', // Validasi setiap role ada di tabel roles
         ]);
