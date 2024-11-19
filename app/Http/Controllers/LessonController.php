@@ -55,7 +55,7 @@ class LessonController extends Controller
      */
     public function edit(Lesson $lesson)
     {
-        //
+        return view('admin.lessonEdit', compact('lesson'));
     }
 
     /**
@@ -63,7 +63,17 @@ class LessonController extends Controller
      */
     public function update(Request $request, Lesson $lesson)
     {
-        //
+        $request->validate([
+            'course_id' => 'nullable|exists:courses,id',
+            'name' => 'required|string|max:255',
+            'path_video' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+
+        $lesson->update($request->all());
+
+        return redirect()->route('courses.show', $lesson->course_id)
+            ->with('success', 'Lesson created successfully.');
     }
 
     /**
@@ -71,6 +81,7 @@ class LessonController extends Controller
      */
     public function destroy(Lesson $lesson)
     {
-        //
+        $lesson->delete();
+        return redirect()->route('courses.show', $lesson->course_id);
     }
 }
