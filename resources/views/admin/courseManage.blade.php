@@ -97,14 +97,18 @@
 
                                 <!-- Action Buttons -->
                                 <div class="flex space-x-2">
-                                    <button
+                                    <a href="{{ route('lessons.edit', $lesson->id) }}"
                                         class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm hover:bg-blue-700">
-                                        Edit Video
-                                    </button>
-                                    <button
-                                        class="bg-red-600 text-white px-4 py-2 rounded-full text-sm hover:bg-red-700">
-                                        Delete
-                                    </button>
+                                        Edit
+                                    </a>
+                                    <form action="{{ route('lessons.destroy', $lesson->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="bg-red-600 text-white px-4 py-2 rounded-full text-sm hover:bg-red-700">
+                                            Delete
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         @endforeach
