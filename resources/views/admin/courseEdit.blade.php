@@ -29,15 +29,9 @@
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                                 required value="{{ old('name', $course->name) }}">
                         </div>
-
-                        <!-- Slug -->
-                        <div class="col-span-2">
-                            <label for="slug" class="block mb-2 text-sm font-medium text-gray-900">Slug</label>
-                            <input type="text" name="slug" id="slug"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                                value="{{ old('slug', $course->slug) }}" placeholder="Auto-generated if empty">
-                        </div>
-
+                        <input type="hidden" name="slug" id="slug"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                            value="{{ old('slug', $course->slug) }}" placeholder="Auto-generated if empty">
                         <!-- Path Trailer -->
                         <div class="col-span-2">
                             <label for="path_trailer" class="block mb-2 text-sm font-medium text-gray-900">Path
@@ -83,7 +77,6 @@
                                 @endforeach
                             </select>
                         </div>
-
                         <!-- Teacher -->
                         <div class="col-span-2 sm:col-span-1">
                             <label for="teacher_id" class="block mb-2 text-sm font-medium text-gray-900">Teacher</label>
@@ -98,7 +91,6 @@
                             </select>
                         </div>
                     </div>
-
                     <!-- Submit Button -->
                     <button type="submit"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
