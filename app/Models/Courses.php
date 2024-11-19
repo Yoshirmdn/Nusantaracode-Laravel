@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Categories;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Courses extends Model
@@ -18,5 +19,9 @@ class Courses extends Model
     public function teacherconn()
     {
         return $this->belongsTo(Teacher::class, 'teacher_id');
+    }
+    public function lessons(): HasMany
+    {
+        return $this->hasMany(Lesson::class, 'course_id');
     }
 }
