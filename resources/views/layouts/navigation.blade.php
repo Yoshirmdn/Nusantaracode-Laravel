@@ -41,6 +41,8 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
+                <img src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) . '&background=random' }}"
+                    alt="{{ Auth::user()->name }}" class="w-8 h-8 rounded-full">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
