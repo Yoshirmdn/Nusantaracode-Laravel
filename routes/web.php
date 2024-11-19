@@ -1,10 +1,12 @@
 <?php
 
-use App\Http\Controllers\CategoriesController;
+use App\Models\Lesson;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\LessonController;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\CategoriesController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,6 +25,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('courses', CoursesController::class);
         Route::resource('categories', CategoriesController::class);
         Route::resource('users', UserController::class);
+        Route::resource('lessons', LessonController::class);
     });
 
     Route::group(['middleware' => ['role:admin|teacher']], function () {
