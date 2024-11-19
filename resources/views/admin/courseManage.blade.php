@@ -75,8 +75,36 @@
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
                         @foreach ($course->lessons as $lesson)
                             <div class="flex items-center mb-4">
-                                <div class="flex-1">
+                                <!-- Video Thumbnail -->
+                                @php
+                                    $embedUrl = 'https://www.youtube.com/embed/' . $lesson->path_video;
+                                @endphp
+
+                                <div class="flex items-center">
+                                    <div class="w-32 h-20 relative overflow-hidden rounded-lg">
+                                        <iframe class="absolute inset-0 w-full h-full" src="{{ $embedUrl }}"
+                                            title="{{ $lesson->name }}"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowfullscreen>
+                                        </iframe>
+                                    </div>
+                                </div>
+                                <!-- Lesson Details -->
+                                <div class="flex-1 ml-4">
                                     <h2 class="text-lg font-semibold">{{ $lesson->name }}</h2>
+                                    <p class="text-sm text-slate-600 font-medium">{{ $course->name }}</p>
+                                </div>
+
+                                <!-- Action Buttons -->
+                                <div class="flex space-x-2">
+                                    <button
+                                        class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm hover:bg-blue-700">
+                                        Edit Video
+                                    </button>
+                                    <button
+                                        class="bg-red-600 text-white px-4 py-2 rounded-full text-sm hover:bg-red-700">
+                                        Delete
+                                    </button>
                                 </div>
                             </div>
                         @endforeach
