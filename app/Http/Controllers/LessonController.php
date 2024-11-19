@@ -15,6 +15,7 @@ class LessonController extends Controller
         //
     }
 
+
     /**
      * Show the form for creating a new resource.
      */
@@ -28,7 +29,17 @@ class LessonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'course_id' => 'required|exists:courses,id',
+            'name' => 'required|string|max:255',
+            'path_video' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+
+        Lesson::create($request->all());
+
+        return redirect()->route('courses.show', $request->course_id)
+            ->with('success', 'Lesson created successfully.');
     }
 
     /**
