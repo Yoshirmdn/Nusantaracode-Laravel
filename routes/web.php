@@ -2,6 +2,7 @@
 
 use App\Models\Lesson;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\QuizController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\CoursesController;
@@ -26,6 +27,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('categories', CategoriesController::class);
         Route::resource('users', UserController::class);
         Route::resource('lessons', LessonController::class);
+        Route::resource('quizzes', QuizController::class);
     });
 
     Route::group(['middleware' => ['role:admin|teacher']], function () {
