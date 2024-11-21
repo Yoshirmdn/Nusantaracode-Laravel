@@ -14,7 +14,6 @@
                 </li>
             </ol>
         </nav>
-
     </x-slot>
 
     <div class="py-12">
@@ -25,6 +24,13 @@
                 <div class="p-6 text-gray-900">
                     {{ __("You're logged in!") }}
                     <h1>Inner Section</h1>
+                    @role('admin')
+                        <p class="text-lg font-bold text-green-600">Hello Admin!</p>
+                        @elserole('teacher')
+                        <p class="text-lg font-bold text-blue-600">Hello, {{ Auth::user()->name }}! You're a teacher.</p>
+                        @elserole('student')
+                        <p class="text-lg font-bold text-purple-600">Hello, {{ Auth::user()->name }}! You're a student.</p>
+                    @endrole
                 </div>
             </div>
         </div>
