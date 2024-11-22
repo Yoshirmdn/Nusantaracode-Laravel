@@ -13,11 +13,11 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
         <img src="{{ $user->avatar ? asset('storage/' . $user->avatar) : 'https://ui-avatars.com/api/?name=' . urlencode($user->name) . '&background=random' }}"
-            alt="{{ $user->name }}" class="w-16 h-16 rounded-full">
+            alt="{{ $user->name }}" class="w-16 h-16 rounded-full object-cover">
         <div>
             <x-input-label for="avatar" :value="__('Avatar')" />
             <x-text-input id="avatar" name="avatar" type="file" class="mt-1 block w-full" accept="image/*" />
