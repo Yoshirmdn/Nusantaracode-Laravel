@@ -150,7 +150,8 @@
                             <div class="flex mt-2 space-x-4">
                                 <span class="text-blue-600 font-medium">{{ $course->students_count ?? 0 }}
                                     Students</span>
-                                <span class="text-blue-600 font-medium">{{ $course->videos_count ?? 0 }} Videos</span>
+                                <span class="text-blue-600 font-medium">{{ $course->lessons_count ?? 0 }}
+                                    Videos</span>
                                 <span class="text-blue-600 font-medium">{{ $course->lessons_count ?? 0 }}
                                     Lessons</span>
                                 <span class="text-gray-800 font-semibold">

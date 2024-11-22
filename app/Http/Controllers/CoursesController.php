@@ -17,9 +17,10 @@ class CoursesController extends Controller
      */
     public function index()
     {
-        // Mengambil kategori dan kursus dengan relasi yang benar
         $categories = Categories::all();
-        $courses = Courses::with(['categoriesconn', 'teacherconn.user', 'lessons'])->paginate(10);
+        $courses = Courses::withCount(['lessons'])
+            ->with(['categoriesconn', 'teacherconn.user'])
+            ->paginate(10);
         return view('admin.courseIndex', compact('courses', 'categories'));
     }
 
