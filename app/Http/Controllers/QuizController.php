@@ -36,14 +36,33 @@ class QuizController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'lesson_id' => 'required|exists:lessons,id', // Validasi untuk lesson_id
-            'question' => 'required|string|max:255', // Validasi untuk question
+            'lesson_id' => 'required|exists:lessons,id',
+            'question' => 'required|string|max:255',
+            'answers' => 'required|array|min:2', // Minimal 2 jawaban
+            'answers.*' => 'required|string|max:255', // Validasi setiap jawaban
+            'correct_answer' => 'required|integer|min:0|max:' . (count($request->answers) - 1), // Validasi indeks jawaban benar
         ]);
 
-        Quiz::create($validatedData);
+        // Simpan kuis
+        $quiz = Quiz::create([
+            'lesson_id' => $validatedData['lesson_id'],
+            'question' => $validatedData['question'],
+        ]);
+
+        // Simpan jawaban
+        $answers = [];
+        foreach ($validatedData['answers'] as $index => $answerText) {
+            $answers[] = [
+                'quiz_id' => $quiz->id,
+                'answer' => $answerText,
+                'is_correct' => $index == $validatedData['correct_answer'], // Tandai jawaban benar
+            ];
+        }
+        \App\Models\Quiz_answer::insert($answers);
 
         return redirect()->route('quizzes.index')->with('success', 'Quiz created successfully.');
     }
+
 
 
     public function edit(Quiz $quiz)
