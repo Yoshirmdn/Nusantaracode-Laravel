@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Course_keypoint extends Model
 {
     protected $table = 'course_keypoint';
-    protected $fillable = ['course_id', 'name'];
+    protected $fillable = ['course_id', 'keypoint'];
     public $timestamps = true;
     public function course()
     {
