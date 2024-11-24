@@ -79,13 +79,33 @@ class QuizController extends Controller
         $validatedData = $request->validate([
             'lesson_id' => 'required|exists:lessons,id', // Validasi untuk lesson_id
             'question' => 'required|string|max:255', // Validasi untuk question
+            'answers' => 'required|array|min:2', // Minimal 2 jawaban
+            'answers.*' => 'required|string|max:255', // Validasi setiap jawaban
+            'correct_answer' => 'required|integer|min:0|max:' . (count($request->answers) - 1), // Validasi indeks jawaban benar
         ]);
 
-        $quiz->update($validatedData);
+        // Update data kuis
+        $quiz->update([
+            'lesson_id' => $validatedData['lesson_id'],
+            'question' => $validatedData['question'],
+        ]);
+
+        // Hapus jawaban lama
+        $quiz->answers()->delete();
+
+        // Simpan jawaban baru
+        $answers = [];
+        foreach ($validatedData['answers'] as $index => $answerText) {
+            $answers[] = [
+                'quiz_id' => $quiz->id,
+                'answer' => $answerText,
+                'is_correct' => $index == $validatedData['correct_answer'], // Tandai jawaban benar
+            ];
+        }
+        \App\Models\Quiz_answer::insert($answers);
 
         return redirect()->route('quizzes.index')->with('success', 'Quiz updated successfully.');
     }
-
     /**
      * Remove the specified resource from storage.
      */
