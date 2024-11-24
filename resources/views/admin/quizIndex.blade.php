@@ -42,6 +42,9 @@
                                     Lesson</th>
                                 <th
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Correct Answer</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Aksi</th>
                             </tr>
                         </thead>
@@ -50,6 +53,9 @@
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ $quiz->question }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ $quiz->lesson->name ?? 'No Lesson' }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        {{ $quiz->answers->where('is_correct', 1)->first()->answer ?? 'No Correct Answer' }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <a href="{{ route('quizzes.edit', $quiz->id) }}"
