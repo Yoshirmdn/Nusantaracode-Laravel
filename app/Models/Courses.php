@@ -24,4 +24,8 @@ class Courses extends Model
     {
         return $this->hasMany(Lesson::class, 'course_id');
     }
+    public function keyPoint()
+    {
+        return $this->hasMany(Course_keypoint::class);
+    }
 }
