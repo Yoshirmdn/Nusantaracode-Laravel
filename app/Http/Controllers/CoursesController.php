@@ -49,6 +49,9 @@ class CoursesController extends Controller
             'thumbnail' => 'nullable|image|max:2048',
             'category_id' => 'required|exists:categories,id',
             'teacher_id' => 'required|exists:teachers,id',
+            'keypoint' => 'required|array|min:2', // Minimal 2 jawaban
+            'keypoint.*' => 'required|string|max:255', // Validasi setiap jawaban
+
         ]);
 
         // Proses slug jika tidak ada
@@ -63,7 +66,16 @@ class CoursesController extends Controller
         }
 
         // Simpan course baru
-        Courses::create($validatedData);
+        $course = Courses::create($validatedData);
+        // simpan keypoint
+        $keypoints = [];
+        foreach ($validatedData['keypoint'] as $index => $answerText) {
+            $keypoints[] = [
+                'course_id' => $course->id,
+                'keypoint' => $answerText,
+            ];
+        }
+        \App\Models\Course_keypoint::insert($keypoints);
 
         // Redirect ke halaman daftar course dengan pesan sukses
         return redirect()->route('courses.index')

@@ -113,6 +113,38 @@
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                         placeholder="Type course description"></textarea>
                                 </div>
+                                <div class="col-span-2">
+                                    <label for="keypoints"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                        Keypoints
+                                    </label>
+                                    <div id="keypointsContainer">
+                                        <!-- Tampilkan keypoints yang sudah diisi sebelumnya, jika ada -->
+                                        @if (old('keypoint'))
+                                            @foreach (old('keypoint') as $index => $keypoint)
+                                                <div class="flex items-center space-x-2 mb-2">
+                                                    <input type="text" name="keypoint[]"
+                                                        placeholder="Enter keypoint" value="{{ $keypoint }}"
+                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+                                                    <button type="button"
+                                                        class="removeKeypoint text-red-600 hover:text-red-900">Hapus</button>
+                                                </div>
+                                            @endforeach
+                                        @else
+                                            <!-- Input default jika tidak ada keypoint sebelumnya -->
+                                            <div class="flex items-center space-x-2 mb-2">
+                                                <input type="text" name="keypoint[]" placeholder="Enter keypoint"
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+                                                <button type="button"
+                                                    class="removeKeypoint text-red-600 hover:text-red-900">Hapus</button>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <button type="button" id="addKeypoint"
+                                        class="inline-flex items-center px-4 py-2 mt-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400">
+                                        Tambah Keypoint
+                                    </button>
+                                </div>
                             </div>
                             <button type="submit"
                                 class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -288,5 +320,28 @@
         const name = this.value;
         const slug = name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
         document.getElementById('slug').value = slug;
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        const container = document.getElementById('keypointsContainer');
+        const addButton = document.getElementById('addKeypoint');
+
+        // Tambah keypoint baru
+        addButton.addEventListener('click', () => {
+            const newKeypoint = document.createElement('div');
+            newKeypoint.classList.add('flex', 'items-center', 'space-x-2', 'mb-2');
+            newKeypoint.innerHTML = `
+                <input type="text" name="keypoint[]" placeholder="Enter keypoint"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" />
+                <button type="button" class="removeKeypoint text-red-600 hover:text-red-900">Hapus</button>
+            `;
+            container.appendChild(newKeypoint);
+        });
+
+        // Hapus keypoint
+        container.addEventListener('click', (e) => {
+            if (e.target.classList.contains('removeKeypoint')) {
+                e.target.parentElement.remove();
+            }
+        });
     });
 </script>
