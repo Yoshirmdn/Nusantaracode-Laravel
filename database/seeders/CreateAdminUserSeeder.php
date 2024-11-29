@@ -20,17 +20,17 @@ class CreateAdminUserSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => bcrypt('123456')
         ]);
-        $role = Role::create(['name' => 'admin']);
+        $role = Role::create(['name' => 'Admin']);
         $permissions = Permission::pluck('id', 'id')->all();
         $role->syncPermissions($permissions);
         $user->assignRole([$role->id]);
-        // create for teacher
+        // create for <teacher></teacher>
         $user = User::create([
             'name' => 'Rio Teacher',
             'email' => 'teacher@gmail.com',
             'password' => bcrypt('123456')
         ]);
-        $role = Role::create(['name' => 'teacher']);
+        $role = Role::create(['name' => 'Teacher']);
         $permissions = Permission::where('name', 'LIKE', 'course%')->pluck('id', 'id')->all();
         $role->syncPermissions($permissions);
         $user->assignRole([$role->id]);
@@ -40,7 +40,7 @@ class CreateAdminUserSeeder extends Seeder
             'email' => 'student@gmail.com',
             'password' => bcrypt('123456')
         ]);
-        $role = Role::create(['name' => 'student']);
+        $role = Role::create(['name' => 'Student']);
         $permissions = Permission::where('name', 'LIKE', 'course%')->pluck('id', 'id')->all();
         $role->syncPermissions($permissions);
         $user->assignRole([$role->id]);

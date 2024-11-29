@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course_keypoint;
 use App\Models\Courses;
 use Illuminate\View\View;
 use App\Models\Categories;
@@ -48,10 +49,9 @@ class CoursesController extends Controller
             'about' => 'nullable|string',
             'thumbnail' => 'nullable|image|max:2048',
             'category_id' => 'required|exists:categories,id',
-            'teacher_id' => 'required|exists:teachers,id',
+            'teacher_id' => 'nullable|exists:teachers,id', // Ubah menjadi nullable
             'keypoint' => 'required|array|min:2', // Minimal 2 jawaban
             'keypoint.*' => 'required|string|max:255', // Validasi setiap jawaban
-
         ]);
 
         // Proses slug jika tidak ada
@@ -67,20 +67,22 @@ class CoursesController extends Controller
 
         // Simpan course baru
         $course = Courses::create($validatedData);
-        // simpan keypoint
+
+        // Simpan keypoint
         $keypoints = [];
-        foreach ($validatedData['keypoint'] as $index => $answerText) {
+        foreach ($validatedData['keypoint'] as $answerText) {
             $keypoints[] = [
                 'course_id' => $course->id,
                 'keypoint' => $answerText,
             ];
         }
-        \App\Models\Course_keypoint::insert($keypoints);
+        Course_keypoint::insert($keypoints);
 
         // Redirect ke halaman daftar course dengan pesan sukses
         return redirect()->route('courses.index')
             ->with('success', 'Course created successfully.');
     }
+
 
     /**
      * Display the specified resource.
