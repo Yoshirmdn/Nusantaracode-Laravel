@@ -23,6 +23,13 @@ class CoursesController extends Controller
             ->with(['categoriesconn', 'teacherconn.user'])
             ->paginate(10);
         return view('admin.courseIndex', compact('courses', 'categories'));
+        // if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('teacher')) {
+        //     return view('admin.courseIndex', compact('courses', 'categories'));
+        // } elseif (auth()->user()->hasRole('student')) {
+        //     return view('user.courseIndex', compact('courses', 'categories'));
+        // } else {
+        //     abort(403, 'Unauthorized action.');
+        // }
     }
 
     /**
