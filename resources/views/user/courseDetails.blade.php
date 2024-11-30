@@ -14,7 +14,8 @@
             </div>
 
             <!-- txt -->
-            <div class="flex gap-[30px] lg:gap-[20px] md:flex-col md:items-center">
+            <div class="flex gap-[30px] lg:gap-[20px] md:flex-row sm:flex-col md:items-center">
+                {{-- left --}}
                 <div class="left max-w-full grow">
                     <div>
                         <h4
@@ -116,97 +117,98 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+                {{-- right --}}
+                <div class="right h-full sticky top-[120px] max-w-full w-[370px] lg:w-[300px] shrink-0 space-y-[30px]">
+                    <!-- COURSE INFORMATION -->
+                    <div
+                        class="border border-[#e5e5e5] rounded-[10px] px-[30px] lg:px-[20px] xxs:px-[15px] py-[35px] lg:py-[25px] xxs:py-[25px]">
+                        <h5 class="font-semibold text-[24px] text-edblue mb-[20px]">Course includes:</h5>
 
-        <!-- right sidebar -->
-        <div class="right h-full sticky top-[120px] max-w-full w-[370px] lg:w-[300px] shrink-0 space-y-[30px]">
-            <!-- COURSE INFORMATION -->
-            <div
-                class="border border-[#e5e5e5] rounded-[10px] px-[30px] lg:px-[20px] xxs:px-[15px] py-[35px] lg:py-[25px] xxs:py-[25px]">
-                <h5 class="font-semibold text-[24px] text-edblue mb-[20px]">Course includes:</h5>
+                        <ul class="mb-[30px]">
+                            <li
+                                class="py-[15px] flex flex-wrap gap-[10px] items-center justify-between border-t border-[#e5e5e5] last:border-b">
+                                <span class="flex items-center gap-[8px] font-semibold text-edblue">
+                                    <span class="icon"><img src="{{ asset('img/icon/calender-purple.svg') }}"
+                                            alt="icon"></span>
+                                    <span>Level:</span>
+                                </span>
+                                <span class="text-[15px] text-edgray">Beginner</span>
+                            </li>
 
-                <ul class="mb-[30px]">
-                    <li
-                        class="py-[15px] flex flex-wrap gap-[10px] items-center justify-between border-t border-[#e5e5e5] last:border-b">
-                        <span class="flex items-center gap-[8px] font-semibold text-edblue">
-                            <span class="icon"><img src="{{ asset('img/icon/calender-purple.svg') }}"
-                                    alt="icon"></span>
-                            <span>Level:</span>
-                        </span>
-                        <span class="text-[15px] text-edgray">Beginner</span>
-                    </li>
+                            <li
+                                class="py-[15px] flex flex-wrap gap-[10px] items-center justify-between border-t border-[#e5e5e5] last:border-b">
+                                <span class="flex items-center gap-[8px] font-semibold text-edblue">
+                                    <span class="icon"><img src="{{ asset('img/icon/clock-purple.svg') }}"
+                                            alt="icon"></span>
+                                    <span>Duration:</span>
+                                </span>
+                                <span class="text-[15px] text-edgray">6 Months</span>
+                            </li>
 
-                    <li
-                        class="py-[15px] flex flex-wrap gap-[10px] items-center justify-between border-t border-[#e5e5e5] last:border-b">
-                        <span class="flex items-center gap-[8px] font-semibold text-edblue">
-                            <span class="icon"><img src="{{ asset('img/icon/clock-purple.svg') }}"
-                                    alt="icon"></span>
-                            <span>Duration:</span>
-                        </span>
-                        <span class="text-[15px] text-edgray">6 Months</span>
-                    </li>
+                            <li
+                                class="py-[15px] flex flex-wrap gap-[10px] items-center justify-between border-t border-[#e5e5e5] last:border-b">
+                                <span class="flex items-center gap-[8px] font-semibold text-edblue">
+                                    <span class="icon"><img src="{{ asset('img/icon/lesson-purple.svg') }}"
+                                            alt="icon"></span>
+                                    <span>Lessons:</span>
+                                </span>
+                                <span class="text-[15px] text-edgray">12</span>
+                            </li>
 
-                    <li
-                        class="py-[15px] flex flex-wrap gap-[10px] items-center justify-between border-t border-[#e5e5e5] last:border-b">
-                        <span class="flex items-center gap-[8px] font-semibold text-edblue">
-                            <span class="icon"><img src="{{ asset('img/icon/lesson-purple.svg') }}"
-                                    alt="icon"></span>
-                            <span>Lessons:</span>
-                        </span>
-                        <span class="text-[15px] text-edgray">12</span>
-                    </li>
+                            <li
+                                class="py-[15px] flex flex-wrap gap-[10px] items-center justify-between border-t border-[#e5e5e5] last:border-b">
+                                <span class="flex items-center gap-[8px] font-semibold text-edblue">
+                                    <span class="icon"><img src="{{ asset('img/icon/user-group-purple.svg') }}"
+                                            alt="icon"></span>
+                                    <span>Students:</span>
+                                </span>
+                                <span class="text-[15px] text-edgray">120</span>
+                            </li>
 
-                    <li
-                        class="py-[15px] flex flex-wrap gap-[10px] items-center justify-between border-t border-[#e5e5e5] last:border-b">
-                        <span class="flex items-center gap-[8px] font-semibold text-edblue">
-                            <span class="icon"><img src="{{ asset('img/icon/user-group-purple.svg') }}"
-                                    alt="icon"></span>
-                            <span>Students:</span>
-                        </span>
-                        <span class="text-[15px] text-edgray">120</span>
-                    </li>
+                            <li
+                                class="py-[15px] flex flex-wrap gap-[10px] items-center justify-between border-t border-[#e5e5e5] last:border-b">
+                                <span class="flex items-center gap-[8px] font-semibold text-edblue">
+                                    <span class="icon"><img src="{{ asset('img/icon/medal.svg') }}"
+                                            alt="icon"></span>
+                                    <span>Certifications:</span>
+                                </span>
+                                <span class="text-[15px] text-edgray">Yes</span>
+                            </li>
 
-                    <li
-                        class="py-[15px] flex flex-wrap gap-[10px] items-center justify-between border-t border-[#e5e5e5] last:border-b">
-                        <span class="flex items-center gap-[8px] font-semibold text-edblue">
-                            <span class="icon"><img src="{{ asset('img/icon/medal.svg') }}" alt="icon"></span>
-                            <span>Certifications:</span>
-                        </span>
-                        <span class="text-[15px] text-edgray">Yes</span>
-                    </li>
+                            <li
+                                class="py-[15px] flex flex-wrap gap-[10px] items-center justify-between border-t border-[#e5e5e5] last:border-b">
+                                <span class="flex items-center gap-[8px] font-semibold text-edblue">
+                                    <span class="icon"><img src="{{ asset('img/icon/globe.svg') }}"
+                                            alt="icon"></span>
+                                    <span>Language:</span>
+                                </span>
+                                <span class="text-[15px] text-edgray">English</span>
+                            </li>
+                        </ul>
 
-                    <li
-                        class="py-[15px] flex flex-wrap gap-[10px] items-center justify-between border-t border-[#e5e5e5] last:border-b">
-                        <span class="flex items-center gap-[8px] font-semibold text-edblue">
-                            <span class="icon"><img src="{{ asset('img/icon/globe.svg') }}" alt="icon"></span>
-                            <span>Language:</span>
-                        </span>
-                        <span class="text-[15px] text-edgray">English</span>
-                    </li>
-                </ul>
+                        <div class="space-y-[12px]">
+                            <button
+                                class="ed-btn !h-[56px] !rounded-[8px] w-full !bg-transparent border border-edpurple !text-edpurple hover:!bg-edpurple hover:!text-white">Add
+                                to cart</button>
+                            <a href="#" class="ed-btn gap-[10px] !h-[56px] !rounded-[8px] w-full">Join this
+                                Course
+                                <span><i class="fa-solid fa-arrow-right-long"></i></span></a>
+                        </div>
 
-                <div class="space-y-[12px]">
-                    <button
-                        class="ed-btn !h-[56px] !rounded-[8px] w-full !bg-transparent border border-edpurple !text-edpurple hover:!bg-edpurple hover:!text-white">Add
-                        to cart</button>
-                    <a href="#" class="ed-btn gap-[10px] !h-[56px] !rounded-[8px] w-full">Join this
-                        Course
-                        <span><i class="fa-solid fa-arrow-right-long"></i></span></a>
-                </div>
-
-                <!-- social links -->
-                <div class="flex gap-[28px] items-center justify-center mt-[22px]">
-                    <h6 class="font-semibold text-[16px] text-black">Share:</h6>
-                    <div class="flex gap-[15px] text-[16px]">
-                        <a href="#" class="text-[#757277] hover:text-edpurple"><i
-                                class="fa-brands fa-facebook-f"></i></a>
-                        <a href="#" class="text-[#757277] hover:text-edpurple"><i
-                                class="fa-brands fa-twitter"></i></a>
-                        <a href="#" class="text-[#757277] hover:text-edpurple"><i
-                                class="fa-brands fa-linkedin-in"></i></a>
-                        <a href="#" class="text-[#757277] hover:text-edpurple"><i
-                                class="fa-brands fa-youtube"></i></a>
+                        <!-- social links -->
+                        <div class="flex gap-[28px] items-center justify-center mt-[22px]">
+                            <h6 class="font-semibold text-[16px] text-black">Share:</h6>
+                            <div class="flex gap-[15px] text-[16px]">
+                                <a href="#" class="text-[#757277] hover:text-edpurple"><i
+                                        class="fa-brands fa-facebook-f"></i></a>
+                                <a href="#" class="text-[#757277] hover:text-edpurple"><i
+                                        class="fa-brands fa-twitter"></i></a>
+                                <a href="#" class="text-[#757277] hover:text-edpurple"><i
+                                        class="fa-brands fa-linkedin-in"></i></a>
+                                <a href="#" class="text-[#757277] hover:text-edpurple"><i
+                                        class="fa-brands fa-youtube"></i></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
