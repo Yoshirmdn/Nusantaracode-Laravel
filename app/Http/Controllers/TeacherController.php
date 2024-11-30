@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 
@@ -12,23 +13,41 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        //
+        $teachers = Teacher::with('user')->paginate(10);
+        return view('admin.teacherIndex', compact('teachers'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        //
-    }
+    public function create() {}
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+            'is_active' => 'required|boolean',
+        ]);
+
+        // Cari user berdasarkan email
+        $user = User::where('email', $request->email)->first();
+
+        // Periksa apakah user sudah menjadi teacher
+        $existingTeacher = Teacher::where('user_id', $user->id)->first();
+        if ($existingTeacher) {
+            return redirect()->back()->withErrors(['email' => 'User ini sudah menjadi teacher.']);
+        }
+
+        // Tambahkan data ke tabel teachers
+        Teacher::create([
+            'user_id' => $user->id,
+            'is_active' => $request->is_active,
+        ]);
+
+        return redirect()->route('teachers.index')->with('success', 'Teacher berhasil ditambahkan.');
     }
 
     /**
