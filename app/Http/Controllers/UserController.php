@@ -77,21 +77,21 @@ class UserController extends Controller
 
         // Validasi input form
         $validated = $request->validate([
-            'name' => 'required',
+            'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $id,
             'avatar' => 'nullable|image|max:1024',
             'occupation' => 'nullable|string|max:255',
-            'roles' => 'required|array', // Validasi roles sebagai array
-            'roles.*' => 'exists:roles,name', // Validasi setiap role ada di tabel roles
+            'roles' => 'required|array',
+            'roles.*' => 'exists:roles,name',
+            'password' => 'nullable|min:8',
         ]);
 
-        // Cek jika role 'teacher' dipilih, dan tambahkan user ke tabel teachers
+        // Cek jika role 'teacher' dipilih, tambahkan ke tabel teachers
         if (in_array('teacher', $validated['roles'])) {
-            // Pastikan user belum ada di tabel teacher
             if (!$user->teacher) {
                 Teacher::create([
                     'user_id' => $user->id,
-                    // Tambahkan kolom lain jika perlu
+                    'is_active' => 1, // Default aktif, atau sesuaikan dengan kebutuhan Anda
                 ]);
             }
         } else {
@@ -105,27 +105,25 @@ class UserController extends Controller
         if (!empty($validated['password'])) {
             $validated['password'] = Hash::make($validated['password']);
         } else {
-            // Hapus password jika tidak ada perubahan
             $validated = Arr::except($validated, ['password']);
         }
 
         // Update avatar jika ada
         if ($request->hasFile('avatar')) {
             if ($user->avatar) {
-                // Hapus avatar lama jika ada
+                // Hapus avatar lama
                 Storage::disk('public')->delete($user->avatar);
             }
-            // Simpan avatar baru
             $validated['avatar'] = $request->file('avatar')->store('avatars', 'public');
         }
 
         // Perbarui data user
         $user->update($validated);
 
-        // Atur roles untuk user
-        $user->syncRoles($validated['roles']); // Gunakan syncRoles untuk memastikan tidak ada duplikasi
+        // Sinkronisasi roles
+        $user->syncRoles($validated['roles']);
 
-        return redirect()->route('users.index')->with('success', 'User berhasil diperbarui');
+        return redirect()->route('users.index')->with('success', 'User berhasil diperbarui.');
     }
 
 
