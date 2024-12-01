@@ -62,41 +62,23 @@
             </section>
             {{-- Hero End --}}
             {{-- Content Start --}}
-            <div class="h-screen mt-4">
-                <div class="container mx-auto">
-                    <h2 class="text-3xl font-semibold text-gray-800 text-center">Kategori <span
+            <div class="h-screen mt-4 overflow-hidden px-16 ">
+                <div class="container ">
+                    <h2 class="text-3xl font-semibold text-gray-800 text-center mb-6">Kategori <span
                             class="text-purple-400">Course</span></h2>
-                    <div class="grid grid-cols-1 gap-6 mt-6 md:grid-cols-2 lg:grid-cols-3">
-                        <div class="bg-white shadow-lg rounded-lg">
-                            <img src="{{ asset('img/news-details-img-1.jpg') }}" alt=""
-                                class="object-cover w-full h-48 rounded-t-lg">
-                            <div class="p-6">
-                                <h2 class="text-xl font-semibold text-gray-800">Belajar Pemrograman Web</h2>
-                                <p class="mt-4 text-gray-600">Pelajari cara membuat website dengan HTML, CSS, dan
-                                    JavaScript</p>
-                                <a href="#" class="block mt-4 text-violet-400">Lihat Detail</a>
+                    <div class="category-carousel flex gap-8">
+                        @foreach ($categories as $category)
+                            <div class="w-full bg-gray-200 px-4">
+                                <div class="carousel-item bg-white shadow-lg rounded-lg ">
+                                    <img src="{{ asset('storage/' . $category->icon) }}" alt="{{ $category->name }}"
+                                        class="object-cover w-[250px] h-48 rounded-t-lg">
+                                    <div class="p-6">
+                                        <h2 class="text-xl font-semibold text-gray-800">{{ $category->name }}</h2>
+                                        <a href="#" class="block mt-4 text-violet-400">Lihat Detail</a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="bg-white shadow-lg rounded-lg">
-                            <img src="{{ asset('img/news-details-img-2.jpg') }}" alt=""
-                                class="object-cover w-full h-48 rounded-t-lg">
-                            <div class="p-6">
-                                <h2 class="text-xl font-semibold text-gray-800">Belajar Javascript</h2>
-                                <p class="mt-4 text-gray-600">Pelajari cara membuat website dengan HTML, CSS, dan
-                                    JavaScript</p>
-                                <a href="#" class="block mt-4 text-violet-400">Lihat Detail</a>
-                            </div>
-                        </div>
-                        <div class="bg-white shadow-lg rounded-lg">
-                            <img src="{{ asset('img/news-details-img-3.jpg') }}" alt=""
-                                class="object-cover w-full h-48 rounded-t-lg">
-                            <div class="p-6">
-                                <h2 class="text-xl font-semibold text-gray-800">Belajar Laravel</h2>
-                                <p class="mt-4 text-gray-600">Pelajari cara membuat website dengan HTML, CSS, dan
-                                    JavaScript</p>
-                                <a href="#" class="block mt-4 text-violet-400">Lihat Detail</a>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -200,3 +182,8 @@
         </div>
     </div>
 </x-app-layout>
+<style>
+    .carousel {
+        transition: transform 0.5s ease;
+    }
+</style>
