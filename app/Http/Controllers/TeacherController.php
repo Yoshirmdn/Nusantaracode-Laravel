@@ -47,7 +47,7 @@ class TeacherController extends Controller
             'is_active' => $request->is_active,
         ]);
 
-        return redirect()->route('teachers.index')->with('success', 'Teacher berhasil ditambahkan.');
+        return redirect()->route('teacher.index')->with('success', 'Teacher berhasil ditambahkan.');
     }
 
     /**
@@ -79,6 +79,7 @@ class TeacherController extends Controller
      */
     public function destroy(Teacher $teacher)
     {
-        //
+        $teacher->delete();
+        return redirect()->route('teacher.index')->with('success', 'Teacher berhasil dihapus.');
     }
 }

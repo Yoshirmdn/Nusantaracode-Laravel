@@ -1,13 +1,15 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
 use App\Models\Lesson;
+use App\Models\Teacher;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoriesController;
 
 Route::get('/', function () {
@@ -29,6 +31,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('users', UserController::class);
         Route::resource('lessons', LessonController::class);
         Route::resource('quizzes', QuizController::class);
+        Route::resource('teacher', TeacherController::class);
     });
 
     Route::group(['middleware' => ['role:admin|teacher']], function () {

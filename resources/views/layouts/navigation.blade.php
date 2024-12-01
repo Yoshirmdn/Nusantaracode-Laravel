@@ -28,6 +28,9 @@
                         <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                             {{ __('Manage Users') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('teacher.index')" :active="request()->routeIs('teacher.index')">
+                            {{ __('Manage Teacher') }}
+                        </x-nav-link>
                     @endrole
                     @role('teacher')
                         <x-nav-link :href="route('courses.index')" :active="request()->routeIs('courses.index')">
