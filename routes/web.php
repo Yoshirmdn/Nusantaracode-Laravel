@@ -33,6 +33,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('quizzes', QuizController::class);
         Route::resource('teacher', TeacherController::class);
     });
+    Route::middleware('role:student')->group(function () {
+        Route::get('student/courses', [CoursesController::class, 'studentIndex'])->name('student.courses.index');
+        Route::get('student/courses/{id}', [CoursesController::class, 'studentShow'])->name('student.courses.show');
+    });
+
 
     Route::group(['middleware' => ['role:admin|teacher']], function () {
         Route::resource('courses', CoursesController::class);
