@@ -90,6 +90,26 @@
                                 @endforeach
                             </select>
                         </div>
+                        <!-- Keypoints -->
+                        <div class="col-span-2">
+                            <label for="keypoints"
+                                class="block mb-2 text-sm font-medium text-gray-900">Keypoints</label>
+                            <div id="keypointsContainer">
+                                @foreach (old('keypoint', $course->keypoints->pluck('keypoint')->toArray() ?? []) as $index => $keypoint)
+                                    <div class="flex items-center space-x-2 mb-2">
+                                        <input type="text" name="keypoint[]" value="{{ $keypoint }}"
+                                            placeholder="Enter keypoint"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+                                        <button type="button"
+                                            class="removeKeypoint text-red-600 hover:text-red-900">Remove</button>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <button type="button" id="addKeypoint"
+                                class="inline-flex items-center px-4 py-2 mt-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400">
+                                Add Keypoint
+                            </button>
+                        </div>
                     </div>
                     <!-- Submit Button -->
                     <button type="submit"
@@ -106,5 +126,28 @@
         const name = this.value;
         const slug = name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
         document.getElementById('slug').value = slug;
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        const container = document.getElementById('keypointsContainer');
+        const addButton = document.getElementById('addKeypoint');
+
+        // Add new keypoint
+        addButton.addEventListener('click', () => {
+            const newKeypoint = document.createElement('div');
+            newKeypoint.classList.add('flex', 'items-center', 'space-x-2', 'mb-2');
+            newKeypoint.innerHTML = `
+                <input type="text" name="keypoint[]" placeholder="Enter keypoint"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+                <button type="button" class="removeKeypoint text-red-600 hover:text-red-900">Remove</button>
+            `;
+            container.appendChild(newKeypoint);
+        });
+
+        // Remove keypoint
+        container.addEventListener('click', (e) => {
+            if (e.target.classList.contains('removeKeypoint')) {
+                e.target.parentElement.remove();
+            }
+        });
     });
 </script>

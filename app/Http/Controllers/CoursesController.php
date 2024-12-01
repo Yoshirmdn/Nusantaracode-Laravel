@@ -134,7 +134,9 @@ class CoursesController extends Controller
             'about' => 'nullable|string',
             'thumbnail' => 'nullable|image|max:2048',
             'category_id' => 'required|exists:categories,id',
-            'teacher_id' => 'required|exists:teachers,id',
+            'teacher_id' => 'nullable|exists:teachers,id', // Ubah menjadi nullable
+            'keypoint' => 'required|array|min:2', // Minimal 2 jawaban
+            'keypoint.*' => 'required|string|max:255', // Validasi setiap jawaban
         ]);
 
         // Proses slug jika tidak ada
@@ -152,6 +154,17 @@ class CoursesController extends Controller
         // Update data course
         $course->update($validatedData);
 
+        /// Update keypoint
+        Course_keypoint::where('course_id', $course->id)->delete();
+
+        $keypoints = [];
+        foreach ($validatedData['keypoint'] as $keypointText) {
+            $keypoints[] = [
+                'course_id' => $course->id,
+                'keypoint' => $keypointText,
+            ];
+        }
+        Course_keypoint::insert($keypoints);
         // Redirect ke halaman courses dengan pesan sukses
         return redirect()->route('courses.index')
             ->with('success', 'Course updated successfully.');
