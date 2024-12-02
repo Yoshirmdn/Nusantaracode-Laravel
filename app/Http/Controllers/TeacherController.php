@@ -47,7 +47,7 @@ class TeacherController extends Controller
             'is_active' => $request->is_active,
         ]);
 
-        return redirect()->route('teachers.index')->with('success', 'Teacher berhasil ditambahkan.');
+        return redirect()->route('teacher.index')->with('success', 'Teacher berhasil ditambahkan.');
     }
 
     /**
@@ -63,12 +63,7 @@ class TeacherController extends Controller
      */
     public function edit(Teacher $teacher)
     {
-        // update data teacher
-        $teacher->update([
-            'is_active' => !$teacher->is_active,
-        ]);
-
-        return redirect()->route('teachers.index')->with('success', 'Teacher status berhasil diubah.');
+        // 
     }
 
     /**
@@ -76,8 +71,19 @@ class TeacherController extends Controller
      */
     public function update(Request $request, Teacher $teacher)
     {
-        //
+        // Validasi input
+        $request->validate([
+            'is_active' => 'required|boolean',
+        ]);
+
+        // Update data teacher berdasarkan input dari form
+        $teacher->update([
+            'is_active' => $request->is_active,
+        ]);
+
+        return redirect()->route('teacher.index')->with('success', 'Status teacher berhasil diubah.');
     }
+
 
     /**
      * Remove the specified resource from storage.
