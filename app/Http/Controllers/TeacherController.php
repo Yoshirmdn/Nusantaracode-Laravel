@@ -63,7 +63,12 @@ class TeacherController extends Controller
      */
     public function edit(Teacher $teacher)
     {
-        //
+        // update data teacher
+        $teacher->update([
+            'is_active' => !$teacher->is_active,
+        ]);
+
+        return redirect()->route('teachers.index')->with('success', 'Teacher status berhasil diubah.');
     }
 
     /**
