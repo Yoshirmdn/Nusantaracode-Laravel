@@ -32,9 +32,8 @@ class CoursesController extends Controller
         $course = Courses::with(['categoriesconn', 'teacherconn.user', 'lessons'])
             ->findOrFail($id);
 
-        return view('user.courseDetail', compact('course'));
+        return view('user.courseDetails', compact('course'));
     }
-
     /**
      * Display a listing of the resource.
      */
