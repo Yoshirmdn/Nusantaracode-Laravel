@@ -108,12 +108,13 @@ class UserController extends Controller
             $validated = Arr::except($validated, ['password']);
         }
 
-        // Update avatar jika ada
         if ($request->hasFile('avatar')) {
+            // Hapus avatar lama jika ada
             if ($user->avatar) {
-                // Hapus avatar lama
-                Storage::disk('public')->delete($user->avatar);
+                Storage::delete($user->avatar);
             }
+
+            // Simpan avatar baru
             $validated['avatar'] = $request->file('avatar')->store('avatars', 'public');
         }
 

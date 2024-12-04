@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\CourseDetailsController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,6 +20,8 @@ Route::get('/', function () {
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
+
+Route::resource('coursedetails', CourseDetailsController::class);
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -50,6 +53,6 @@ require __DIR__ . '/auth.php';
 Route::get('/playground', function () {
     return view('user/codePlayground');
 })->name('playground');
-Route::get('/Coursedetails', function () {
-    return view('user/Coursedetails');
-})->name('coursedetails');
+// Route::get('/Coursedetails', function () {
+//     return view('user/Coursedetails');
+// })->name('coursedetails');

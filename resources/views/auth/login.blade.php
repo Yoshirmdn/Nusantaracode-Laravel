@@ -25,8 +25,18 @@
                 <div class="mt-4">
                     <x-input-label for="password" :value="__('Password')" />
 
-                    <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
-                        autocomplete="current-password" />
+                    {{-- <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
+                        autocomplete="current-password" /> --}}
+
+                    <div
+                        class="focus:border-indigo-500 bg rounded-md shadow-sm flex items-center justify-center focus:ring-1">
+                        <input type="password"
+                            class="border-none rounded-md block focus:border-white focus:ring-0 border-gray-300 w-full h-full"
+                            id="password" name="password" required autocomplete="current-password">
+
+                        <input type="checkbox" name="passwordToggle" id="passwordToggle" onclick="toggleHandler()"
+                            class="mx-2 rounded border-gray-300 text-indigo shadow-sm focus:ring-indigo-500">
+                    </div>
 
                     <x-input-error :messages="$errors->get('password')" class="mt-2" />
                 </div>
@@ -57,3 +67,15 @@
         </div>
     </div>
 </x-guest-layout>
+
+<script>
+    const passwordToggle = document.querySelector('.passwordToggle');
+    const toggleHandler = () => {
+        const password = document.getElementById('password');
+        if (password.type === 'password') {
+            password.type = 'text';
+        } else {
+            password.type = 'password';
+        }
+    };
+</script>

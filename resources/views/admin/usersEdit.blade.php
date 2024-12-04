@@ -30,8 +30,8 @@
                 <label for="icon" class="block text-sm font-medium text-gray-700">Icon</label>
                 <input type="file" id="icon" name="icon"
                     class="mt-1 p-2 border border-gray-300 rounded w-full">
-                @if ($user->icon)
-                    <img src="{{ Storage::url($user->icon) }}" alt="{{ $user->name }}"
+                @if ($user->avatar)
+                    <img src="{{ Storage::url($user->avatar) }}" alt="{{ $user->name }}"
                         class="w-20 h-20 object-cover mt-2">
                 @endif
             </div>

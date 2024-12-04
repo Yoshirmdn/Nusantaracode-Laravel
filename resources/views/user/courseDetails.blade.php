@@ -19,7 +19,7 @@
                     <div>
                         <h4
                             class="font-semibold text-[30px] lg:text-[27px] xs:text-[25px] xxs:text-[23px] text-edblue mb-[23px]">
-                            The Complete Graphic Design for Beginners</h4>
+                            {{ $course->name }}</h4>
 
                         <!-- course meta -->
                         <div
@@ -27,10 +27,11 @@
                             <!-- single info -->
                             <div
                                 class="flex items-center gap-[10px] border-l border-[#CDCDCD] first:border-none pl-[10px] first:pl-0">
-                                <img src="{{ asset('img/teacher-2.jpg') }}" alt="Course Instructor"
-                                    class="w-[52px] aspect-square rounded-full object-cover">
+                                <img src="{{ $objTeacher->avatar ? asset('storage/' . $objTeacher->avatar) : 'https://ui-avatars.com/api/?name=' . urlencode($course->teacherconn->user->name) . '&background=random' }}"
+                                    alt="{{ $objTeacher->name }}" class="w-16 h-16 rounded-full object-cover">
                                 <div>
-                                    <h6 class="font-medium text-edblue leading-[1.2]">Jane Cooper</h6>
+                                    <h6 class="font-medium text-edblue leading-[1.2]">
+                                        {{ $course->teacherconn->user->name ?? 'No Teacher' }}</h6>
                                     <span class="font-medium text-[14px] text-edgray leading-[1]">Teacher</span>
                                 </div>
                             </div>
@@ -40,7 +41,8 @@
                                 class="flex items-center gap-[10px] border-l border-[#CDCDCD] first:border-none pl-[10px] first:pl-0">
                                 <div>
                                     <h6 class="font-medium text-edblue leading-[1.2]">Categories</h6>
-                                    <span class="font-medium text-[14px] text-edgray leading-[1]">Online Teaching</span>
+                                    <span
+                                        class="font-medium text-[14px] text-edgray leading-[1]">{{ $course->categoriesconn->name }}</span>
                                 </div>
                             </div>
 
@@ -80,24 +82,13 @@
                                             class="font-semibold text-[30px] lg:text-[27px] xs:text-[25px] xxs:text-[23px] text-edblue mt-[28px] mb-[15px]">
                                             Course Descriptions</h4>
                                         <div class="space-y-[10px]">
-                                            <p class="text-edgray">Consectetur adipisicing elit, sed do eiusmod tempor
-                                                is
-                                                incididunt ut labore et dolore of magna aliqua. Ut enim ad minim veniam,
-                                                made of owl the quis nostrud exercitation ullamco laboris nisi ut
-                                                aliquip ex
-                                                ea dolor commodo consequat. Duis aute irure and dolor in reprehenderit.
+                                            <p class="text-edgray">
+                                                {{ $course->about }}
                                             </p>
-                                            <p class="text-edgray">The is ipsum dolor sit amet consectetur adipiscing
-                                                elit.
-                                                Fusce eleifend porta arcu In hac augu ehabitasse the is platea augue
-                                                thelorem turpoi dictumst. In lacus libero faucibus at malesuada sagittis
-                                                placerat eros sed istincidunt augue ac ante rutrum sed the is sodales
-                                                augue
-                                                consequat.</p>
                                         </div>
                                     </div>
 
-                                    <div>
+                                    {{-- <div>
                                         <h4
                                             class="font-semibold text-[30px] lg:text-[27px] xs:text-[25px] xxs:text-[23px] text-edblue mt-[28px] mb-[15px]">
                                             Requirements for The Course</h4>
@@ -109,7 +100,7 @@
                                                 Sed a
                                                 massa eget lacus consequat auctor.</p>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                             </div>
@@ -134,7 +125,7 @@
                                 <span class="text-[15px] text-edgray">Beginner</span>
                             </li>
 
-                            <li
+                            {{-- <li
                                 class="py-[15px] flex flex-wrap gap-[10px] items-center justify-between border-t border-[#e5e5e5] last:border-b">
                                 <span class="flex items-center gap-[8px] font-semibold text-edblue">
                                     <span class="icon"><img src="{{ asset('img/icon/clock-purple.svg') }}"
@@ -142,7 +133,7 @@
                                     <span>Duration:</span>
                                 </span>
                                 <span class="text-[15px] text-edgray">6 Months</span>
-                            </li>
+                            </li> --}}
 
                             <li
                                 class="py-[15px] flex flex-wrap gap-[10px] items-center justify-between border-t border-[#e5e5e5] last:border-b">
@@ -151,7 +142,7 @@
                                             alt="icon"></span>
                                     <span>Lessons:</span>
                                 </span>
-                                <span class="text-[15px] text-edgray">12</span>
+                                <span class="text-[15px] text-edgray">{{ $course->lessons_count ?? 0 }}</span>
                             </li>
 
                             <li
@@ -161,7 +152,7 @@
                                             alt="icon"></span>
                                     <span>Students:</span>
                                 </span>
-                                <span class="text-[15px] text-edgray">120</span>
+                                <span class="text-[15px] text-edgray">{{ $course->student_count }}</span>
                             </li>
 
                             <li
