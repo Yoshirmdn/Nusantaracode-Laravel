@@ -99,12 +99,12 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center space-x-2">
-                                            <button data-modal-target="authentication-modal"
+                                            {{-- <button data-modal-target="authentication-modal"
                                                 data-modal-toggle="authentication-modal"
                                                 class="text-blue-700 hover:text-blue-800 dark:text-blue-600 dark:hover:text-blue-700"
                                                 type="button">
                                                 Edit
-                                            </button>
+                                            </button> --}}
                                             <form action="{{ route('teacher.destroy', $teacher->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
