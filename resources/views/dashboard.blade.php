@@ -63,7 +63,7 @@
             {{-- Hero End --}}
             {{-- Content Start --}}
             <div class="h-screen mt-4 overflow-hidden px-16 ">
-                <div class="container ">
+                <div class="">
                     <h2 class="text-3xl font-semibold text-gray-800 text-center mb-6">Kategori <span
                             class="text-purple-400">Course</span></h2>
                     <div class="category-carousel flex gap-8">
