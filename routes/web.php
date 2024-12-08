@@ -56,3 +56,7 @@ Route::get('/playground', function () {
 // Route::get('/Coursedetails', function () {
 //     return view('user/Coursedetails');
 // })->name('coursedetails');
+// routes for course layout
+Route::get('/Courselayouts', function () {
+    return view('user/CourseLayout');
+})->name('courseLayout');
