@@ -40,8 +40,8 @@ class CoursesController extends Controller
     public function index()
     {
         $categories = Categories::all();
-        $courses = Courses::withCount(['lessons'])
-            ->with(['categoriesconn', 'teacherconn.user'])
+        $courses = Courses::withCount(['lessons', 'studentCourse'])
+            ->with(['categoriesconn', 'teacherconn.user', 'studentCourse'])
             ->paginate(10);
         return view('admin.courseIndex', compact('courses', 'categories'));
     }
@@ -111,7 +111,9 @@ class CoursesController extends Controller
     public function show(Courses $courses, $id): View
     {
         // Ambil data course berdasarkan ID dan relasi yang diperlukan
-        $course = Courses::with(['categoriesconn', 'teacherconn.user'])->find($id);
+        $course = Courses::with(['categoriesconn', 'teacherconn.user'])
+            ->withCount('studentCourse') // Tambahkan dengan count
+            ->find($id);
 
         if (!$course) {
             return redirect()->back()->with('error', 'Course not found.');

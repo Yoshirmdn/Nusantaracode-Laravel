@@ -52,8 +52,12 @@
                                     <h2 class="text-lg font-semibold">{{ $course->name }}</h2>
                                     <p class="text-sm text-gray-500">
                                         {{ $course->categoriesconn->name ?? 'No Category' }}</p>
-                                    <span class="text-blue-600 font-medium">{{ $course->students_count ?? 0 }}
-                                        Students</span>
+                                    <span class="text-blue-600 font-medium">
+                                        {{ $course->student_course_count }} Students
+                                    </span>
+                                    <span class="text-gray-500 text-sm">
+                                        ({{ $course->lessons->count() }} Lessons)
+                                    </span>
                                 </div>
                                 <a href="{{ route('courses.edit', $course->id) }}"
                                     class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700">

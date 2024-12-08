@@ -181,8 +181,9 @@
                             <h2 class="text-lg font-semibold">{{ $course->name }}</h2>
                             <p class="text-sm text-gray-500">{{ $course->categoriesconn->name ?? 'No Category' }}</p>
                             <div class="flex mt-2 space-x-4">
-                                <span class="text-blue-600 font-medium">{{ $course->students_count ?? 0 }}
-                                    Students</span>
+                                <span class="text-blue-600 font-medium">
+                                    {{ $course->student_course_count ?? 0 }} Students
+                                </span>
                                 <span class="text-blue-600 font-medium">{{ $course->lessons_count ?? 0 }}
                                     Videos</span>
                                 <span class="text-blue-600 font-medium">{{ $course->lessons_count ?? 0 }}

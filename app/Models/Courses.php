@@ -28,4 +28,8 @@ class Courses extends Model
     {
         return $this->hasMany(Course_keypoint::class);
     }
+    public function studentCourse()
+    {
+        return $this->belongsToMany(User::class, 'course_students', 'course_id', 'user_id');
+    }
 }
