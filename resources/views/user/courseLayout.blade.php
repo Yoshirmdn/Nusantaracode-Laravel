@@ -71,8 +71,9 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
+                        {{-- end scrolled --}}
                     </div>
                 </div>
             </div>
