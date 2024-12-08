@@ -20,69 +20,59 @@
                     <!-- COURSE INFORMATION -->
                     <div
                         class="border border-[#e5e5e5] rounded-[10px] px-[30px] lg:px-[20px] xxs:px-[15px] py-[35px] lg:py-[25px] xxs:py-[25px]">
-                        <h5 class="font-semibold text-[24px] text-edblue mb-[20px]">Lessons</h5>
+                        <h5 class="font-semibold text-[24px] text-edblue text-center mb-[20px]">Lessons</h5>
 
-                        <ul class="mb-[30px]">
-                            <li
-                                class="py-[15px] flex flex-wrap gap-[10px] items-center justify-between border-t border-[#e5e5e5] last:border-b">
-                                <span class="flex items-center gap-[8px] font-semibold text-edblue">
-                                    <span class="icon"><img src="{{ asset('img/icon/calender-purple.svg') }}"
-                                            alt="icon"></span>
-                                    <span>Level:</span>
-                                </span>
-                                <span class="text-[15px] text-edgray">Beginner</span>
-                            </li>
+                        {{-- scrolled --}}
+                        <div class="overflow-auto h-[300px]">
+                            <div class="flex flex-col items-center gap-[10px] border-b border-[#E5E5E5] pb-[20px]">
+                                <div class="flex items-center gap-4 bg-purple-400 w-full rounded-xl p-3">
+                                    <div
+                                        class="w-[40px] h-[40px] bg-edpurple rounded-full flex items-center justify-center">
+                                        <span class="text-white font-semibold">1</span>
+                                    </div>
+                                    <div>
+                                        <h6 class="font-medium text-edblue">Introduction</h6>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-4 bg-purple-400 w-full rounded-xl p-3">
+                                    <div
+                                        class="w-[40px] h-[40px] bg-edpurple rounded-full flex items-center justify-center">
+                                        <span class="text-white font-semibold">1</span>
+                                    </div>
+                                    <div>
+                                        <h6 class="font-medium text-edblue">Introduction</h6>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-4 bg-purple-400 w-full rounded-xl p-3">
+                                    <div
+                                        class="w-[40px] h-[40px] bg-edpurple rounded-full flex items-center justify-center">
+                                        <span class="text-white font-semibold">1</span>
+                                    </div>
+                                    <div>
+                                        <h6 class="font-medium text-edblue">Introduction</h6>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-4 bg-purple-400 w-full rounded-xl p-3">
+                                    <div
+                                        class="w-[40px] h-[40px] bg-edpurple rounded-full flex items-center justify-center">
+                                        <span class="text-white font-semibold">1</span>
+                                    </div>
+                                    <div>
+                                        <h6 class="font-medium text-edblue">Introduction</h6>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-4 bg-purple-400 w-full rounded-xl p-3">
+                                    <div
+                                        class="w-[40px] h-[40px] bg-edpurple rounded-full flex items-center justify-center">
+                                        <span class="text-white font-semibold">1</span>
+                                    </div>
+                                    <div>
+                                        <h6 class="font-medium text-edblue">Introduction</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                            <li
-                                class="py-[15px] flex flex-wrap gap-[10px] items-center justify-between border-t border-[#e5e5e5] last:border-b">
-                                <span class="flex items-center gap-[8px] font-semibold text-edblue">
-                                    <span class="icon"><img src="{{ asset('img/icon/clock-purple.svg') }}"
-                                            alt="icon"></span>
-                                    <span>Duration:</span>
-                                </span>
-                                <span class="text-[15px] text-edgray">6 Months</span>
-                            </li>
-
-                            <li
-                                class="py-[15px] flex flex-wrap gap-[10px] items-center justify-between border-t border-[#e5e5e5] last:border-b">
-                                <span class="flex items-center gap-[8px] font-semibold text-edblue">
-                                    <span class="icon"><img src="{{ asset('img/icon/lesson-purple.svg') }}"
-                                            alt="icon"></span>
-                                    <span>Lessons:</span>
-                                </span>
-                                <span class="text-[15px] text-edgray">12</span>
-                            </li>
-
-                            <li
-                                class="py-[15px] flex flex-wrap gap-[10px] items-center justify-between border-t border-[#e5e5e5] last:border-b">
-                                <span class="flex items-center gap-[8px] font-semibold text-edblue">
-                                    <span class="icon"><img src="{{ asset('img/icon/user-group-purple.svg') }}"
-                                            alt="icon"></span>
-                                    <span>Students:</span>
-                                </span>
-                                <span class="text-[15px] text-edgray">120</span>
-                            </li>
-
-                            <li
-                                class="py-[15px] flex flex-wrap gap-[10px] items-center justify-between border-t border-[#e5e5e5] last:border-b">
-                                <span class="flex items-center gap-[8px] font-semibold text-edblue">
-                                    <span class="icon"><img src="{{ asset('img/icon/medal.svg') }}"
-                                            alt="icon"></span>
-                                    <span>Certifications:</span>
-                                </span>
-                                <span class="text-[15px] text-edgray">Yes</span>
-                            </li>
-
-                            <li
-                                class="py-[15px] flex flex-wrap gap-[10px] items-center justify-between border-t border-[#e5e5e5] last:border-b">
-                                <span class="flex items-center gap-[8px] font-semibold text-edblue">
-                                    <span class="icon"><img src="{{ asset('img/icon/globe.svg') }}"
-                                            alt="icon"></span>
-                                    <span>Language:</span>
-                                </span>
-                                <span class="text-[15px] text-edgray">English</span>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>
