@@ -127,12 +127,13 @@ class CoursesController extends Controller
      */
     public function edit($id)
     {
-        $course = Courses::findOrFail($id);
+        $course = Courses::with('keypoints')->findOrFail($id); // Perbaikan di sini
         $categories = Categories::all();
         $teachers = Teacher::all(); // Mengambil semua teacher yang tersedia
 
         return view('admin.courseEdit', compact('course', 'categories', 'teachers'));
     }
+
 
     /**
      * Update the specified resource in storage.
