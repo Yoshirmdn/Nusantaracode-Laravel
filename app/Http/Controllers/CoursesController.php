@@ -14,27 +14,6 @@ use Illuminate\Support\Facades\Storage;
 class CoursesController extends Controller
 {
     /**
-     * Display a list of courses for students.
-     */
-    public function studentIndex()
-    {
-        $courses = Courses::with(['categoriesconn', 'teacherconn.user'])
-            ->paginate(10);
-
-        return view('user.courseIndex', compact('courses'));
-    }
-
-    /**
-     * Show details of a specific course for students.
-     */
-    public function studentShow($id)
-    {
-        $course = Courses::with(['categoriesconn', 'teacherconn.user', 'lessons'])
-            ->findOrFail($id);
-
-        return view('user.courseDetails', compact('course'));
-    }
-    /**
      * Display a listing of the resource.
      */
     public function index()
