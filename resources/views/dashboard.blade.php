@@ -39,7 +39,7 @@
                             <p class="text-lg font-bold text-purple-600">Hello, {{ Auth::user()->name }}! You're a
                                 student.</p>
                         @endrole
-                        <h1 class="text-5xl font-bold text-gray-800 sm:text-6xl">Belajar Koding dengan
+                        <h1 class="text-3xl font-bold text-gray-800 sm:text-6xl">Belajar Koding dengan
                             <span class="text-violet-400">Nusantara</span>Code
                         </h1>
                         <p class="mt-6 mb-8 text-gray-600 text-lg sm:mb-12">Tingkatkan kemampuan programming Anda
@@ -69,12 +69,24 @@
                     <div class="category-carousel flex gap-8">
                         @foreach ($categories as $category)
                             <div class="w-full bg-gray-200 px-4">
-                                <div class="carousel-item bg-white shadow-lg rounded-lg ">
+                                <div class="carousel-item bg-white shadow-lg rounded-lg max-w-[300px]">
                                     <img src="{{ asset('storage/' . $category->icon) }}" alt="{{ $category->name }}"
-                                        class="object-cover w-[250px] h-48 rounded-t-lg">
+                                        class="object-cover w-[300px] h-48 rounded-t-lg">
                                     <div class="p-6">
-                                        <h2 class="text-xl font-semibold text-gray-800">{{ $category->name }}</h2>
-                                        <a href="#" class="block mt-4 text-violet-400">Lihat Detail</a>
+                                        <div class="flex justify-between">
+                                            <h1 class="border px-3 border-black rounded-lg">{{ $category->id }}</h1>
+                                            <h1 class="text-sm text-gray-400"><i class="fa-regular fa-clock"></i>
+                                                {{ $category->created_at->diffForHumans() }}
+                                            </h1>
+                                        </div>
+                                        <div class="flex items-center gap-4 my-5">
+                                            <h2 class="text-2xl font-semibold text-gray-800">{{ $category->name }}</h2>
+                                        </div>
+                                        <hr>
+                                        <button
+                                            class="border border-violet-400 mt-4 p-2 rounded-lg hover:bg-violet-400"><a
+                                                href="#" class="block text-violet-400 hover:text-white">Lihat
+                                                Detail</a></button>
                                     </div>
                                 </div>
                             </div>
