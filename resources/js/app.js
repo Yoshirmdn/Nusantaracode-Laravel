@@ -3,7 +3,10 @@ import "flowbite";
 // rich editor quill
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
-
+// sweetalert
+import Swal from "sweetalert2";
+window.Swal = Swal;
+// Alpine.js
 import Alpine from "alpinejs";
 import $ from "jquery"; // Impor jQuery
 import "slick-carousel"; // Impor Slick Carousel
