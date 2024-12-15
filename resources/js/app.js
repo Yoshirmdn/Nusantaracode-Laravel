@@ -52,9 +52,21 @@ document.addEventListener("DOMContentLoaded", function () {
             placeholder: "Tulis sesuatu di sini...",
             modules: {
                 toolbar: [
-                    [{ header: [1, 2, false] }],
-                    ["bold", "italic", "underline"],
-                    ["image", "code-block"],
+                    // Format teks
+                    ["bold", "italic", "underline", "strike"],
+                    // Header dan font-size
+                    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+                    [{ font: [] }],
+                    // List, indentasi, dan perataan
+                    [{ list: "ordered" }, { list: "bullet" }],
+                    [{ indent: "-1" }, { indent: "+1" }],
+                    [{ align: [] }],
+                    // Inline styling (warna teks dan latar belakang)
+                    [{ color: [] }, { background: [] }],
+                    // Media dan link
+                    ["link", "image", "video"],
+                    // Misc
+                    ["code-block", "blockquote", "clean"],
                 ],
             },
         });
