@@ -1,5 +1,8 @@
 import "./bootstrap";
 import "flowbite";
+// rich editor quill
+import Quill from "quill";
+import "quill/dist/quill.snow.css";
 
 import Alpine from "alpinejs";
 import $ from "jquery"; // Impor jQuery
@@ -39,4 +42,21 @@ $(document).ready(function () {
             },
         ],
     });
+});
+// Inisialisasi Quill
+document.addEventListener("DOMContentLoaded", function () {
+    const editor = document.querySelector("#quill-editor");
+    if (editor) {
+        new Quill(editor, {
+            theme: "snow",
+            placeholder: "Tulis sesuatu di sini...",
+            modules: {
+                toolbar: [
+                    [{ header: [1, 2, false] }],
+                    ["bold", "italic", "underline"],
+                    ["image", "code-block"],
+                ],
+            },
+        });
+    }
 });
