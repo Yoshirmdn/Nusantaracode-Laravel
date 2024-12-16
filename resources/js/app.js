@@ -19,7 +19,7 @@ Alpine.start();
 
 $(document).ready(function () {
     $(".category-carousel").slick({
-        slidesToShow: 3, // Jumlah slide yang ditampilkan
+        slidesToShow: 2, // Jumlah slide yang ditampilkan
         slidesToScroll: 1, // Jumlah slide yang digulirkan saat tombol ditekan
         autoplay: true, // Mengaktifkan autoplay
         autoplaySpeed: 2000, // Kecepatan autoplay
@@ -34,6 +34,7 @@ $(document).ready(function () {
                 settings: {
                     slidesToShow: 2, // Jumlah slide untuk layar lebih kecil
                     slidesToScroll: 1,
+                    centerMode: true,
                 },
             },
             {
@@ -41,6 +42,7 @@ $(document).ready(function () {
                 settings: {
                     slidesToShow: 1, // Jumlah slide untuk layar lebih kecil
                     slidesToScroll: 1,
+                    centerMode: true,
                 },
             },
         ],
