@@ -58,12 +58,20 @@
                         </div>
                     </div>
                 </div>
-
             </section>
             {{-- Hero End --}}
             {{-- Content Start --}}
-            <div class="h-screen mt-4 overflow-hidden px-16 ">
-                <div class="flex justify-center space-x-2 mb-8">
+            <div class="h-screen overflow-hidden px-16 bg-white">
+                <div class="container mx-auto text-center mt-5">
+                    <h2 class="text-indigo-600 text-sm font-semibold tracking-wide uppercase">Our Courses</h2>
+                    <div class="flex justify-center items-center mt-2">
+                        <div class="w-8 h-1 bg-indigo-600 mr-1"></div>
+                        <div class="w-2 h-1 bg-indigo-600 mr-1"></div>
+                        <div class="w-1 h-1 bg-indigo-600"></div>
+                    </div>
+                    <h1 class="text-4xl font-bold text-gray-900 mt-4">NusantaraCode Courses</h1>
+                </div>
+                <div class="flex justify-center space-x-2 mb-8 mt-4">
                     <!-- Tombol All -->
                     <form method="GET" action="{{ route('dashboard') }}">
                         <button type="submit"
@@ -98,15 +106,19 @@
                                 </div>
                             </div>
                             <div class="p-4">
-                                <span class="bg-gray-200 text-gray-800 text-xs font-semibold py-1 rounded-full">
-                                    Basic || {{ $courseDisplay->categoriesconn->name ?? 'No Category' }}
+                                <span class="bg-gray-200 text-gray-800 text-xs font-semibold py-1 rounded-sm px-2">
+                                    Beginner || {{ $courseDisplay->categoriesconn->name ?? 'No Category' }}
                                 </span>
                                 <span class="text-purple-600 text-xl font-bold float-right">
                                     Free
                                 </span>
                                 <h3 class="text-lg font-semibold mt-2">
-                                    {{ $courseDisplay->name }}
+                                    <a href="{{ route('coursedetails.show', $courseDisplay->id) }}"
+                                        class="text-black hover:text-purple-600">
+                                        {{ $courseDisplay->name }}
+                                    </a>
                                 </h3>
+
                                 <div class="flex items-center text-gray-600 text-sm mt-2">
                                     <i class="fas fa-user-friends mr-1">
                                     </i>
