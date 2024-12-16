@@ -206,7 +206,7 @@
                                 <div class="flex items-center text-gray-600 text-sm mt-2">
                                     <i class="fas fa-user-friends mr-1">
                                     </i>
-                                    {{ $course->student_course_count ?? 0 }}
+                                    {{ $courseDisplay->student_course_count ?? 0 }}
                                     <i class="fas fa-book ml-4 mr-1">
                                     </i>
                                     {{ $courseDisplay->lessons_count ?? 0 }}

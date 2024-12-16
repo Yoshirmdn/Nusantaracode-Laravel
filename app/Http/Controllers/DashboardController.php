@@ -16,7 +16,7 @@ class DashboardController extends Controller
         $categories = Categories::all();
 
         // Filter course berdasarkan kategori jika `category_id` ada
-        $courses = Courses::withCount(['lessons', 'studentCourse'])
+        $courses = Courses::withCount(['lessons', 'studentCourse']) // Counting the students
             ->with(['categoriesconn', 'teacherconn.user', 'studentCourse'])
             ->when($selectedCategoryId, function ($query, $selectedCategoryId) {
                 $query->where('category_id', $selectedCategoryId);
