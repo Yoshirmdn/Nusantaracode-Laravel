@@ -20,7 +20,7 @@
     <div class="pt-1">
         <div class="bg-gray-200">
             {{-- Hero Start --}}
-            <section class="bg-white text-gray-100 shadow-lg">
+            {{-- <section class="bg-white text-gray-100 shadow-lg">
                 <div
                     class="container flex flex-col justify-center p-6 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-between">
                     <div
@@ -58,7 +58,80 @@
                         </div>
                     </div>
                 </div>
+            </section> --}}
+            <section class="bg-gray-100 pt-[120px] pb-[190px] relative z-[1] overflow-hidden">
+                <div class="container max-w-[71.6%] xxxl:max-w-[86.5%] xxl:max-w-[90.6%] mx-auto">
+                    <div class="flex flex-row md:flex-col gap-x-28 gap-y-10 items-center">
+                        <!-- banner text -->
+                        <div class="max-w-[49%] xxxl:max-w-[45.5%] md:max-w-full shrink-0">
+                            <h6 class="text-black uppercase font-medium mb-2">ONLINE <span
+                                    class="text-purple-600">Learning</span> COURSE</h6>
+                            <h1
+                                class="font-medium text-[clamp(35px,5.4vw,80px)] text-blue-700 tracking-tight leading-[1.12] mb-6">
+                                Explore Your Skills With <span class="font-bold">
+                                    <span
+                                        class="inline-block text-purple-600 relative before:absolute before:left-0 before:top-[calc(100%-6px)] before:w-[240px] before:h-[21px] before:bg-[url('{{ asset('img/banner-2-title-vector.svg') }}')]">
+                                        Online
+                                    </span>
+                                    Class
+                                </span>
+                            </h1>
+                            <p class="text-gray-600 font-medium mb-10">
+                                Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                                industry’s standard dummy text ever since the 1500s, when an unknown printer took a
+                                galley of type and scrambled.
+                            </p>
+                            <div class="flex flex-wrap gap-4">
+                                <a href=""
+                                    class="relative px-6 py-2.5 border border-purple-600 text-purple-600 font-medium rounded-md overflow-hidden group transition duration-300 ease-in-out">
+                                    <span
+                                        class="absolute inset-0 w-full h-full bg-purple-600 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
+                                    <span class="relative z-10 group-hover:text-white">Start a course</span>
+                                </a>
+                                <a href=""
+                                    class="relative px-6 py-2.5 border border-black text-black font-medium rounded-md overflow-hidden group transition duration-300 ease-in-out">
+                                    <span
+                                        class="absolute inset-0 w-full h-full bg-black transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
+                                    <span class="relative z-10 group-hover:text-white">About us</span>
+                                </a>
+                            </div>
+
+                        </div>
+
+                        <!-- banner image -->
+                        <div class="max-w-[51%] md:max-w-full">
+                            <div class="w-max relative z-[1] flex gap-7 items-center">
+                                <img src="{{ asset('img/banner-2-img-1.jpg') }}" alt="banner image"
+                                    class="border-4 border-white rounded-2xl max-w-[241px] aspect-[261/366]">
+                                <img src="{{ asset('img/banner-2-img-2.jpg') }}" alt="banner image"
+                                    class="rounded-2xl h-96">
+
+                                <!-- vectors -->
+                                <div>
+                                    <div
+                                        class="w-[242px] aspect-square rounded-full bg-purple-600 opacity-80 blur-[110px] absolute -z-[1] bottom-0 left-[163px]">
+                                    </div>
+                                    <img src="{{ asset('img/banner-2-img-vector-1.svg') }}" alt="vector"
+                                        class="pointer-events-none absolute -z-[1] top-[30px] -left-[35px]">
+                                    <img src="{{ asset('img/banner-2-img-vector-2.svg') }}" alt="vector"
+                                        class="pointer-events-none absolute -z-[1] -top-[50px] -right-[40px]">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- vector -->
+                <div>
+                    <img src="{{ asset('img/banner-2-vector-1.svg') }}" alt="vector"
+                        class="pointer-events-none absolute -z-[1] top-[135px] left-[38px] xxxl:hidden">
+                    <img src="{{ asset('img/banner-2-vector-2.svg') }}" alt="vector"
+                        class="pointer-events-none absolute -z-[1] bottom-0 left-0">
+                    <img src="{{ asset('img/banner-2-vector-3.svg') }}" alt="vector"
+                        class="pointer-events-none absolute -z-[1] -bottom-[8px] right-0">
+                </div>
             </section>
+
             {{-- Hero End --}}
             {{-- Content Start --}}
             <div class="h-screen overflow-hidden px-16 bg-white">
@@ -75,8 +148,13 @@
                     <!-- Tombol All -->
                     <form method="GET" action="{{ route('dashboard') }}">
                         <button type="submit"
-                            class="px-4 py-2 border border-purple-600 {{ !$selectedCategoryId ? 'bg-purple-700 text-white' : 'text-purple-600' }} rounded-full hover:bg-purple-700 hover:text-white">
-                            All
+                            class="relative px-4 py-2 border border-purple-600 rounded-full overflow-hidden group transition duration-300 ease-in-out">
+                            <span
+                                class="absolute inset-0 w-full h-full bg-purple-700 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
+                            <span
+                                class="relative z-10 {{ !$selectedCategoryId ? 'text-purple-500' : 'text-purple-600' }} group-hover:text-white">
+                                All
+                            </span>
                         </button>
                     </form>
 
@@ -85,12 +163,18 @@
                         <form method="GET" action="{{ route('dashboard') }}">
                             <input type="hidden" name="category_id" value="{{ $category->id }}">
                             <button type="submit"
-                                class="px-4 py-2 border border-purple-600 {{ $selectedCategoryId == $category->id ? 'bg-purple-700 text-white' : 'text-purple-600' }} rounded-full hover:bg-purple-700 hover:text-white">
-                                {{ $category->name }}
+                                class="relative px-4 py-2 border border-purple-600 rounded-full overflow-hidden group transition duration-300 ease-in-out">
+                                <span
+                                    class="absolute inset-0 w-full h-full bg-purple-700 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
+                                <span
+                                    class="relative z-10 {{ $selectedCategoryId == $category->id ? 'text-white' : 'text-purple-600' }} group-hover:text-white">
+                                    {{ $category->name }}
+                                </span>
                             </button>
                         </form>
                     @endforeach
                 </div>
+
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     @foreach ($courses as $courseDisplay)
                         <div class="border rounded-lg shadow-lg overflow-hidden">
