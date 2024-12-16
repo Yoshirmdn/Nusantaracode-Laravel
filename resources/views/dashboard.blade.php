@@ -63,35 +63,84 @@
             {{-- Hero End --}}
             {{-- Content Start --}}
             <div class="h-screen mt-4 overflow-hidden px-16 ">
-                <div class="">
-                    <h2 class="text-3xl font-semibold text-gray-800 text-center mb-6">Kategori <span
-                            class="text-purple-400">Course</span></h2>
-                    <div class="category-carousel flex gap-8">
-                        @foreach ($categories as $category)
-                            <div class="w-full bg-gray-200 px-4">
-                                <div class="carousel-item bg-white shadow-lg rounded-lg max-w-[300px]">
-                                    <img src="{{ asset('storage/' . $category->icon) }}" alt="{{ $category->name }}"
-                                        class="object-cover w-[300px] h-48 rounded-t-lg">
-                                    <div class="p-6">
-                                        <div class="flex justify-between">
-                                            <h1 class="border px-3 border-black rounded-lg">{{ $category->id }}</h1>
-                                            <h1 class="text-sm text-gray-400"><i class="fa-regular fa-clock"></i>
-                                                {{ $category->created_at->diffForHumans() }}
-                                            </h1>
+                <div class="flex justify-center space-x-2 mb-8">
+                    <!-- Tombol All -->
+                    <form method="GET" action="{{ route('dashboard') }}">
+                        <button type="submit"
+                            class="px-4 py-2 border border-purple-600 {{ !$selectedCategoryId ? 'bg-purple-700 text-white' : 'text-purple-600' }} rounded-full hover:bg-purple-700 hover:text-white">
+                            All
+                        </button>
+                    </form>
+
+                    <!-- Tombol Kategori -->
+                    @foreach ($categories as $category)
+                        <form method="GET" action="{{ route('dashboard') }}">
+                            <input type="hidden" name="category_id" value="{{ $category->id }}">
+                            <button type="submit"
+                                class="px-4 py-2 border border-purple-600 {{ $selectedCategoryId == $category->id ? 'bg-purple-700 text-white' : 'text-purple-600' }} rounded-full hover:bg-purple-700 hover:text-white">
+                                {{ $category->name }}
+                            </button>
+                        </form>
+                    @endforeach
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    @foreach ($courses as $courseDisplay)
+                        <div class="border rounded-lg shadow-lg overflow-hidden">
+                            <div class="relative">
+                                <img alt="Group of people working on a laptop" class="w-full h-48 object-cover"
+                                    height="400" src="{{ asset('storage/' . $courseDisplay->thumbnail) }}"
+                                    width="600" />
+                                <div
+                                    class="absolute top-2 left-2 bg-yellow-500 text-white px-2 py-1 rounded-full text-sm flex items-center">
+                                    <i class="far fa-clock mr-1">
+                                    </i>
+                                    8h 30m
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <span class="bg-gray-200 text-gray-800 text-xs font-semibold py-1 rounded-full">
+                                    Basic || {{ $courseDisplay->categoriesconn->name ?? 'No Category' }}
+                                </span>
+                                <span class="text-purple-600 text-xl font-bold float-right">
+                                    Free
+                                </span>
+                                <h3 class="text-lg font-semibold mt-2">
+                                    {{ $courseDisplay->name }}
+                                </h3>
+                                <div class="flex items-center text-gray-600 text-sm mt-2">
+                                    <i class="fas fa-user-friends mr-1">
+                                    </i>
+                                    {{ $course->student_course_count ?? 0 }}
+                                    <i class="fas fa-book ml-4 mr-1">
+                                    </i>
+                                    {{ $courseDisplay->lessons_count ?? 0 }}
+                                </div>
+                                <div class="flex items-center mt-4">
+                                    <img alt="Instructor's profile picture" class="w-10 h-10 rounded-full mr-2"
+                                        height="100"
+                                        src="{{ $courseDisplay->teacherconn->user->avatar ? asset('storage/' . $courseDisplay->teacherconn->user->avatar) : 'https://ui-avatars.com/api/?name=' . urlencode($courseDisplay->teacherconn->user->name) . '&background=random' }}"
+                                        width="100" />
+                                    <div>
+                                        <p class="text-sm font-semibold">
+                                            {{ $courseDisplay->teacherconn->user->name ?? 'No Teacher' }}
+                                        </p>
+                                        <div class="flex text-yellow-500">
+                                            <i class="fas fa-star">
+                                            </i>
+                                            <i class="fas fa-star">
+                                            </i>
+                                            <i class="fas fa-star">
+                                            </i>
+                                            <i class="fas fa-star">
+                                            </i>
+                                            <i class="fas fa-star-half-alt">
+                                            </i>
                                         </div>
-                                        <div class="flex items-center gap-4 my-5">
-                                            <h2 class="text-2xl font-semibold text-gray-800">{{ $category->name }}</h2>
-                                        </div>
-                                        <hr>
-                                        <button
-                                            class="border border-violet-400 mt-4 p-2 rounded-lg hover:bg-violet-400"><a
-                                                href="#" class="block text-violet-400 hover:text-white">Lihat
-                                                Detail</a></button>
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
-                    </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
             {{-- Content End --}}
