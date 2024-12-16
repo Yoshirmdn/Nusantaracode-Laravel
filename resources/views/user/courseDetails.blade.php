@@ -1,5 +1,33 @@
 <!-- main content -->
-<x-guest-layout>
+<x-app-layout>
+    <x-slot name="header">
+        <nav class="flex" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                <li class="inline-flex items-center">
+                    <a href="/dashboard"
+                        class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-black">
+                        <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
+                        </svg>
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                        <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 9 4-4-4-4" />
+                        </svg>
+                        <a href="#" class="ms-1 text-sm font-medium text-gray-700 hover:text-black md:ms-2">Course
+                            Details</a>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+    </x-slot>
     <div class="py-[120px] xl:py-[80px] md:py-[60px]">
         <div class="mx-[19.71%] xxxl:mx-[14.71%] xxl:mx-[9.71%] xl:mx-[5.71%] md:mx-[12px]">
             <!-- cover -->
@@ -7,10 +35,21 @@
                 class="rounded-[8px] overflow-hidden relative z-[2] before:absolute before:inset-0 before:-z-[0] before:bg-edpurple/20 mb-[40px] md:mb-[25px] xs:mb-[15px]">
                 <img src="{{ asset('storage/' . $course->thumbnail) }}" alt="Course Cover"
                     class="rounded-[8px] w-full aspect-[1170/552]">
-                <a href="https://www.youtube.com/watch?v=ht7vYtWOazI&amp;pp=ygUPY291cnNlIG92ZXJ2aWV3" data-fslightbox
-                    class="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] w-[75px] xs:w-[65px] xxs:w-[60px] aspect-square bg-white rounded-full flex items-center justify-center text-[28px] text-edpurple hover:text-black before:absolute before:animate-borderFade before:-inset-[12px] before:border before:border-white before:rounded-full after:absolute after:animate-borderFade after:-inset-[5px] after:border after:border-white after:rounded-full"><i
-                        class="fa-solid fa-play"></i></a>
+
+                <!-- Tombol Play untuk Menampilkan Video -->
+                <div id="videoContainer"
+                    class="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] w-[75px] xs:w-[65px] xxs:w-[60px] aspect-square bg-white rounded-full flex items-center justify-center text-[28px] text-edpurple hover:text-black cursor-pointer">
+                    <i class="fa-solid fa-play"></i>
+                </div>
+
+                <!-- Iframe Video (Tersembunyi Secara Default) -->
+                <div id="youtubeIframe" class="absolute inset-0 w-full h-full hidden">
+                    <iframe width="100%" height="100%"
+                        src="https://www.youtube.com/embed/{{ $course->path_trailer }}" frameborder="0"
+                        allow="encrypted-media" allowfullscreen></iframe>
+                </div>
             </div>
+
 
             <!-- txt -->
             <div class="flex gap-[30px] lg:gap-[20px] md:flex-row sm:flex-col md:items-center">
@@ -66,13 +105,28 @@
                         <div>
                             <!-- tab navs  -->
                             <div
-                                class="ed-course-details-tab-navs border border-[#E5E5E5] rounded-[10px] p-[20px] lg:p-[15px] flex gap-[16px] *:h-[56px] sm:*:h-[46px] *:rounded-[8px] *:flex-auto *:bg-edpurple/[06%] *:px-[20px] lg:*:px-[15px] *:font-semibold overflow-auto">
-                                <button class="tab-nav active" data-tab="overview">Overview</button>
-                                <button class="tab-nav" data-tab="curriculum">Curriculum</button>
-                                <button class="tab-nav" data-tab="instructor">Instructor</button>
-                                <button class="tab-nav" data-tab="reviews">Reviews</button>
+                                class="ed-course-details-tab-navs border border-[#E5E5E5] rounded-[10px] p-[20px] lg:p-[15px] flex gap-[16px] *:h-[56px] sm:*:h-[46px] *:rounded-[8px] *:flex-auto *:font-semibold overflow-auto">
+                                <button
+                                    class="tab-nav active bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md transition-all duration-300 hover:shadow-lg hover:scale-105"
+                                    data-tab="overview">
+                                    Overview
+                                </button>
+                                <button
+                                    class="tab-nav bg-gradient-to-r from-gray-100 to-gray-200 text-edpurple hover:from-purple-500 hover:to-indigo-500 hover:text-white shadow-md transition-all duration-300 hover:shadow-lg hover:scale-105"
+                                    data-tab="curriculum">
+                                    Curriculum
+                                </button>
+                                <button
+                                    class="tab-nav bg-gradient-to-r from-gray-100 to-gray-200 text-edpurple hover:from-purple-500 hover:to-indigo-500 hover:text-white shadow-md transition-all duration-300 hover:shadow-lg hover:scale-105"
+                                    data-tab="instructor">
+                                    Instructor
+                                </button>
+                                <button
+                                    class="tab-nav bg-gradient-to-r from-gray-100 to-gray-200 text-edpurple hover:from-purple-500 hover:to-indigo-500 hover:text-white shadow-md transition-all duration-300 hover:shadow-lg hover:scale-105"
+                                    data-tab="reviews">
+                                    Reviews
+                                </button>
                             </div>
-
                             <!-- tabs -->
                             <div class="ed-course-details-tabs">
                                 <!-- tab 01 -->
@@ -87,22 +141,27 @@
                                             </p>
                                         </div>
                                     </div>
-
-                                    {{-- <div>
+                                    <div>
                                         <h4
-                                            class="font-semibold text-[30px] lg:text-[27px] xs:text-[25px] xxs:text-[23px] text-edblue mt-[28px] mb-[15px]">
-                                            Requirements for The Course</h4>
-                                        <div class="space-y-[10px]">
-                                            <p class="text-edgray">Nulla facilisi. Vestibulum tristique sem in eros
-                                                eleifend
-                                                imperdiet. Donec quis convallis neque. In id lacus pulvinar lacus, eget
-                                                vulputate lectus. Ut viverra bibendum lorem, at tempus nibh mattis in.
-                                                Sed a
-                                                massa eget lacus consequat auctor.</p>
-                                        </div>
-                                    </div> --}}
-                                </div>
+                                            class="font-semibold text-[30px] lg:text-[27px] xs:text-[25px] xxs:text-[23px] text-edblue mt-7 mb-4">
+                                            What We Learn Here?
+                                        </h4>
+                                        <ul class="space-y-3">
+                                            @foreach ($course->keypoints as $keypoint)
+                                                <li class="flex items-center gap-2 text-edgray">
+                                                    <svg class="w-5 h-5 text-green-500"
+                                                        xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2" d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    <span>{{ $keypoint->keypoint }}</span>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
 
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -148,11 +207,12 @@
                             <li
                                 class="py-[15px] flex flex-wrap gap-[10px] items-center justify-between border-t border-[#e5e5e5] last:border-b">
                                 <span class="flex items-center gap-[8px] font-semibold text-edblue">
-                                    <span class="icon"><img src="{{ asset('img/icon/user-group-purple.svg') }}"
-                                            alt="icon"></span>
+                                    <span class="icon">
+                                        <img src="{{ asset('img/icon/user-group-purple.svg') }}" alt="icon">
+                                    </span>
                                     <span>Students:</span>
                                 </span>
-                                <span class="text-[15px] text-edgray">{{ $course->student_count }}</span>
+                                <span class="text-[15px] text-edgray">{{ $studentCount ?? 0 }}</span>
                             </li>
 
                             <li
@@ -177,12 +237,14 @@
                         </ul>
 
                         <div class="space-y-[12px]">
+                            <!-- Tombol Add to Cart -->
                             <button
-                                class="ed-btn !h-[56px] !rounded-[8px] w-full !bg-transparent border border-edpurple !text-edpurple hover:!bg-edpurple hover:!text-white">Add
-                                to cart</button>
-                            <a href="#" class="ed-btn gap-[10px] !h-[56px] !rounded-[8px] w-full">Join this
-                                Course
-                                <span><i class="fa-solid fa-arrow-right-long"></i></span></a>
+                                class="ed-btn !h-[56px] !rounded-[8px] w-full !bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold shadow-md transition-all duration-300 hover:shadow-lg hover:scale-105">
+                                Join this Course
+                                <span class="transition-transform duration-300 group-hover:translate-x-1">
+                                    <i class="fa-solid fa-arrow-right-long"></i>
+                                </span>
+                            </button>
                         </div>
 
                         <!-- social links -->
@@ -204,4 +266,10 @@
             </div>
         </div>
     </div>
-</x-guest-layout>
+</x-app-layout>
+<script>
+    document.getElementById('videoContainer').addEventListener('click', function() {
+        document.getElementById('youtubeIframe').classList.remove('hidden');
+        this.classList.add('hidden');
+    });
+</script>
