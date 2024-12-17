@@ -21,7 +21,6 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-Route::resource('coursedetails', CourseDetailsController::class);
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -39,6 +38,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::middleware('role:student')->group(function () {
         Route::get('student/courses', [CoursesController::class, 'studentIndex'])->name('student.courses.index');
         Route::get('student/courses/{id}', [CoursesController::class, 'studentShow'])->name('student.courses.show');
+        Route::resource('coursedetails', CourseDetailsController::class);
     });
 
 
