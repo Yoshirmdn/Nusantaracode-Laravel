@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AllCourseController;
 use App\Models\Lesson;
 use App\Models\Teacher;
 use Illuminate\Support\Facades\Route;
@@ -10,11 +9,13 @@ use App\Http\Controllers\LessonController;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\MyCourseController;
+use App\Http\Controllers\AllCourseController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\StudentQuizController;
 use App\Http\Controllers\CourseDetailsController;
 use App\Http\Controllers\LessonStudentController;
-use App\Http\Controllers\MyCourseController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -50,6 +51,12 @@ Route::group(['middleware' => ['auth']], function () {
             ->name('lessons.index');
         Route::resource('courseindex', AllCourseController::class);
         Route::resource('mycourse', MyCourseController::class);
+        // Quiz overview route
+        Route::get('/quiz/{lessonId}', [StudentQuizController::class, 'index'])->name('quiz.index');
+        // Start quiz route
+        Route::get('/quiz/{lessonId}/start/{questionNumber?}', [StudentQuizController::class, 'start'])->name('quiz.start');
+        Route::post('/quiz/process', [StudentQuizController::class, 'process'])->name('quiz.process');
+        Route::get('/quiz/{lessonId}/result', [StudentQuizController::class, 'result'])->name('quiz.result');
     });
 
 
