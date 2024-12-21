@@ -237,14 +237,16 @@
                         </ul>
 
                         <div class="space-y-[12px]">
-                            <!-- Tombol Add to Cart -->
-                            <button
-                                class="ed-btn !h-[56px] !rounded-[8px] w-full !bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold shadow-md transition-all duration-300 hover:shadow-lg hover:scale-105">
-                                Join this Course
-                                <span class="transition-transform duration-300 group-hover:translate-x-1">
-                                    <i class="fa-solid fa-arrow-right-long"></i>
+                            <a href="{{ route('courselayout', ['id' => $course->id]) }}"
+                                class="relative flex items-center justify-center h-[56px] rounded-[8px] w-full bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 text-white font-semibold shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                                <span
+                                    class="absolute inset-0 bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100 rounded-[8px]"></span>
+                                <span class="relative z-10 flex items-center gap-2">
+                                    Join this Course
+                                    <i
+                                        class="fa-solid fa-arrow-right-long transform transition-transform duration-300 group-hover:translate-x-2"></i>
                                 </span>
-                            </button>
+                            </a>
                         </div>
 
                         <!-- social links -->
