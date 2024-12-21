@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Quiz;
 use App\Models\Courses;
 use Illuminate\Http\Request;
 
@@ -21,25 +22,41 @@ class LessonStudentController extends Controller
             abort(404, 'Course not found.');
         }
 
-        // Choose lesson based on lessonId or default to the first lesson
+        // Pilih lesson berdasarkan lessonId atau default ke pelajaran pertama
         $selectedLesson = $lessonStudent->lessons->first();
         if ($lessonId) {
             $selectedLesson = $lessonStudent->lessons->where('id', $lessonId)->first() ?? $selectedLesson;
         }
 
-        // Set the current lesson ID (default to the first lesson's ID if not specified)
+        // Periksa apakah lesson memiliki quiz
+        $hasQuiz = false;
+        if ($selectedLesson) {
+            $hasQuiz = Quiz::where('lesson_id', $selectedLesson->id)->exists();
+        }
+
+        // Set the current lesson ID
         $lessonId = $selectedLesson->id ?? null;
 
-        return view('user.courselayout', compact('lessonStudent', 'selectedLesson', 'lessonId'));
+        return view('user.courselayout', compact('lessonStudent', 'selectedLesson', 'lessonId', 'hasQuiz'));
     }
+
 
     public function showLesson($courseId, $lessonId)
     {
         $lessonStudent = Courses::with(['lessons', 'teacherconn.user'])->find($courseId);
+
         if (!$lessonStudent) {
             abort(404, 'Course not found.');
         }
+
         $selectedLesson = $lessonStudent->lessons->where('id', $lessonId)->first();
-        return view('user.CourseIndex', compact('lessonStudent', 'selectedLesson', 'lessonId'));
+
+        // Periksa apakah lesson memiliki quiz
+        $hasQuiz = false;
+        if ($selectedLesson) {
+            $hasQuiz = Quiz::where('lesson_id', $selectedLesson->id)->exists();
+        }
+
+        return view('user.courselayout', compact('lessonStudent', 'selectedLesson', 'lessonId', 'hasQuiz'));
     }
 }
