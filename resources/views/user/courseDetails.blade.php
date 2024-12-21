@@ -238,7 +238,7 @@
 
                         <div class="space-y-[12px]">
                             <a href="{{ route('courselayout', ['id' => $course->id]) }}"
-                                class="relative flex items-center justify-center h-[56px] rounded-[8px] w-full bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 text-white font-semibold shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                                class="relative flex items-center justify-center h-[56px] rounded-[8px] w-full bg-gradient-to-r from-purple-500 via-purple-800 to-indigo-500 text-white font-semibold shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
                                 <span
                                     class="absolute inset-0 bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100 rounded-[8px]"></span>
                                 <span class="relative z-10 flex items-center gap-2">
