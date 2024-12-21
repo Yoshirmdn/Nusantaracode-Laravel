@@ -14,6 +14,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CourseDetailsController;
 use App\Http\Controllers\LessonStudentController;
+use App\Http\Controllers\MyCourseController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -48,6 +49,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/courses/{courseId}/lessons/{lessonId?}', [LessonStudentController::class, 'index'])
             ->name('lessons.index');
         Route::resource('courseindex', AllCourseController::class);
+        Route::resource('mycourse', MyCourseController::class);
     });
 
 

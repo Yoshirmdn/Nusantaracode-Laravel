@@ -41,7 +41,7 @@
                         </x-nav-link> --}}
                     @endrole
                     @role('student')
-                        <x-nav-link :href="route('courses.index')" :active="request()->routeIs('courses.index')">
+                        <x-nav-link :href="route('mycourse.index')" :active="request()->routeIs('mycourse.index')">
                             {{ __('My Courses') }}
                         </x-nav-link>
                         <x-nav-link :href="route('courseindex.index')" :active="request()->routeIs('courseindex.index')">
