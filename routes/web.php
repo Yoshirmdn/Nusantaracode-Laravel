@@ -41,6 +41,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('student/courses/{id}', [CoursesController::class, 'studentShow'])->name('student.courses.show');
         Route::resource('coursedetails', CourseDetailsController::class);
         Route::get('courselayout/{id}', [LessonStudentController::class, 'index'])->name('courselayout');
+        Route::get('/courses/{courseId}/lessons/{lessonId?}', [LessonStudentController::class, 'index'])
+            ->name('lessons.index');
     });
 
 
