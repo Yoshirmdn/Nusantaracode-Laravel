@@ -1,4 +1,4 @@
-<!-- main content -->
+<!-- Main Content -->
 <x-app-layout>
     <x-slot name="header">
         <nav class="flex" aria-label="Breadcrumb">
@@ -30,121 +30,72 @@
     </x-slot>
     <div class="py-[120px] xl:py-[80px] md:py-[60px]">
         <div class="mx-[19.71%] xxxl:mx-[14.71%] xxl:mx-[9.71%] xl:mx-[5.71%] md:mx-[12px]">
-            <!-- cover and lessons -->
             <div class="flex gap-4 lg:flex-row flex-col items-start">
-                {{-- left --}}
+                {{-- Left (Video) --}}
                 <div class="flex-1 bg-gray-100 rounded-[8px] overflow-hidden relative">
-                    <!-- Video Container -->
-                    @if (isset($lessonStudent->lessons) && $lessonStudent->lessons->isNotEmpty())
-                        @php
-                            $lesson = $lessonStudent->lessons->first();
-                        @endphp
+                    @if ($selectedLesson)
                         <div id="youtubeIframe" class="w-full max-w-[960px] h-[540px] mx-auto">
                             <iframe width="100%" height="100%"
-                                src="https://www.youtube.com/embed/{{ $lesson->path_video }}" frameborder="0"
+                                src="https://www.youtube.com/embed/{{ $selectedLesson->path_video }}" frameborder="0"
                                 allow="autoplay; encrypted-media" allowfullscreen></iframe>
                         </div>
                     @else
                         <p class="text-center text-gray-500">Lesson video is not available.</p>
                     @endif
                 </div>
-                {{-- right --}}
+
+                {{-- Right (Sidebar Lessons) --}}
                 <div class="right w-full lg:w-[370px] md:w-full shrink-0 space-y-[30px]">
-                    <!-- COURSE INFORMATION -->
                     <div
                         class="border border-[#e5e5e5] rounded-[10px] px-[30px] lg:px-[20px] xxs:px-[15px] py-[35px] lg:py-[25px] xxs:py-[25px] h-auto">
                         <h5 class="font-semibold text-[24px] text-edblue text-center mb-[20px]">Lessons</h5>
-
-                        {{-- scrolled --}}
                         <div class="overflow-auto h-[300px]">
                             @if ($lessonStudent->lessons->isNotEmpty())
                                 @foreach ($lessonStudent->lessons as $index => $lesson)
-                                    <div class="flex items-center gap-4 bg-purple-400 w-full rounded-xl p-3 mb-2">
+                                    <a href="{{ route('lessons.index', ['courseId' => $lessonStudent->id, 'lessonId' => $lesson->id]) }}"
+                                        class="block flex items-center gap-4 bg-gradient-to-r from-purple-500 via-purple-600 to-purple-800 w-full rounded-xl p-4 mb-3 shadow-lg hover:shadow-xl hover:from-purple-600 hover:to-purple-700 transition-all duration-300 ease-in-out">
                                         <div
-                                            class="w-[40px] h-[40px] bg-edpurple rounded-full flex items-center justify-center">
-                                            <span class="text-white font-semibold">{{ $index + 1 }}</span>
+                                            class="w-[50px] h-[50px] bg-white text-purple-500 rounded-full flex items-center justify-center font-bold shadow-sm">
+                                            {{ $index + 1 }}
                                         </div>
                                         <div>
-                                            <h6 class="font-medium text-white font">{{ $lesson->name }}</h6>
+                                            <h6 class="font-medium text-white text-lg">{{ $lesson->name }}</h6>
                                         </div>
-                                    </div>
+                                    </a>
                                 @endforeach
                             @else
                                 <p class="text-center text-gray-500">No lessons available for this course.</p>
                             @endif
                         </div>
-                        {{-- end scrolled --}}
                     </div>
                 </div>
             </div>
 
-            <!-- txt -->
-            <div class="flex gap-[30px] lg:gap-[20px] md:flex-row sm:flex-col md:items-center">
-                {{-- left --}}
-                <div class="left max-w-full grow">
-                    <div>
-                        <h4
-                            class="font-semibold text-[30px] lg:text-[27px] xs:text-[25px] xxs:text-[23px] text-edblue mb-[23px]">
-                            {{ $lesson->name }}</h4>
-
-                        <!-- course meta -->
-                        <div
-                            class="border-b border-[#E5E5E5] pb-[25px] flex xs:flex-wrap items-center gap-[60px] lg:gap-[40px] xs:gap-[20px] mb-[34px]">
-                            <!-- single info -->
-                            <div
-                                class="flex items-center gap-[10px] border-l border-[#CDCDCD] first:border-none pl-[10px] first:pl-0">
-                                @if (isset($lessonStudent->teacherconn) && isset($lessonStudent->teacherconn->user))
-                                    <img src="{{ asset('storage/' . $lessonStudent->teacherconn->user->avatar) }}"
-                                        alt="Course Instructor"
-                                        class="w-[52px] aspect-square rounded-full object-cover">
-                                    <div>
-                                        <h6 class="font-medium text-edblue leading-[1.2]">
-                                            {{ $lessonStudent->teacherconn->user->name }}
-                                        </h6>
-                                    </div>
-                                @else
-                                    <p class="text-gray-500">Instructor information not available.</p>
-                                @endif
-                            </div>
-                            <!-- single info -->
-                            <div
-                                class="flex items-center gap-[10px] border-l border-[#CDCDCD] first:border-none pl-[10px] first:pl-0">
-                                <div>
-                                    <h6 class="font-medium text-edblue leading-[1.2]"><i
-                                            class="fa-solid fa-certificate"></i>
-                                        Certificates</h6>
-                                </div>
-                            </div>
-
-                            <!-- single info -->
-                            <div
-                                class="flex items-center gap-[10px] border-l border-[#CDCDCD] first:border-none pl-[10px] first:pl-0">
-                                <div>
-                                    <h6 class="font-medium text-edblue leading-[1.2]">
-                                        <i class="fa-solid fa-users"></i>
-                                        {{ $lessonStudent->studentCourse_count }} Students
-                                    </h6>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- tabs container -->
-                        <div>
-                            <div class="ed-course-details-tabs">
-                                <div id="overview" class="ed-tab duration-[400ms] active">
-                                    <div>
-                                        <h4
-                                            class="font-semibold text-[30px] lg:text-[27px] xs:text-[25px] xxs:text-[23px] text-edblue mt-[28px] mb-[15px]">
-                                            Lesson Content</h4>
-                                        <div class="space-y-[10px]">
-                                            <p class="text-edgray">{{ $lesson->content }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            {{-- Lesson Details --}}
+            <div class="mt-8">
+                @if ($selectedLesson)
+                    <h4
+                        class="font-semibold text-[30px] lg:text-[27px] xs:text-[25px] xxs:text-[23px] text-edblue mb-[23px]">
+                        {{ $selectedLesson->name }}
+                    </h4>
+                    <div class="space-y-[10px]">
+                        <p class="text-edgray">{{ $selectedLesson->content }}</p>
                     </div>
-                </div>
+                @else
+                    <p class="text-gray-500">Lesson details not available.</p>
+                @endif
             </div>
+            <div class="mt-8 flex justify-center items-center">
+                <a href="{{ route('quizzes.index', ['courseId' => $lessonStudent->id]) }}"
+                    class="relative px-6 py-3 border border-purple-600 rounded-full overflow-hidden group transition duration-300 ease-in-out">
+                    <span
+                        class="absolute inset-0 w-full h-full bg-purple-700 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
+                    <span class="relative z-10 text-purple-600 group-hover:text-white font-semibold">
+                        Take Quiz
+                    </span>
+                </a>
+            </div>
+
         </div>
     </div>
 </x-app-layout>
