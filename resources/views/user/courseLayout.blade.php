@@ -1,77 +1,77 @@
 <!-- main content -->
 <x-app-layout>
+    <x-slot name="header">
+        <nav class="flex" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                <li class="inline-flex items-center">
+                    <a href="/dashboard"
+                        class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-black">
+                        <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
+                        </svg>
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                        <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 9 4-4-4-4" />
+                        </svg>
+                        <a href="#"
+                            class="ms-1 text-sm font-medium text-gray-700 hover:text-black md:ms-2">Lessons</a>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+    </x-slot>
     <div class="py-[120px] xl:py-[80px] md:py-[60px]">
         <div class="mx-[19.71%] xxxl:mx-[14.71%] xxl:mx-[9.71%] xl:mx-[5.71%] md:mx-[12px]">
-            <!-- cover -->
-            <div class="flex gap-4 md:flex-col flex-row items-center">
+            <!-- cover and lessons -->
+            <div class="flex gap-4 lg:flex-row flex-col items-start">
                 {{-- left --}}
-                <div
-                    class="rounded-[8px] overflow-hidden relative z-[2] before:absolute before:inset-0 before:-z-[0] mb-[40px] md:mb-[25px] xs:mb-[15px]">
-                    <img src="{{ asset('img/course-details-img.jpg') }}" alt="Course Cover"
-                        class="rounded-[8px] w-full aspect-[1170/552]">
-
-                    <a href="https://www.youtube.com/watch?v=ht7vYtWOazI&amp;pp=ygUPY291cnNlIG92ZXJ2aWV3" data-fslightbox
-                        class="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] w-[75px] xs:w-[65px] xxs:w-[60px] aspect-square bg-white rounded-full flex items-center justify-center text-[28px] text-edpurple hover:text-black before:absolute before:animate-borderFade before:-inset-[12px] before:border before:border-white before:rounded-full after:absolute after:animate-borderFade after:-inset-[5px] after:border after:border-white after:rounded-full"><i
-                            class="fa-solid fa-play"></i></a>
+                <div class="flex justify-center items-center h-screen w-screen bg-gray-100">
+                    <!-- Video Container -->
+                    @if (isset($lessonStudent->lessons) && $lessonStudent->lessons->isNotEmpty())
+                        @php
+                            $lesson = $lessonStudent->lessons->first();
+                        @endphp
+                        <div id="youtubeIframe" class="w-full h-full">
+                            <iframe width="100%" height="100%"
+                                src="https://www.youtube.com/embed/{{ $lesson->path_video }}" frameborder="0"
+                                allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        </div>
+                    @else
+                        <p class="text-center text-gray-500">Lesson video is not available.</p>
+                    @endif
                 </div>
                 {{-- right --}}
-                <div
-                    class="right h-full sticky top-[120px] max-w-full w-[370px] lg:w-[300px] md:w-full shrink-0 space-y-[30px]">
+                <div class="right max-w-full w-[370px] lg:w-[300px] md:w-full shrink-0 space-y-[30px]">
                     <!-- COURSE INFORMATION -->
                     <div
-                        class="border border-[#e5e5e5] rounded-[10px] px-[30px] lg:px-[20px] xxs:px-[15px] py-[35px] lg:py-[25px] xxs:py-[25px]">
+                        class="border border-[#e5e5e5] rounded-[10px] px-[30px] lg:px-[20px] xxs:px-[15px] py-[35px] lg:py-[25px] xxs:py-[25px] h-auto">
                         <h5 class="font-semibold text-[24px] text-edblue text-center mb-[20px]">Lessons</h5>
 
                         {{-- scrolled --}}
                         <div class="overflow-auto h-[300px]">
-                            <div class="flex flex-col items-center gap-[10px] border-b border-[#E5E5E5] pb-[20px]">
-                                <div class="flex items-center gap-4 bg-purple-400 w-full rounded-xl p-3">
-                                    <div
-                                        class="w-[40px] h-[40px] bg-edpurple rounded-full flex items-center justify-center">
-                                        <span class="text-white font-semibold">1</span>
+                            @if ($lessonStudent->lessons->isNotEmpty())
+                                @foreach ($lessonStudent->lessons as $index => $lesson)
+                                    <div class="flex items-center gap-4 bg-purple-400 w-full rounded-xl p-3 mb-2">
+                                        <div
+                                            class="w-[40px] h-[40px] bg-edpurple rounded-full flex items-center justify-center">
+                                            <span class="text-white font-semibold">{{ $index + 1 }}</span>
+                                        </div>
+                                        <div>
+                                            <h6 class="font-medium text-white font">{{ $lesson->name }}</h6>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <h6 class="font-medium text-edblue">Introduction</h6>
-                                    </div>
-                                </div>
-                                <div class="flex items-center gap-4 bg-purple-400 w-full rounded-xl p-3">
-                                    <div
-                                        class="w-[40px] h-[40px] bg-edpurple rounded-full flex items-center justify-center">
-                                        <span class="text-white font-semibold">1</span>
-                                    </div>
-                                    <div>
-                                        <h6 class="font-medium text-edblue">Introduction</h6>
-                                    </div>
-                                </div>
-                                <div class="flex items-center gap-4 bg-purple-400 w-full rounded-xl p-3">
-                                    <div
-                                        class="w-[40px] h-[40px] bg-edpurple rounded-full flex items-center justify-center">
-                                        <span class="text-white font-semibold">1</span>
-                                    </div>
-                                    <div>
-                                        <h6 class="font-medium text-edblue">Introduction</h6>
-                                    </div>
-                                </div>
-                                <div class="flex items-center gap-4 bg-purple-400 w-full rounded-xl p-3">
-                                    <div
-                                        class="w-[40px] h-[40px] bg-edpurple rounded-full flex items-center justify-center">
-                                        <span class="text-white font-semibold">1</span>
-                                    </div>
-                                    <div>
-                                        <h6 class="font-medium text-edblue">Introduction</h6>
-                                    </div>
-                                </div>
-                                <div class="flex items-center gap-4 bg-purple-400 w-full rounded-xl p-3">
-                                    <div
-                                        class="w-[40px] h-[40px] bg-edpurple rounded-full flex items-center justify-center">
-                                        <span class="text-white font-semibold">1</span>
-                                    </div>
-                                    <div>
-                                        <h6 class="font-medium text-edblue">Introduction</h6>
-                                    </div>
-                                </div>
-                            </div>
-
+                                @endforeach
+                            @else
+                                <p class="text-center text-gray-500">No lessons available for this course.</p>
+                            @endif
                         </div>
                         {{-- end scrolled --}}
                     </div>
@@ -85,7 +85,7 @@
                     <div>
                         <h4
                             class="font-semibold text-[30px] lg:text-[27px] xs:text-[25px] xxs:text-[23px] text-edblue mb-[23px]">
-                            Ini Judul</h4>
+                            {{ $lesson->name }}</h4>
 
                         <!-- course meta -->
                         <div
@@ -93,10 +93,26 @@
                             <!-- single info -->
                             <div
                                 class="flex items-center gap-[10px] border-l border-[#CDCDCD] first:border-none pl-[10px] first:pl-0">
-                                <img src="{{ asset('img/teacher-2.jpg') }}" alt="Course Instructor"
-                                    class="w-[52px] aspect-square rounded-full object-cover">
+                                @if (isset($lessonStudent->teacherconn) && isset($lessonStudent->teacherconn->user))
+                                    <img src="{{ asset('storage/' . $lessonStudent->teacherconn->user->avatar) }}"
+                                        alt="Course Instructor"
+                                        class="w-[52px] aspect-square rounded-full object-cover">
+                                    <div>
+                                        <h6 class="font-medium text-edblue leading-[1.2]">
+                                            {{ $lessonStudent->teacherconn->user->name }}
+                                        </h6>
+                                    </div>
+                                @else
+                                    <p class="text-gray-500">Instructor information not available.</p>
+                                @endif
+                            </div>
+                            <!-- single info -->
+                            <div
+                                class="flex items-center gap-[10px] border-l border-[#CDCDCD] first:border-none pl-[10px] first:pl-0">
                                 <div>
-                                    <h6 class="font-medium text-edblue leading-[1.2]">Jane Cooper</h6>
+                                    <h6 class="font-medium text-edblue leading-[1.2]"><i
+                                            class="fa-solid fa-certificate"></i>
+                                        Certificates</h6>
                                 </div>
                             </div>
 
@@ -104,72 +120,23 @@
                             <div
                                 class="flex items-center gap-[10px] border-l border-[#CDCDCD] first:border-none pl-[10px] first:pl-0">
                                 <div>
-                                    <h6 class="font-medium text-edblue leading-[1.2]"><i class="fa-solid fa-crown"></i>
-                                        Product and Customers</h6>
-                                </div>
-                            </div>
-                            <!-- single info -->
-                            <div
-                                class="flex items-center gap-[10px] border-l border-[#CDCDCD] first:border-none pl-[10px] first:pl-0">
-                                <div>
-                                    <h6 class="font-medium text-edblue leading-[1.2]"><i
-                                            class="fa-solid fa-certificate"></i> Certificates</h6>
-                                </div>
-                            </div>
-
-                            <!-- single info -->
-                            <div
-                                class="flex items-center gap-[10px] border-l border-[#CDCDCD] first:border-none pl-[10px] first:pl-0">
-                                <div>
-                                    <h6 class="font-medium text-edblue leading-[1.2]"><i class="fa-solid fa-users"></i>
-                                        Students</h6>
-                                </div>
-                            </div>
-                            <!-- single info -->
-                            <div
-                                class="flex items-center gap-[10px] border-l border-[#CDCDCD] first:border-none pl-[10px] first:pl-0">
-                                <div>
-                                    <h6 class="font-medium text-edblue leading-[1.2]"><i
-                                            class="fa-solid fa-suitcase"></i> Job Guarantee</h6>
+                                    <h6 class="font-medium text-edblue leading-[1.2]">
+                                        <i class="fa-solid fa-users"></i>
+                                        {{ $lessonStudent->studentCourse_count }} Students
+                                    </h6>
                                 </div>
                             </div>
                         </div>
-
                         <!-- tabs container -->
                         <div>
-                            <!-- tab navs  -->
-                            <div
-                                class="ed-course-details-tab-navs border border-[#E5E5E5] rounded-[10px] p-[20px] lg:p-[15px] flex gap-[16px] *:h-[56px] sm:*:h-[46px] *:rounded-[8px] *:flex-auto *:bg-edpurple/[06%] *:px-[20px] lg:*:px-[15px] *:font-semibold overflow-auto">
-                                <button class="tab-nav active" data-tab="overview">About</button>
-                                <button class="tab-nav" data-tab="curriculum">Resource</button>
-                                <button class="tab-nav" data-tab="instructor">Reviews</button>
-                                <button class="tab-nav" data-tab="reviews">Discussion</button>
-                                <button class="tab-nav" data-tab="reviews">Reward</button>
-                            </div>
-
-                            <!-- tabs -->
                             <div class="ed-course-details-tabs">
-                                <!-- tab 01 -->
                                 <div id="overview" class="ed-tab duration-[400ms] active">
                                     <div>
                                         <h4
                                             class="font-semibold text-[30px] lg:text-[27px] xs:text-[25px] xxs:text-[23px] text-edblue mt-[28px] mb-[15px]">
-                                            Course Descriptions</h4>
+                                            Lesson Content</h4>
                                         <div class="space-y-[10px]">
-                                            <p class="text-edgray">Consectetur adipisicing elit, sed do eiusmod tempor
-                                                is
-                                                incididunt ut labore et dolore of magna aliqua. Ut enim ad minim veniam,
-                                                made of owl the quis nostrud exercitation ullamco laboris nisi ut
-                                                aliquip ex
-                                                ea dolor commodo consequat. Duis aute irure and dolor in reprehenderit.
-                                            </p>
-                                            <p class="text-edgray">The is ipsum dolor sit amet consectetur adipiscing
-                                                elit.
-                                                Fusce eleifend porta arcu In hac augu ehabitasse the is platea augue
-                                                thelorem turpoi dictumst. In lacus libero faucibus at malesuada sagittis
-                                                placerat eros sed istincidunt augue ac ante rutrum sed the is sodales
-                                                augue
-                                                consequat.</p>
+                                            <p class="text-edgray">{{ $lesson->content }}
                                         </div>
                                     </div>
                                 </div>
