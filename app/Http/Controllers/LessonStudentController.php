@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Quiz;
+use App\Models\Lesson;
 use App\Models\Courses;
 use Illuminate\Http\Request;
 
@@ -22,22 +23,21 @@ class LessonStudentController extends Controller
             abort(404, 'Course not found.');
         }
 
-        // Pilih lesson berdasarkan lessonId atau default ke pelajaran pertama
+        // Choose the lesson based on lessonId or default to the first lesson
         $selectedLesson = $lessonStudent->lessons->first();
         if ($lessonId) {
             $selectedLesson = $lessonStudent->lessons->where('id', $lessonId)->first() ?? $selectedLesson;
         }
 
-        // Periksa apakah lesson memiliki quiz
+        // Check if the lesson has a quiz
         $hasQuiz = $selectedLesson ? Quiz::where('lesson_id', $selectedLesson->id)->exists() : false;
 
-        // Periksa apakah lesson ini adalah lesson terakhir
+        // Check if the current lesson is the last lesson
         $isLastLesson = $selectedLesson && $selectedLesson->id === $lessonStudent->lessons->last()->id;
 
-        return view('user.courselayout', compact('lessonStudent', 'selectedLesson', 'lessonId', 'hasQuiz', 'isLastLesson'));
+        // Pass the required variables to the view
+        return view('user.courselayout', compact('lessonStudent', 'selectedLesson', 'lessonId', 'hasQuiz', 'isLastLesson', 'courseId'));
     }
-
-
 
     public function showLesson($courseId, $lessonId)
     {
