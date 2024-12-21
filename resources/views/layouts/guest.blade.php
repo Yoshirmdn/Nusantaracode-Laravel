@@ -58,6 +58,7 @@
         <main>
             {{ $slot }}
         </main>
+        @include('layouts.footer') {{-- Include the footer --}}
     </div>
     {{-- JS Flowbite --}}
     <script src="{{ asset('node_modules/flowbite/dist/flowbite.min.js') }}"></script>
