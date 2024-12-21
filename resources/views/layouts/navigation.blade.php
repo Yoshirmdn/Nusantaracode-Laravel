@@ -41,11 +41,14 @@
                         </x-nav-link>
                     @endrole
                     @role('student')
-                        <x-nav-link :href="route('playground')" :active="request()->routeIs('playground')">
-                            {{ __('Code Playground') }}
-                        </x-nav-link>
                         <x-nav-link :href="route('courses.index')" :active="request()->routeIs('courses.index')">
                             {{ __('My Courses') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('courses.index')" :active="request()->routeIs('courses.index')">
+                            {{ __('All Courses') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('playground')" :active="request()->routeIs('playground')">
+                            {{ __('Code Playground') }}
                         </x-nav-link>
                     @endrole
                 </div>
