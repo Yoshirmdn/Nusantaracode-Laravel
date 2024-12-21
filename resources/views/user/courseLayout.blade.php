@@ -86,7 +86,16 @@
                 @endif
             </div>
             <div class="mt-8 flex justify-center items-center">
-                @if ($hasQuiz)
+                @if ($isLastLesson)
+                    <a href=""
+                        class="relative px-6 py-3 border border-green-600 rounded-full overflow-hidden group transition duration-300 ease-in-out">
+                        <span
+                            class="absolute inset-0 w-full h-full bg-green-700 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
+                        <span class="relative z-10 text-green-600 group-hover:text-white font-semibold">
+                            Claim Certificate
+                        </span>
+                    </a>
+                @elseif ($hasQuiz)
                     <a href="{{ route('quiz.index', ['lessonId' => $lessonId]) }}"
                         class="relative px-6 py-3 border border-purple-600 rounded-full overflow-hidden group transition duration-300 ease-in-out">
                         <span

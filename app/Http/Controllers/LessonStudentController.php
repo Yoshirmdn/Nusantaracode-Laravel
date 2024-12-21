@@ -29,16 +29,14 @@ class LessonStudentController extends Controller
         }
 
         // Periksa apakah lesson memiliki quiz
-        $hasQuiz = false;
-        if ($selectedLesson) {
-            $hasQuiz = Quiz::where('lesson_id', $selectedLesson->id)->exists();
-        }
+        $hasQuiz = $selectedLesson ? Quiz::where('lesson_id', $selectedLesson->id)->exists() : false;
 
-        // Set the current lesson ID
-        $lessonId = $selectedLesson->id ?? null;
+        // Periksa apakah lesson ini adalah lesson terakhir
+        $isLastLesson = $selectedLesson && $selectedLesson->id === $lessonStudent->lessons->last()->id;
 
-        return view('user.courselayout', compact('lessonStudent', 'selectedLesson', 'lessonId', 'hasQuiz'));
+        return view('user.courselayout', compact('lessonStudent', 'selectedLesson', 'lessonId', 'hasQuiz', 'isLastLesson'));
     }
+
 
 
     public function showLesson($courseId, $lessonId)
