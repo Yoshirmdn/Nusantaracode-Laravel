@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Certificates extends Model
 {
     protected $table = 'certificates';
-    protected $fillable = ['course_id', 'user_id', 'certificate_path', 'issued_date', 'status'];
+    protected $fillable = [
+        'user_id',
+        'course_id',
+        'issue_date',
+        'certificate_path',
+    ];
     public $timestamps = true;
 }
