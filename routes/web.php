@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AllCourseController;
 use App\Models\Lesson;
 use App\Models\Teacher;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +44,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('courselayout/{id}', [LessonStudentController::class, 'index'])->name('courselayout');
         Route::get('/courses/{courseId}/lessons/{lessonId?}', [LessonStudentController::class, 'index'])
             ->name('lessons.index');
+        Route::resource('courseindex', AllCourseController::class);
     });
 
 
@@ -61,6 +63,6 @@ Route::get('/playground', function () {
 //     return view('user/Coursedetails');
 // })->name('coursedetails');
 // routes for course layout
-Route::get('/Courselayouts', function () {
-    return view('user/CourseLayout');
-})->name('courseLayout');
+// Route::get('/Courseindex', function () {
+//     return view('user/CourseIndex');
+// })->name('courseIndex');
