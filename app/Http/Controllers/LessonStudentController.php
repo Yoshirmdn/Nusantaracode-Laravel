@@ -10,24 +10,36 @@ class LessonStudentController extends Controller
     public function index($courseId, $lessonId = null)
     {
         $lessonStudent = Courses::with([
-            'categoriesconn',  // Kategori kursus
-            'teacherconn.user', // Pengajar dan data user terkait
-            'lessons',         // Pelajaran kursus
-            'keypoints',       // Poin penting kursus
-            'studentCourse'    // Siswa yang terdaftar
-        ])->withCount('studentCourse') // Menghitung jumlah siswa yang terdaftar
-            ->find($courseId);
+            'categoriesconn',
+            'teacherconn.user',
+            'lessons',
+            'keypoints',
+            'studentCourse'
+        ])->withCount('studentCourse')->find($courseId);
 
         if (!$lessonStudent) {
             abort(404, 'Course not found.');
         }
 
-        // Pilih lesson berdasarkan lessonId atau default ke pelajaran pertama
+        // Choose lesson based on lessonId or default to the first lesson
         $selectedLesson = $lessonStudent->lessons->first();
         if ($lessonId) {
             $selectedLesson = $lessonStudent->lessons->where('id', $lessonId)->first() ?? $selectedLesson;
         }
 
-        return view('user.courselayout', compact('lessonStudent', 'selectedLesson'));
+        // Set the current lesson ID (default to the first lesson's ID if not specified)
+        $lessonId = $selectedLesson->id ?? null;
+
+        return view('user.courselayout', compact('lessonStudent', 'selectedLesson', 'lessonId'));
+    }
+
+    public function showLesson($courseId, $lessonId)
+    {
+        $lessonStudent = Courses::with(['lessons', 'teacherconn.user'])->find($courseId);
+        if (!$lessonStudent) {
+            abort(404, 'Course not found.');
+        }
+        $selectedLesson = $lessonStudent->lessons->where('id', $lessonId)->first();
+        return view('user.CourseIndex', compact('lessonStudent', 'selectedLesson', 'lessonId'));
     }
 }
