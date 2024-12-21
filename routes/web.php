@@ -16,6 +16,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\StudentQuizController;
 use App\Http\Controllers\CourseDetailsController;
 use App\Http\Controllers\LessonStudentController;
+use App\Http\Controllers\StudentCertificateController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -57,6 +58,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/quiz/{lessonId}/start/{questionNumber?}', [StudentQuizController::class, 'start'])->name('quiz.start');
         Route::post('/quiz/process', [StudentQuizController::class, 'process'])->name('quiz.process');
         Route::get('/quiz/{lessonId}/result', [StudentQuizController::class, 'result'])->name('quiz.result');
+        // Certificate route
+        Route::get('/certificate/generate/{courseId}', [StudentCertificateController::class, 'generateCertificate'])->name('certificate.generate');
     });
 
 
