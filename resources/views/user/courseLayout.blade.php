@@ -86,7 +86,7 @@
                 @endif
             </div>
             <div class="mt-8 flex justify-center items-center">
-                <a href="{{ route('quizzes.index', ['courseId' => $lessonStudent->id]) }}"
+                <a href="{{ route('quiz.index', ['lessonId' => $lessonId]) }}"
                     class="relative px-6 py-3 border border-purple-600 rounded-full overflow-hidden group transition duration-300 ease-in-out">
                     <span
                         class="absolute inset-0 w-full h-full bg-purple-700 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
@@ -95,7 +95,6 @@
                     </span>
                 </a>
             </div>
-
         </div>
     </div>
 </x-app-layout>
