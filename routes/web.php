@@ -38,6 +38,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('teacher', TeacherController::class);
     });
     Route::middleware('role:student')->group(function () {
+        Route::get('/playground', function () {
+            return view('user/codePlayground');
+        })->name('playground');
         Route::get('student/courses', [CoursesController::class, 'studentIndex'])->name('student.courses.index');
         Route::get('student/courses/{id}', [CoursesController::class, 'studentShow'])->name('student.courses.show');
         Route::resource('coursedetails', CourseDetailsController::class);
@@ -54,15 +57,3 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 require __DIR__ . '/auth.php';
-
-// routes for code playground
-Route::get('/playground', function () {
-    return view('user/codePlayground');
-})->name('playground');
-// Route::get('/Coursedetails', function () {
-//     return view('user/Coursedetails');
-// })->name('coursedetails');
-// routes for course layout
-// Route::get('/Courseindex', function () {
-//     return view('user/CourseIndex');
-// })->name('courseIndex');
