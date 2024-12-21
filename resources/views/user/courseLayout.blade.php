@@ -33,13 +33,13 @@
             <!-- cover and lessons -->
             <div class="flex gap-4 lg:flex-row flex-col items-start">
                 {{-- left --}}
-                <div class="flex justify-center items-center h-screen w-screen bg-gray-100">
+                <div class="flex-1 bg-gray-100 rounded-[8px] overflow-hidden relative">
                     <!-- Video Container -->
                     @if (isset($lessonStudent->lessons) && $lessonStudent->lessons->isNotEmpty())
                         @php
                             $lesson = $lessonStudent->lessons->first();
                         @endphp
-                        <div id="youtubeIframe" class="w-full h-full">
+                        <div id="youtubeIframe" class="w-full max-w-[960px] h-[540px] mx-auto">
                             <iframe width="100%" height="100%"
                                 src="https://www.youtube.com/embed/{{ $lesson->path_video }}" frameborder="0"
                                 allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -49,7 +49,7 @@
                     @endif
                 </div>
                 {{-- right --}}
-                <div class="right max-w-full w-[370px] lg:w-[300px] md:w-full shrink-0 space-y-[30px]">
+                <div class="right w-full lg:w-[370px] md:w-full shrink-0 space-y-[30px]">
                     <!-- COURSE INFORMATION -->
                     <div
                         class="border border-[#e5e5e5] rounded-[10px] px-[30px] lg:px-[20px] xxs:px-[15px] py-[35px] lg:py-[25px] xxs:py-[25px] h-auto">
@@ -140,13 +140,10 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
-                {{-- right --}}
-
             </div>
         </div>
     </div>
