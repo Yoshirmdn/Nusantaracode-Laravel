@@ -30,6 +30,18 @@
     </x-slot>
     <div class="py-[120px] xl:py-[80px] md:py-[60px]">
         <div class="mx-[19.71%] xxxl:mx-[14.71%] xxl:mx-[9.71%] xl:mx-[5.71%] md:mx-[12px]">
+            @if (session('success'))
+                <div class="bg-green-500 text-white p-4 rounded-lg">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if (session('error'))
+                <div class="bg-red-500 text-white p-4 rounded-lg">
+                    {{ session('error') }}
+                </div>
+            @endif
+
             <!-- cover -->
             <div
                 class="rounded-[8px] overflow-hidden relative z-[2] before:absolute before:inset-0 before:-z-[0] before:bg-edpurple/20 mb-[40px] md:mb-[25px] xs:mb-[15px]">
@@ -237,16 +249,20 @@
                         </ul>
 
                         <div class="space-y-[12px]">
-                            <a href="{{ route('courselayout', ['id' => $course->id]) }}"
-                                class="relative flex items-center justify-center h-[56px] rounded-[8px] w-full bg-gradient-to-r from-purple-500 via-purple-800 to-indigo-500 text-white font-semibold shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
-                                <span
-                                    class="absolute inset-0 bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100 rounded-[8px]"></span>
-                                <span class="relative z-10 flex items-center gap-2">
-                                    Join this Course
-                                    <i
-                                        class="fa-solid fa-arrow-right-long transform transition-transform duration-300 group-hover:translate-x-2"></i>
-                                </span>
-                            </a>
+                            <form action="{{ route('course.join') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="course_id" value="{{ $course->id }}">
+                                <button type="submit"
+                                    class="relative flex items-center justify-center h-[56px] rounded-[8px] w-full bg-gradient-to-r from-purple-500 via-purple-800 to-indigo-500 text-white font-semibold shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                                    <span
+                                        class="absolute inset-0 bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100 rounded-[8px]"></span>
+                                    <span class="relative z-10 flex items-center gap-2">
+                                        Join this Course
+                                        <i
+                                            class="fa-solid fa-arrow-right-long transform transition-transform duration-300 group-hover:translate-x-2"></i>
+                                    </span>
+                                </button>
+                            </form>
                         </div>
 
                         <!-- social links -->
