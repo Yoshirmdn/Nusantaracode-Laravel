@@ -12,6 +12,8 @@ class Certificates extends Model
         'course_id',
         'issue_date',
         'certificate_path',
+        'price',
+        'payment_status',
     ];
     public $timestamps = true;
 }
