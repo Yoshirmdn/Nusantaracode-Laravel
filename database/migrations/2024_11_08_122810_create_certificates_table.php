@@ -18,9 +18,6 @@ return new class extends Migration
             $table->string('certificate_path');
             $table->date('issue_date');
             $table->decimal('price', 10, 2)->default(50000);
-            $table->boolean('is_paid')->default(false);
-            $table->string('transaction_id')->nullable();
-            $table->string('payment_status')->default('pending');
             $table->timestamps();
         });
     }
