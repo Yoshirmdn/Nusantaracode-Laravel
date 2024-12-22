@@ -17,7 +17,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
         integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    {{-- Sliders --}}
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -39,7 +41,9 @@
         <main>
             {{ $slot }}
         </main>
-        @include('layouts.footer') {{-- Include the footer --}}
+        <div class="mt-10">
+            @include('layouts.footer') {{-- Include the footer --}}
+        </div>
     </div>
     {{-- JS Flowbite --}}
     <script src="{{ asset('node_modules/flowbite/dist/flowbite.min.js') }}"></script>
