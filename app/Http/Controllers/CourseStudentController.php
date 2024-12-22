@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Course_student;
 use Illuminate\Http\Request;
+use App\Models\Course_student;
+use Illuminate\Support\Facades\Auth;
 
 class CourseStudentController extends Controller
 {
@@ -28,7 +29,33 @@ class CourseStudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate the incoming request
+        $request->validate([
+            'course_id' => 'required|exists:courses,id',
+        ]);
+
+        // Get the authenticated user
+        $user = Auth::user();
+
+        // Check if the user is already enrolled
+        $exists = Course_student::where('user_id', $user->id)
+            ->where('course_id', $request->course_id)
+            ->exists();
+
+        if ($exists) {
+            return redirect()->route('courselayout', ['id' => $request->course_id])
+                ->with('error', 'You are already enrolled in this course.');
+        }
+
+        // Insert the record into the `course_students` table
+        Course_student::create([
+            'user_id' => $user->id,
+            'course_id' => $request->course_id,
+        ]);
+
+        // Redirect to the `courselayout` route
+        return redirect()->route('courselayout', ['id' => $request->course_id])
+            ->with('success', 'You have successfully joined the course.');
     }
 
     /**
