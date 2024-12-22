@@ -43,7 +43,7 @@ class StudentCertificateController extends Controller
             ->setPaper('a4', 'landscape');
 
         // Save the PDF to storage
-        $path = "certificates/{$user->id}_{$course->id}.pdf";
+        $path = "certificates/Certificate-of-completion-{$user->name}-{$course->name}.pdf";
         $pdf->save(storage_path("app/public/{$path}"));
 
         // Update certificate path in DB
