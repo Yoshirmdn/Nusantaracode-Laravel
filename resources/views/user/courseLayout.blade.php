@@ -87,8 +87,14 @@
             </div>
             <div class="mt-8 flex justify-center items-center">
                 @if ($isLastLesson)
-                    <a href="{{ route('certificate.generate', ['courseId' => $courseId]) }}" class="btn btn-primary">
-                        Generate Certificate
+                    <a href="{{ route('certificate.generate', ['courseId' => $courseId]) }}"
+                        class="relative inline-flex items-center justify-center px-6 py-3 text-lg font-semibold text-white transition-all duration-300 bg-gradient-to-r from-green-500 via-green-600 to-green-700 rounded-lg shadow-lg hover:from-green-600 hover:via-green-700 hover:to-green-800 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-600">
+                        <span
+                            class="absolute inset-0 bg-gradient-to-r from-green-600 via-green-700 to-green-800 opacity-0 transition-opacity duration-300 group-hover:opacity-100 rounded-lg"></span>
+                        <span class="relative z-10 flex items-center gap-2">
+                            <i class="fa-solid fa-award"></i>
+                            Generate Certificate
+                        </span>
                     </a>
                 @elseif ($hasQuiz)
                     {{-- <a href="{{ route('quiz.index', ['lessonId' => $lessonId]) }}" --}} {{-- Kadang Kiding Ajg pusing aing --}}
