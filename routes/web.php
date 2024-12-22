@@ -15,6 +15,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\StudentQuizController;
 use App\Http\Controllers\CourseDetailsController;
+use App\Http\Controllers\CourseStudentController;
 use App\Http\Controllers\LessonStudentController;
 use App\Http\Controllers\StudentCertificateController;
 
@@ -60,6 +61,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/quiz/{lessonId}/result', [StudentQuizController::class, 'result'])->name('quiz.result');
         // Certificate route
         Route::get('/certificate/generate/{courseId}', [StudentCertificateController::class, 'generateCertificate'])->name('certificate.generate');
+        // Join course route
+        Route::post('/join-course', [CourseStudentController::class, 'store'])->name('course.join');
     });
 
 
