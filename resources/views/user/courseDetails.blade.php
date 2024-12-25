@@ -29,7 +29,7 @@
         </nav>
     </x-slot>
     <div class="py-[120px] xl:py-[80px] md:py-[60px]">
-        <div class="mx-[19.71%] xxxl:mx-[14.71%] xxl:mx-[9.71%] xl:mx-[5.71%] md:mx-[12px]">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             @if (session('success'))
                 <div class="bg-green-500 text-white p-4 rounded-lg">
                     {{ session('success') }}
@@ -46,7 +46,7 @@
             <div
                 class="rounded-[8px] overflow-hidden relative z-[2] before:absolute before:inset-0 before:-z-[0] before:bg-edpurple/20 mb-[40px] md:mb-[25px] xs:mb-[15px]">
                 <img src="{{ asset('storage/' . $course->thumbnail) }}" alt="Course Cover"
-                    class="rounded-[8px] w-full aspect-[1170/552]">
+                    class="rounded-[8px] w-full object-cover aspect-[1170/552]">
 
                 <!-- Tombol Play untuk Menampilkan Video -->
                 <div id="videoContainer"
@@ -64,9 +64,9 @@
 
 
             <!-- txt -->
-            <div class="flex gap-[30px] lg:gap-[20px] md:flex-row sm:flex-col md:items-center">
+            <div class="flex flex-wrap gap-[30px] lg:gap-[20px]">
                 {{-- left --}}
-                <div class="left max-w-full grow">
+                <div class="left flex-1">
                     <div>
                         <h4
                             class="font-semibold text-[30px] lg:text-[27px] xs:text-[25px] xxs:text-[23px] text-edblue mb-[23px]">
@@ -74,7 +74,7 @@
 
                         <!-- course meta -->
                         <div
-                            class="border-b border-[#E5E5E5] pb-[25px] flex xs:flex-wrap items-center gap-[60px] lg:gap-[40px] xs:gap-[20px] mb-[34px]">
+                            class="border-b border-[#E5E5E5] pb-[25px] flex flex-wrap items-center gap-[60px] lg:gap-[40px] xs:gap-[20px] mb-[34px]">
                             <!-- single info -->
                             <div
                                 class="flex items-center gap-[10px] border-l border-[#CDCDCD] first:border-none pl-[10px] first:pl-0">
@@ -117,7 +117,7 @@
                         <div>
                             <!-- tab navs  -->
                             <div
-                                class="ed-course-details-tab-navs border border-[#E5E5E5] rounded-[10px] p-[20px] lg:p-[15px] flex gap-[16px] *:h-[56px] sm:*:h-[46px] *:rounded-[8px] *:flex-auto *:font-semibold overflow-auto">
+                                class="ed-course-details-tab-navs border border-[#E5E5E5] rounded-[10px] p-[20px] lg:p-[15px] flex gap-[16px] flex-wrap *:h-[56px] sm:*:h-[46px] *:rounded-[8px] *:flex-auto *:font-semibold overflow-auto">
                                 <button
                                     class="tab-nav active bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md transition-all duration-300 hover:shadow-lg hover:scale-105"
                                     data-tab="overview">
@@ -179,7 +179,7 @@
                     </div>
                 </div>
                 {{-- right --}}
-                <div class="right h-full sticky top-[120px] max-w-full w-[370px] lg:w-[300px] shrink-0 space-y-[30px]">
+                <div class="right h-full sticky top-[120px] w-full lg:w-[300px] shrink-0 space-y-[30px]">
                     <!-- COURSE INFORMATION -->
                     <div
                         class="border border-[#e5e5e5] rounded-[10px] px-[30px] lg:px-[20px] xxs:px-[15px] py-[35px] lg:py-[25px] xxs:py-[25px]">
