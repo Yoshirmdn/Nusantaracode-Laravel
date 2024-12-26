@@ -29,10 +29,10 @@
         </nav>
     </x-slot>
     <div class="py-[120px] xl:py-[80px] md:py-[60px]">
-        <div class="mx-[19.71%] xxxl:mx-[14.71%] xxl:mx-[9.71%] xl:mx-[5.71%] md:mx-[12px]">
-            <div class="flex gap-4 lg:flex-row flex-col items-start">
+        <div class="mx-4">
+            <div class="flex gap-4 lg:flex-row flex-col items-center">
                 {{-- Left (Video) --}}
-                <div class="flex-1 bg-gray-100 rounded-[8px] overflow-hidden relative">
+                <div class="flex bg-gray-100 rounded-[8px] overflow-hidden relative w-full">
                     @if ($selectedLesson)
                         <div id="youtubeIframe" class="w-full max-w-[960px] h-[540px] mx-auto">
                             <iframe width="100%" height="100%"
