@@ -48,11 +48,12 @@ $(document).ready(function () {
         ],
     });
 });
-// Inisialisasi Quill
+
 document.addEventListener("DOMContentLoaded", function () {
-    const editor = document.querySelector("#quill-editor");
+    const editor = document.getElementById("quill-editor");
     if (editor) {
-        new Quill(editor, {
+        // Inisialisasi Quill
+        const quill = new Quill(editor, {
             theme: "snow",
             placeholder: "Tulis sesuatu di sini...",
             modules: {
@@ -66,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     [{ list: "ordered" }, { list: "bullet" }],
                     [{ indent: "-1" }, { indent: "+1" }],
                     [{ align: [] }],
-                    // Inline styling (warna teks dan latar belakang)
+                    // Inline styling
                     [{ color: [] }, { background: [] }],
                     // Media dan link
                     ["link", "image", "video"],
@@ -75,5 +76,27 @@ document.addEventListener("DOMContentLoaded", function () {
                 ],
             },
         });
+
+        // Update hidden input saat content berubah
+        quill.on('text-change', function () {
+            const about = document.querySelector('#about');
+            if (about) {
+                about.value = quill.root.innerHTML;
+            }
+        });
+
+        // Handle form submission
+        const form = editor.closest('form');
+        if (form) {
+            form.addEventListener('submit', function (e) {
+                const about = document.querySelector('#about');
+                if (about) {
+                    about.value = quill.root.innerHTML;
+                }
+
+                // Optional: Log untuk debugging
+                console.log('Form submitted with content:', about.value);
+            });
+        }
     }
 });

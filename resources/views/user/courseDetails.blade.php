@@ -149,7 +149,7 @@
                                             Course Descriptions</h4>
                                         <div class="space-y-[10px]">
                                             <p class="text-edgray">
-                                                {{ $course->about }}
+                                                {!! $course->about !!}
                                             </p>
                                         </div>
                                     </div>
