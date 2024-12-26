@@ -43,10 +43,14 @@
 
                         <!-- About -->
                         <div class="col-span-2">
-                            <label for="about" class="block mb-2 text-sm font-medium text-gray-900">About</label>
-                            <textarea id="about" name="about" rows="4"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                                placeholder="Enter course description">{{ old('about', $course->about) }}</textarea>
+                            <label for="about"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">About</label>
+                            <div id="quill-editor" style="height: 150px; background-color: #f9fafb;"
+                                class="rounded-lg border border-gray-300 dark:bg-gray-600 dark:border-gray-500">
+                                {!! old('about', $course->about) !!}
+                            </div>
+                            <input type="hidden" id="about" name="about"
+                                value="{{ old('about', $course->about) }}">
                         </div>
 
                         <!-- Thumbnail -->

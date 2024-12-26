@@ -78,24 +78,44 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         // Update hidden input saat content berubah
-        quill.on('text-change', function () {
-            const about = document.querySelector('#about');
+        quill.on("text-change", function () {
+            const about = document.querySelector("#about");
             if (about) {
                 about.value = quill.root.innerHTML;
             }
         });
 
-        // Handle form submission
-        const form = editor.closest('form');
+        // Handle form submission Course
+        const form = editor.closest("form");
         if (form) {
-            form.addEventListener('submit', function (e) {
-                const about = document.querySelector('#about');
+            form.addEventListener("submit", function (e) {
+                const about = document.querySelector("#about");
                 if (about) {
                     about.value = quill.root.innerHTML;
                 }
 
                 // Optional: Log untuk debugging
-                console.log('Form submitted with content:', about.value);
+                console.log("Form submitted with content:", about.value);
+            });
+        }
+        quill.on("text-change", function () {
+            const content = document.querySelector("#content");
+            if (content) {
+                content.value = quill.root.innerHTML;
+            }
+        });
+
+        // Handle form submission Lesson
+        const form2 = editor.closest("form");
+        if (form2) {
+            form2.addEventListener("submit", function (e) {
+                const content = document.querySelector("#content");
+                if (content) {
+                    content.value = quill.root.innerHTML;
+                }
+
+                // Optional: Log untuk debugging
+                console.log("Form submitted with content:", content.value);
             });
         }
     }

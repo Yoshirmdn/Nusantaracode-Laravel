@@ -73,10 +73,15 @@
                                     value="{{ $lesson->path_video }}"
                                     class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                             </div>
-                            <div>
-                                <label for="content" class="block text-sm font-medium text-gray-700">Content</label>
-                                <textarea name="content" id="content"
-                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">{{ $lesson->content }}</textarea>
+                            <div class="col-span-2">
+                                <label for="content"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Content</label>
+                                <div id="quill-editor" style="height: 150px; background-color: #f9fafb;"
+                                    class="rounded-lg border border-gray-300 dark:bg-gray-600 dark:border-gray-500">
+                                    {!! $lesson->content !!}
+                                </div>
+                                <!-- Hidden input for submitting content -->
+                                <input type="hidden" id="content" name="content" value="{{ $lesson->content }}">
                             </div>
                         </div>
                         <div class="mt-4">
