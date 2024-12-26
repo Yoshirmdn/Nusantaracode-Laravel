@@ -268,10 +268,10 @@
                                     <div class="relative">
                                         <img alt="Course Thumbnail" class="w-full h-48 object-cover"
                                             src="{{ asset('storage/' . $courseDisplay->thumbnail) }}" />
-                                        <div
+                                        {{-- <div
                                             class="absolute top-2 left-2 bg-yellow-500 text-white px-2 py-1 rounded-full text-sm flex items-center">
                                             <i class="far fa-clock mr-1"></i> 8h 30m
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="p-4 flex flex-col flex-grow">
                                         <div class="mb-2">
