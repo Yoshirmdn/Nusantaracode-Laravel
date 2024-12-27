@@ -21,7 +21,8 @@
 
                 {{-- Tombol "Pay Now" (untuk memanggil Snap) --}}
                 <button id="pay-button"
-                    class="inline-block px-5 py-3 rounded-md font-medium bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    class="inline-block px-5 py-3 rounded-md font-medium bg-blue-600 text-white hover:bg-blue-700
+                           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                     Pay Now
                 </button>
 
@@ -54,22 +55,50 @@
 
     <script>
         document.getElementById('pay-button').onclick = function() {
-            // snapToken dari controller
+            // snapToken dari controller (PaymentController@payCertificate)
             window.snap.pay('{{ $snapToken }}', {
                 onSuccess: function(result) {
                     alert("Payment successful!");
                     console.log(result);
-                    // Arahkan user ke manapun; bisa ke generate certificate
-                    window.location.href = "{{ route('certificate.generate', $course->id) }}";
+
+                    // --- [BEGIN] AJAX Update Payment Status di Laravel ---
+                    fetch("{{ route('payment.updateStatus') }}", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                            },
+                            body: JSON.stringify({
+                                order_id: result.order_id // Midtrans akan memberi order_id
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log("Update status response:", data);
+                            // Jika sukses, redirect ke generate certificate
+                            if (data.status === 'success') {
+                                window.location.href =
+                                    "{{ route('certificate.generate', $course->id) }}";
+                            } else {
+                                alert("Gagal update status di server");
+                            }
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
+                    // --- [END] AJAX Update Payment Status di Laravel ---
                 },
+
                 onPending: function(result) {
                     alert("Waiting your payment!");
                     console.log(result);
                 },
+
                 onError: function(result) {
                     alert("Payment failed!");
                     console.log(result);
                 },
+
                 onClose: function() {
                     alert("You closed the popup without finishing the payment");
                 }

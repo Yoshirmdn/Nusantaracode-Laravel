@@ -72,4 +72,27 @@ class PaymentController extends Controller
         // 6. Return view yang memanggil Snap popup
         return view('payment.pay_certificate', compact('snapToken', 'course'));
     }
+    public function updateStatus(Request $request)
+    {
+        $orderId = $request->input('order_id');
+
+        // Cari data certificate
+        $certificate = \App\Models\Certificates::where('order_id', $orderId)->first();
+
+        if (!$certificate) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Certificate not found for order_id: ' . $orderId
+            ], 404);
+        }
+
+        // Update status (langsung success, hanya demo - real-nya pakai notif midtrans)
+        $certificate->payment_status = 'success';
+        $certificate->save();
+
+        return response()->json([
+            'status'  => 'success',
+            'message' => 'Payment status updated to success'
+        ]);
+    }
 }

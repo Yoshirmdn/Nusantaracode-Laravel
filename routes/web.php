@@ -63,19 +63,21 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/quiz/{lessonId}/result', [StudentQuizController::class, 'result'])->name('quiz.result');
         // Certificate route
         // Route::get('/certificate/generate/{courseId}', [StudentCertificateController::class, 'generateCertificate'])->name('certificate.generate');
-        // Tombol untuk memulai pembayaran
+        // Route memulai pembayaran
         Route::get('/payment/course/{courseId}', [PaymentController::class, 'payCertificate'])
             ->name('payment.payCertificate');
 
-        // Notifikasi Midtrans
+        // Route untuk AJAX update status
+        Route::post('/payment/update-status', [PaymentController::class, 'updateStatus'])
+            ->name('payment.updateStatus');
+
+        // Route untuk Notification Midtrans
         Route::post('/midtrans/notification', [MidtransController::class, 'notificationHandler'])
             ->name('midtrans.notification');
 
-        // Generate certificate
+        // Route untuk generate certificate
         Route::get('/certificate/generate/{courseId}', [StudentCertificateController::class, 'generateCertificate'])
             ->name('certificate.generate');
-        // Join course route
-        Route::post('/join-course', [CourseStudentController::class, 'store'])->name('course.join');
     });
 
 
