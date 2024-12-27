@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-namespace App\Http\Controllers;
-
 use App\Models\User;
 use App\Models\Courses;
 use App\Models\Certificates;
@@ -13,42 +11,47 @@ use Illuminate\Support\Facades\Auth;
 
 class StudentCertificateController extends Controller
 {
-
     public function generateCertificate(Request $request, $courseId)
     {
-        $user = Auth::user(); // Use the Auth facade here
+        $user = Auth::user();
         $course = Courses::findOrFail($courseId);
 
-        // Check if the user is enrolled in the course
-        if (!$user->coursesToUser->contains($course)) {
-            return redirect()->back()->with('error', 'You are not enrolled in this course.');
+        // 1. Cari data certificate di DB
+        $certificate = Certificates::where('user_id', $user->id)
+            ->where('course_id', $course->id)
+            ->first();
+
+        // Kalau belum ada, suruh user "beli"/"buat" dulu
+        if (!$certificate) {
+            return redirect()
+                ->route('payment.payCertificate', $courseId)
+                ->with('error', 'Certificate record not found, please pay first.');
         }
 
-        // Generate certificate data
-        $certificate = Certificates::create([
-            'user_id' => $user->id,
-            'course_id' => $course->id,
-            'issue_date' => now(),
-            'certificate_path' => '', // Default to an empty string
-        ]);
-
-        // Ensure the directory exists
-        $certificateDirectory = storage_path('app/public/certificates');
-        if (!file_exists($certificateDirectory)) {
-            mkdir($certificateDirectory, 0755, true);
+        // 2. Cek payment_status
+        if ($certificate->payment_status !== 'success') {
+            return redirect()
+                ->route('payment.payCertificate', $courseId)
+                ->with('error', 'You must complete payment before generating certificate.');
         }
 
-        // Generate PDF with landscape orientation
+        // 3. (Opsional) Cek apakah sudah pernah generate PDF?
+        //    Kalau certificate_path masih kosong, generate; kalau sudah ada, bisa re-generate, dsb.
+
+        // 4. Generate PDF
         $pdf = Pdf::loadView('certificates.template', compact('user', 'course', 'certificate'))
             ->setPaper('a4', 'landscape');
 
-        // Save the PDF to storage
+        // Lokasi penyimpanan
         $path = "certificates/Certificate-of-completion-{$user->name}-{$course->name}.pdf";
         $pdf->save(storage_path("app/public/{$path}"));
 
-        // Update certificate path in DB
-        $certificate->update(['certificate_path' => $path]);
+        // Update path di DB
+        $certificate->certificate_path = $path;
+        $certificate->issue_date = now(); // set issue date ke hari ini, misal
+        $certificate->save();
 
+        // 5. Return file ke user
         return response()->download(storage_path("app/public/{$path}"));
     }
 }
