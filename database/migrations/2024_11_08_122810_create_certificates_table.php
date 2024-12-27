@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('course_id')->constrained('courses')->onDelete('cascade');
+            $table->string('order_id')->nullable();
             $table->string('certificate_path');
             $table->date('issue_date');
             $table->decimal('price', 10, 2)->default(50000);
