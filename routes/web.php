@@ -78,6 +78,9 @@ Route::group(['middleware' => ['auth']], function () {
         // Route untuk generate certificate
         Route::get('/certificate/generate/{courseId}', [StudentCertificateController::class, 'generateCertificate'])
             ->name('certificate.generate');
+
+        // Join course route
+        Route::post('/join-course', [CourseStudentController::class, 'store'])->name('course.join');
     });
 
 
