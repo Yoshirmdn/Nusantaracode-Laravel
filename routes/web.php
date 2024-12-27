@@ -7,8 +7,10 @@ use App\Http\Controllers\QuizController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\CoursesController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\MidtransController;
 use App\Http\Controllers\MyCourseController;
 use App\Http\Controllers\AllCourseController;
 use App\Http\Controllers\DashboardController;
@@ -60,7 +62,18 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/quiz/process', [StudentQuizController::class, 'process'])->name('quiz.process');
         Route::get('/quiz/{lessonId}/result', [StudentQuizController::class, 'result'])->name('quiz.result');
         // Certificate route
-        Route::get('/certificate/generate/{courseId}', [StudentCertificateController::class, 'generateCertificate'])->name('certificate.generate');
+        // Route::get('/certificate/generate/{courseId}', [StudentCertificateController::class, 'generateCertificate'])->name('certificate.generate');
+        // Tombol untuk memulai pembayaran
+        Route::get('/payment/course/{courseId}', [PaymentController::class, 'payCertificate'])
+            ->name('payment.payCertificate');
+
+        // Notifikasi Midtrans
+        Route::post('/midtrans/notification', [MidtransController::class, 'notificationHandler'])
+            ->name('midtrans.notification');
+
+        // Generate certificate
+        Route::get('/certificate/generate/{courseId}', [StudentCertificateController::class, 'generateCertificate'])
+            ->name('certificate.generate');
         // Join course route
         Route::post('/join-course', [CourseStudentController::class, 'store'])->name('course.join');
     });
