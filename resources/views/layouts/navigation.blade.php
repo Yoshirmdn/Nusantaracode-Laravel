@@ -36,9 +36,9 @@
                         <x-nav-link :href="route('courses.index')" :active="request()->routeIs('courses.index')">
                             {{ __('Manage Course') }}
                         </x-nav-link>
-                        {{-- <x-nav-link :href="route('quizzes.index')" :active="request()->routeIs('quizzes.index')">
+                        <x-nav-link :href="route('quizzes.index')" :active="request()->routeIs('quizzes.index')">
                             {{ __('Manage Quizzes') }}
-                        </x-nav-link> --}}
+                        </x-nav-link>
                     @endrole
                     @role('student')
                         <x-nav-link :href="route('mycourse.index')" :active="request()->routeIs('mycourse.index')">

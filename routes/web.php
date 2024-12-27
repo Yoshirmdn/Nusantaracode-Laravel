@@ -33,7 +33,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::group(['middleware' => ['role:admin']], function () {
+    Route::group(['middleware' => ['role:admin|teacher']], function () {
         Route::resource('courses', CoursesController::class);
         Route::resource('categories', CategoriesController::class);
         Route::resource('users', UserController::class);
