@@ -19,4 +19,8 @@ class Lesson extends Model
     {
         return $this->belongsTo(Courses::class, 'course_id');
     }
+    public function quizzes()
+    {
+        return $this->hasMany(Quiz::class);
+    }
 }
