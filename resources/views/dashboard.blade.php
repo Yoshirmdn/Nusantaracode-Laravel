@@ -246,7 +246,7 @@
                         <form method="GET" action="{{ route('dashboard') }}">
                             <input type="hidden" name="category_id" value="{{ $category->id }}">
                             <button type="submit"
-                                class="relative px-4 py-2 border border-purple-600 rounded-full overflow-hidden group transition duration-300 ease-in-out">
+                                class="mt-2 relative px-4 py-2 border border-purple-600 rounded-full overflow-hidden group transition duration-300 ease-in-out">
                                 <span
                                     class="absolute inset-0 w-full h-full bg-purple-700 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
                                 <span
