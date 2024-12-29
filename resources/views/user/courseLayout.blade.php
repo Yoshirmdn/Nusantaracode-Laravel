@@ -99,8 +99,7 @@
                         </span>
                     </a>
                 @elseif ($hasQuiz)
-                    {{-- <a href="{{ route('quiz.index', ['lessonId' => $lessonId]) }}" --}} {{-- Kadang Kiding Ajg pusing aing --}}
-                    <a href=""
+                    <a href="{{ route('quiz.index', ['lessonId' => $selectedLesson->id ?? null]) }}"
                         class="relative px-6 py-3 border border-purple-600 rounded-full overflow-hidden group transition duration-300 ease-in-out">
                         <span
                             class="absolute inset-0 w-full h-full bg-purple-700 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
