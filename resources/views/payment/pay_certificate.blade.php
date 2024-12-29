@@ -7,10 +7,10 @@
         </h2>
     </x-slot>
 
-    <div class="py-12 bg-gray-50">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-12 bg-gray-50 h-screen">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex justify-center">
             <div class="bg-white p-6 sm:p-8 shadow sm:rounded-lg">
-                <h1 class="text-2xl font-bold mb-4">Bayar Course: {{ $course->name }}</h1>
+                <h1 class="text-2xl font-bold mb-10">Bayar Course: {{ $course->name }}</h1>
 
                 @php
                     // Ambil data certificate user untuk course ini
@@ -21,16 +21,16 @@
 
                 {{-- Tombol "Pay Now" (untuk memanggil Snap) --}}
                 <button id="pay-button"
-                    class="inline-block px-5 py-3 rounded-md font-medium bg-blue-600 text-white hover:bg-blue-700
+                    class="inline-block w-full px-5 py-3 rounded-md font-medium bg-blue-600 text-white hover:bg-blue-700
                            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    Pay Now
+                    <i class="fa-solid fa-money-bill"></i> Pay Now
                 </button>
 
-                <div class="mt-6">
+                <div class="mt-6 flex justify-center">
                     @if ($certificate && $certificate->payment_status === 'success')
                         {{-- Jika sudah sukses bayar, tampilkan tombol DOWNLOAD --}}
                         <a href="{{ route('certificate.generate', ['courseId' => $course->id]) }}"
-                            class="inline-flex items-center gap-2 px-5 py-3 bg-green-600 text-white rounded-md font-medium
+                            class="inline-flex w-full justify-center items-center gap-2 px-5 py-3 bg-green-600 text-white rounded-md font-medium
                                    hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                             <i class="fa-solid fa-download"></i>
                             Download Certificate
@@ -38,8 +38,8 @@
                     @else
                         {{-- Jika belum bayar atau payment_status != success, tetap pakai tombol "Generate" --}}
                         <a href="{{ route('certificate.generate', ['courseId' => $course->id]) }}"
-                            class="inline-flex items-center gap-2 px-5 py-3 bg-yellow-600 text-white rounded-md font-medium
-                                   hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
+                            class="inline-flex w-full justify-center items-center gap-2 px-5 py-3 bg-yellow-600 text-white rounded-md font-medium
+                                       hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
                             <i class="fa-solid fa-award"></i>
                             Generate Certificate
                         </a>
