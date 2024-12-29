@@ -148,9 +148,9 @@
                                             class="font-semibold text-[30px] lg:text-[27px] xs:text-[25px] xxs:text-[23px] text-edblue mt-[28px] mb-[15px]">
                                             Course Descriptions</h4>
                                         <div class="space-y-[10px]">
-                                            <p class="text-edgray">
+                                            <div class="ql-editor">
                                                 {!! $course->about !!}
-                                            </p>
+                                            </div>
                                         </div>
                                     </div>
                                     <div>

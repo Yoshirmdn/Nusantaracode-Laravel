@@ -79,7 +79,9 @@
                         {{ $selectedLesson->name }}
                     </h4>
                     <div class="space-y-[10px]">
-                        <p class="text-edgray">{!! $selectedLesson->content !!}</p>
+                        <div class="ql-editor">
+                            {!! $selectedLesson->content !!}
+                        </div>
                     </div>
                 @else
                     <p class="text-gray-500">Lesson details not available.</p>
